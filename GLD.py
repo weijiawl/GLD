@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-
 import math
 import do
 import rk
@@ -691,44 +690,47 @@ if hwnd > 0:
         damo.MoveWindowpy(hwnd, 0, 600)
         damo.SetWindowSizepy(hwnd, 800, 170)
 while True:
-    FinStr = damo.FindStrEpy(667, 27, 745, 51, "斯曼工业基地", "e6c89b-000000", 1)
-    pos = FinStr.split('|')
-    if int(pos[1]) > 0:
-        出售分解(1)
-        FinStr = damo.FindPicEpy(272, 483, 501, 544, "虚弱.bmp", "000000", "0.9", 0)
+    while True:
+        print('等待曼斯工业基地')
+        damo.Delaypy(200)
+        FinStr = damo.FindStrEpy(667, 27, 745, 51, "斯曼工业基地", "e6c89b-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
-            print('虚弱等待')
-            continue
-        向右()
-        while True:
-            damo.Delaypy(200)
-            FinStr = damo.FindStrEpy(509, 533, 583, 570, "练习模式", "ddc593-000000", 1)
+            出售分解(1)
+            FinStr = damo.FindPicEpy(272, 483, 501, 544, "虚弱.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
-                弹起()
-                damo.Delaypy(1000)
-                FinStr = damo.FindPicEpy(510, 366, 536, 395, "副本界面_格兰迪.bmp", "000000", "0.9", 0)
+                print('虚弱等待')
+                continue
+            向右()
+            while True:
+                damo.Delaypy(200)
+                FinStr = damo.FindStrEpy(509, 533, 583, 570, "练习模式", "ddc593-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
-                    for i in range(5):
-                        damo.KeyPresspy(37)
-                        damo.Delaypy(200)
-                    for i in range(maoxiandengji - 1):
-                        damo.KeyPresspy(39)
-                        damo.Delaypy(200)
-                    damo.KeyPresspy(32)
-                    damo.Delaypy(200)
-                    damo.KeyPresspy(32)
-                    damo.Delaypy(3000)
-                else:
-                    damo.KeyPresspy(38)
+                    弹起()
                     damo.Delaypy(1000)
-            FinStr = damo.FindStrEpy(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
-            pos = FinStr.split('|')
-            if int(pos[1]) > 0:
-                break
-
+                    FinStr = damo.FindPicEpy(510, 366, 536, 395, "副本界面_格兰迪.bmp", "000000", "0.9", 0)
+                    pos = FinStr.split('|')
+                    if int(pos[1]) > 0:
+                        for i in range(5):
+                            damo.KeyPresspy(37)
+                            damo.Delaypy(200)
+                        for i in range(maoxiandengji - 1):
+                            damo.KeyPresspy(39)
+                            damo.Delaypy(200)
+                        damo.KeyPresspy(32)
+                        damo.Delaypy(200)
+                        damo.KeyPresspy(32)
+                        damo.Delaypy(3000)
+                    else:
+                        damo.KeyPresspy(38)
+                        damo.Delaypy(1000)
+                FinStr = damo.FindStrEpy(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
+                pos = FinStr.split('|')
+                if int(pos[1]) > 0:
+                    break
+            break
     xingwei = True
     guanqia = 0
     duobidihuo = False

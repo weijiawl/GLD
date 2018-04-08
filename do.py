@@ -12,7 +12,7 @@ class bw():
         dw.eqvC(0)
         try:
             #模拟方式
-            dwreg = dw.pcGYt(4)
+            dwreg = dw.pcGYt(2)
             if dwreg != 1:
                 print("驱动加载失败")
                 input()
