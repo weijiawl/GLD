@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 import os
 import win32com.client
-#V1.0
+#V1.1
 dw = win32com.client.Dispatch('tp.ten')
 class bw():
     def __init__(self):
