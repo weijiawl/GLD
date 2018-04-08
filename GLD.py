@@ -693,6 +693,10 @@ while True:
     while True:
         print('等待曼斯工业基地')
         damo.Delaypy(200)
+        FinStr = damo.FindStrEpy(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            break
         FinStr = damo.FindStrEpy(667, 27, 745, 51, "斯曼工业基地", "e6c89b-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:

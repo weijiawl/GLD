@@ -1,7 +1,7 @@
 missing module named resource - imported by posix, F:\Code\MyCode\GLD.py
 missing module named posix - imported by os, F:\Code\MyCode\GLD.py
 missing module named _posixsubprocess - imported by subprocess, F:\Code\MyCode\GLD.py
-missing module named org - imported by pickle, F:\Code\MyCode\GLD.py
+missing module named 'org.python' - imported by pickle, F:\Code\MyCode\GLD.py, xml.sax
 missing module named readline - imported by cmd, code, pdb, F:\Code\MyCode\GLD.py
 excluded module named _frozen_importlib - imported by importlib, importlib.abc, F:\Code\MyCode\GLD.py
 missing module named _frozen_importlib_external - imported by importlib._bootstrap, importlib, importlib.abc, F:\Code\MyCode\GLD.py
@@ -21,7 +21,7 @@ missing module named urllib.quote_plus - imported by urllib, requests.compat
 missing module named urllib.unquote - imported by urllib, requests.compat
 missing module named urllib.quote - imported by urllib, requests.compat
 missing module named grp - imported by shutil, tarfile, F:\Code\MyCode\GLD.py
-missing module named 'org.python' - imported by copy, F:\Code\MyCode\GLD.py, xml.sax
+missing module named org - imported by copy, F:\Code\MyCode\GLD.py
 missing module named pwd - imported by posixpath, shutil, tarfile, http.server, webbrowser, netrc, getpass, F:\Code\MyCode\GLD.py
 missing module named _dummy_threading - imported by dummy_threading, F:\Code\MyCode\GLD.py
 missing module named backports - imported by urllib3.packages.ssl_match_hostname
