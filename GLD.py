@@ -650,7 +650,7 @@ def 出售分解(ZZ):
             damo.Delaypy(200)
             damo.LeftClickpy()
             damo.Delaypy(2000)
-            FinStr = damo.FindStrEpy(316, 269, 480, 313, "缺少分解道具", "ddc593-000000", 1)
+            FinStr = damo.FindStrEpy(316, 269, 480, 313, "缺少分解道具", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 清理游戏窗口()
@@ -662,6 +662,15 @@ def 出售分解(ZZ):
                 return 1
 def 学习技能():
     pass
+def 安全模式():
+    FinStr = damo.FindStrEpy(335, 319, 396, 350, "确定解除", "ddc593-000000", 1)
+    pos = FinStr.split('|')
+    if int(pos[1]) > 0:
+        pass
+    FinStr = damo.FindStrEpy(312, 272, 483, 295, "解除安全模式", "ffffff-000000", 1)
+    pos = FinStr.split('|')
+    if int(pos[1]) > 0:
+        pass
 #############################################主程式####################################################
 #定义参数
 jn_key = {'弗利特':'q','桑德尔':'w','牛头王':'e','路易斯':'r','伊伽贝拉':'t','召唤兽狂化':'y','鞭子':'a','赫德尔':'s','冰':'d','火':'f','光':'g','暗':'h'}
