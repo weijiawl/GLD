@@ -557,23 +557,18 @@ def 出售分解(ZZ):
                     Color = damo.GetColorpy(x + 5, y)
                     if Color == '4c9bad':
                         #高级装备
-                        damo.MoveTopy(x + 14, y + 14)
-                        damo.Delaypy(200)
-                        damo.LeftClickpy()
-                        damo.Delaypy(1000)
-                        damo.LeftClickpy()
-                        damo.Delaypy(1000)
+                        zizhuangshuliang += 1
                     elif Color == '656565' or Color == '874747' or Color == '766c79':
                         #普通装备
+                        zizhuangshuliang += 1
+                    elif Color == 'ab83f7' or Color == 'b85bac':
+                        #紫色装备
                         damo.MoveTopy(x + 14, y + 14)
                         damo.Delaypy(200)
                         damo.LeftClickpy()
                         damo.Delaypy(1000)
                         damo.LeftClickpy()
                         damo.Delaypy(1000)
-                    elif Color == 'ab83f7' or Color == 'b85bac':
-                        #紫色装备
-                        zizhuangshuliang += 1
                     elif Color == 'be00c0':
                         #粉色装备
                         pass
@@ -607,45 +602,6 @@ def 出售分解(ZZ):
         FinStr = damo.FindStrEpy(659, 477, 712, 498, "整理", "ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
-            damo.MoveTopy(255, 350)
-            damo.Delaypy(1000)
-            #普通
-            FinStr = damo.FindStrEpy(323, 370, 335, 382, "勾选", "ffae00-000000", 1)
-            pos = FinStr.split('|')
-            if int(pos[1]) > 0:
-                damo.MoveTopy(323 + 5, 370 + 5)
-                damo.Delaypy(200)
-                damo.LeftClickpy()
-                damo.Delaypy(1000)
-            #高级
-            FinStr = damo.FindStrEpy(323, 384, 335, 396, "勾选", "ffae00-000000", 1)
-            pos = FinStr.split('|')
-            if int(pos[1]) > 0:
-                damo.MoveTopy(323 + 5, 384 + 5)
-                damo.Delaypy(200)
-                damo.LeftClickpy()
-                damo.Delaypy(1000)
-            #紫装
-            FinStr = damo.FindStrEpy(323, 398, 335, 410, "勾选", "ffae00-000000", 1)
-            pos = FinStr.split('|')
-            if int(pos[1]) > 0:
-                pass
-            else:
-                damo.MoveTopy(323 + 5, 398 + 5)
-                damo.Delaypy(200)
-                damo.LeftClickpy()
-                damo.Delaypy(1000)
-            #自身可穿戴装备
-            FinStr = damo.FindStrEpy(323, 431, 335, 443, "勾选", "ffae00-000000", 1)
-            pos = FinStr.split('|')
-            if int(pos[1]) > 0:
-                pass
-            else:
-                damo.MoveTopy(323 + 5, 431 + 5)
-                damo.Delaypy(200)
-                damo.LeftClickpy()
-                damo.Delaypy(1000)
-
             damo.MoveTopy(255, 350)
             damo.Delaypy(200)
             damo.LeftClickpy()
@@ -700,12 +656,12 @@ while True:
         FinStr = damo.FindStrEpy(667, 27, 745, 51, "斯曼工业基地", "e6c89b-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
-            出售分解(1)
             FinStr = damo.FindPicEpy(272, 483, 501, 544, "虚弱.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 print('虚弱等待')
                 continue
+            出售分解(1)
             向右()
             while True:
                 damo.Delaypy(200)
@@ -713,7 +669,6 @@ while True:
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     弹起()
-                    damo.Delaypy(1000)
                     FinStr = damo.FindPicEpy(510, 366, 536, 395, "副本界面_格兰迪.bmp", "000000", "0.9", 0)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
@@ -759,11 +714,11 @@ while True:
                 技能(1)
             elif guanqia == 3:
                 向右()
-                damo.Delaypy(1500)
+                damo.Delaypy(2000)
                 弹起()
             elif guanqia == 5:
                 向下()
-                damo.Delaypy(2000)
+                damo.Delaypy(3000)
                 弹起()
             elif guanqia == 6:
                 技能(2)
@@ -820,7 +775,7 @@ while True:
                 damo.Delaypy(3000)
                 break
             else:
-                if fubencishu > 4:
+                if fubencishu > 2:
                     print('返回城镇')
                     fanhuichengzhen()
                     damo.Delaypy(3000)
@@ -828,6 +783,7 @@ while True:
                     break
                 else:
                     fubencishu += 1
+                    清理游戏窗口()
                     damo.KeyPresspyCharpy('f10')
                     damo.Delaypy(5000)
                     break
