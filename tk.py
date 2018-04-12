@@ -64,6 +64,7 @@ def trickit():
         ids = ""
         hao_path = get_ini('config/cfg.ini', '主配置', '账号路径')
         pc_name = os.environ['COMPUTERNAME']
+        text(pc_name)
         for ic in range(500):
             num = get_ini(hao_path, pc_name, str(ic + 1))
             if num != "":
@@ -120,10 +121,11 @@ def trickit():
     except:
         print('刷新列表失败')
 def end_jincheng():
-    command = 'taskkill /F /IM Login.exe'
-    os.system(command)
-    command = 'taskkill /F /IM Login.exe'
-    os.system(command)
+    os.system('taskkill /F /IM Login.exe')
+    os.system('taskkill /F /IM Login.exe')
+    os.system('taskkill /F /IM DNF.exe')
+    os.system('taskkill /F /IM tgp_daemon.exe')
+    os.system('taskkill /F /IM TPHelper.exe')
 def text(temp):
     win_tk.lb.insert(END, temp + '\n')
     win_tk.lb.see(END)
@@ -131,7 +133,7 @@ def win():
     root = tkinter.Tk()
     root.geometry('800x310+0+601')
     root.resizable(False, False)
-    root.title('疯子打印机V2.0')
+    root.title('疯子打印机V2.0.5')
     frame = Frame(root)
     frame.place(x=0, y=10, width=610, height=300)
     # 滚动条
@@ -175,7 +177,11 @@ def win():
     Button(frams, text='打印机结束', command=end_jincheng).pack(side=TOP, anchor=S, fill=NONE, expand=NO)
     # Button(frams, text='Bottom').pack(side=TOP, anchor=S, fill=NONE , expand=NO)
     def donothing():
-        os.system('TASKKILL /F /IM Login.exe"')
+        os.system('taskkill /F /IM Login.exe')
+        os.system('taskkill /F /IM Login.exe')
+        os.system('taskkill /F /IM DNF.exe')
+        os.system('taskkill /F /IM tgp_daemon.exe')
+        os.system('taskkill /F /IM TPHelper.exe')
         root.destroy()
     root.protocol("WM_DELETE_WINDOW",donothing)
     root.mainloop()

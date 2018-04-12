@@ -29,6 +29,11 @@ class account_value:
     def get_value(self):
         return self.hao, self.mi, self.daqu, self.zongjuese, self.dangqianjuese
 account = account_value()
+# 定义参数
+jn_key = {'弗利特': 'q', '桑德尔': 'w', '牛头王': 'e', '路易斯': 'r', '伊伽贝拉': 't', '召唤兽狂化': 'y', '鞭子': 'a', '赫德尔': 's','冰': 'd', '火': 'f', '光': 'g', '暗': 'h'}
+jn_time = {'伊伽贝拉': 200, '冰': 200, '火': 200, '光': 200, '暗': 200}
+jn_now_time = {'弗利特': '2018-03-30 21:44:09', '桑德尔': '2018-03-30 21:44:09', '牛头王': '2018-03-30 21:44:09','路易斯': '2018-03-30 21:44:09', '伊伽贝拉': '2018-03-30 21:44:09', '召唤兽狂化': '2018-03-30 21:44:09','鞭子': '2018-03-30 21:44:09', '赫德尔': '2018-03-30 21:44:09', '冰': '2018-03-30 21:44:09','火': '2018-03-30 21:44:09', '光': '2018-03-30 21:44:09', '暗': '2018-03-30 21:44:09'}
+jn_sf_time = {'弗利特': 1000, '桑德尔': 1100, '牛头王': 1500, '路易斯': 1300, '伊伽贝拉': 1300, '召唤兽狂化': 900, '鞭子': 200,'赫德尔': 1000, '冰': 1000, '火': 1000, '光': 1000, '暗': 1000}
 def remove_option(path,section, option):
     try:
         cf = configparser.ConfigParser()
@@ -603,17 +608,17 @@ def qingkongyouxichuangkou():
             if int(pos[1]) > 0:
                 intx = int(pos[1])
                 inty = int(pos[2])
-                damo.MoveTopy(intx+10, inty+5)
-                damo.Delaypy(1000)
+                damo.MoveTopy(intx + 10, inty + 5)
+                damo.Delaypy(500)
                 damo.LeftClickpy()
-                damo.Delaypy(1000)
+                damo.Delaypy(500)
                 FinStr = damo.FindStrEpy(307, 242, 362, 274, "邮件箱", "e6c89b-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     damo.MoveTopy(intx + 10, inty + 5)
-                    damo.Delaypy(1000)
+                    damo.Delaypy(500)
                     damo.LeftClickpy()
-                    damo.Delaypy(1000)
+                    damo.Delaypy(500)
                     break
                 else:
                     break
@@ -623,7 +628,7 @@ def qingkongyouxichuangkou():
                 damo.LeftClickpy()
                 damo.Delaypy(500)
                 damo.KeyPresspy(27)
-                damo.Delaypy(2000)
+                damo.Delaypy(1000)
     except:
         prints("报错######清空游戏窗口失败")
 def fayoujian(CRuser, CRpwd):
@@ -679,6 +684,7 @@ def fayoujian(CRuser, CRpwd):
             damo.Delaypy(500)
         #检查金币
         number = damo.Ocrpy(610, 529, 700, 549,"e6c89b-000000",1)
+        number = re.sub("\D", "", number)
         if int(number) < int(money):
             prints("游戏币不够设置的金额")
             qingkongyouxichuangkou()
@@ -816,6 +822,10 @@ def fayoujian(CRuser, CRpwd):
                 damo.LeftClickpy()
                 damo.Delaypy(1000)
                 if int(pos[0]) == 0:
+                    ws_sl = number = damo.Ocrpy(627, 313, 742, 396, "ffe3ab-000000", 1)
+                    ws_sl = re.sub("\D", "", ws_sl)
+                    damo.KeyPressStrpy(ws_sl,50)
+                    damo.Delaypy(500)
                     damo.KeyPresspy(13)
                     damo.Delaypy(1000)
                 else:
@@ -1026,7 +1036,7 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
             if int(pos[1]) > 0:
                 intx = int(pos[1])
                 inty = int(pos[2])
-                damo.MoveTopy(intx + 10, inty)
+                damo.MoveTopy(intx + 10, inty+3)
                 damo.Delaypy(200)
                 damo.LeftClickpy()
                 damo.Delaypy(1000)
@@ -1114,8 +1124,9 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
             FinStr = damo.FindStrEpy(1, 1, x, y, "结束游戏", "ddc593-000000|ffffb8-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
-                set_ini('config/功能键设置.ini', '飞机功能键', '赛丽亚房间按键开关', "True")
-                set_ini('config/功能键设置.ini', '飞机功能键', '图内按键开关', "True")
+                hwnda = damo.FindWindowpy("", "疯子打印机")
+                if hwnda > 0:
+                    damo.SetWindowStatepy(hwnda, 12)
                 return 1
             if shubiaodianji:
                 damo.MoveTopy(1, 1)
@@ -1395,6 +1406,9 @@ def chushoudianquan():
                         damo.Delaypy(500)
                         damo.LeftClickpy()
                         damo.Delaypy(6000)
+                        aq_ret = 安全模式()
+                        if aq_ret == 1:
+                           break
                         FinStr = damo.FindStrEpy(293, 235, 503, 356, '拍卖行不存在', "ffffff-000000", 1)
                         pos = FinStr.split('|')
                         if int(pos[1]) > 0:
@@ -1620,7 +1634,6 @@ def 弹起():
     if damo.GetKeyStatepy(40) == 1:
         damo.KeyUppy(40)
 def 捡取():
-    print("捡取")
     my_x_py = 10
     my_y_py = 190
     wp_x_py = 12
@@ -1672,7 +1685,6 @@ def 捡取():
                 wp_y = int(pos[2])
             else:
                 弹起()
-                print("没有东西")
                 break
         if my_x > 0 and my_y > 0 and wp_x > 0 and wp_y > 0:
             if abs((my_x+my_x_py) - (wp_x+wp_x_py)) < 10:
@@ -1694,17 +1706,32 @@ def 捡取():
                     右上()
                 elif my_y+my_y_py < wp_y+wp_y_py:
                     右下()
+def 判断方向(num):
+    if num == 1:
+        return "右"
+    elif num == 2:
+        return "右"
+    elif num == 3:
+        return "下"
+    elif num == 4:
+        return "下"
+    elif num == 5:
+        return "右"
+    elif num == 6:
+        return "上"
+    elif num == 8:
+        return "右"
 def 检查关卡():
-    x = [730, 748, 766, 766, 766, 784,784]
-    y = [55, 55, 55, 73, 91, 91,74]
-    for i in range(0,7):
+    #第八关为最左边的关卡正常不会走到那里
+    x = [730, 748, 766, 766, 766, 784,784, 748]
+    y = [55, 55, 55, 73, 91, 91,74, 91]
+    for i in range(0,8):
         color = damo.GetColorpy(x[i],y[i])
         if color == "0000ff":
-            return i+1
-    print(0)
+            return i + 1
     return 0
 def 找门(guanqia):
-    print("找门")
+    prints("找门")
     d1 = datetime.datetime.now()
     my_x_py = 10
     my_y_py = 190
@@ -1793,11 +1820,9 @@ def 找门(guanqia):
                     pass
                 else:
                     弹起()
-                    print("找门成功")
                     break
             else:
                 弹起()
-                print("找门成功")
                 break
         d2 = datetime.datetime.now()
         d3 = d2 - d1
@@ -1824,8 +1849,25 @@ def 找门(guanqia):
                 damo.Delaypy(1000)
                 弹起()
             d1 = datetime.datetime.now()
+            fangxiang = 判断方向(检查关卡())
+            if fangxiang == "左":
+                pass
+            elif fangxiang == "右":
+                x, y, x1, y1 = 689, 130, 791, 525
+                pic = "左右门.bmp"
+                wp_x_py = 10
+                wp_y_py = 65
+            elif fangxiang == "上":
+                x, y, x1, y1 = 0, 119, 798, 345
+                pic = "上门.bmp"
+                wp_x_py = 35
+                wp_y_py = -20
+            elif fangxiang == "下":
+                x, y, x1, y1 = 0, 340, 798, 529
+                pic = "下门.bmp"
+                wp_x_py = 35
+                wp_y_py = 140
 def 打石头():
-    print("打石头")
     my_x_py = 10
     my_y_py = 190
     wp_x_py = 12
@@ -1847,7 +1889,6 @@ def 打石头():
             wp_y = int(pos[2])
         else:
             弹起()
-            print("没有石头")
             break
         if my_x > 0 and my_y > 0 and wp_x > 0 and wp_y > 0:
             FinStr = damo.FindPicEpy(my_x - 80, my_y + 125, my_x + 140, my_y + 200, "可破坏.bmp", "000000", "0.9", 0)
@@ -1882,37 +1923,27 @@ def 打石头():
                     右下()
 def 技能(leixing):
     if leixing == 1:
-        print('技能1')
+        prints('召唤兽唤出')
         temp_name = ['弗利特','桑德尔','牛头王','路易斯','伊伽贝拉','赫德尔','冰','火','光','暗']
         for i in range(len(temp_name)):
             damo.KeyPresspyCharpy(jn_key[temp_name[i]])
             damo.Delaypy(jn_sf_time[temp_name[i]])
             jn_now_time[temp_name[i]] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        damo.KeyPresspy(40)
+        damo.KeyPresspy(38)
+        damo.KeyPresspy(32)
+
     elif leixing == 2:
-        print('技能2')
         temp_name = ['伊伽贝拉','冰','火','光','暗']
         for i in range(len(temp_name)):
             d1 = datetime.datetime.now()
             d2 = datetime.datetime.strptime(jn_now_time[temp_name[i]],'%Y-%m-%d %H:%M:%S')
             d3 = d1 - d2
             if d3.seconds > jn_time[temp_name[i]]:
-                print('召唤:' + temp_name[i])
                 damo.KeyPresspyCharpy(jn_key[temp_name[i]])
                 damo.Delaypy(1200)
                 jn_now_time[temp_name[i]] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-def 判断方向(num):
-    if num == 1:
-        return "右"
-    elif num == 2:
-        return "右"
-    elif num == 3:
-        return "下"
-    elif num == 4:
-        return "下"
-    elif num == 5:
-        return "右"
-    elif num == 6:
-        return "上"
 def 躲避地火():
     my_x_py = 10
     my_y_py = 195
@@ -1928,11 +1959,11 @@ def 躲避地火():
         if int(pos[1]) > 0:
             my_x = int(pos[1])
             my_y = int(pos[2])
-        FinStr = damo.FindPicEpy(0, 78, 799, 492, "地火.bmp", "000000", "0.9", 0)
+        FinStr = damo.FindColorEpy(0, 78, 799, 492, "0000ff-000000", "1", 5)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
-            wp_x = int(pos[1])
-            wp_y = int(pos[2])
+            wp_x = int(pos[0])
+            wp_y = int(pos[1])
             if wp_y < 320:
                 wp_y_py = 150
         else:
@@ -1958,6 +1989,11 @@ def 躲避地火():
                     右上()
                 elif my_y + my_y_py < wp_y + wp_y_py:
                     右下()
+        FinStr = damo.FindPicEpy(0, 78, 799, 552, "wp.bmp", "000000", "0.9", 0)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            弹起()
+            捡取()
         FinStr = damo.FindPicEpy(337, 29, 451, 97, "奖励.bmp", "000000", "0.9", 0)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
@@ -2032,12 +2068,19 @@ def 出售分解(ZZ):
             damo.LeftClickpy()
             damo.Delaypy(1000)
             y = 262
-            x_py = 31
-            y_py = 31
+            x_py = 30
+            y_py = 30
             no_zhuangbei = False
             for i in range(4):
                 x = 474
                 for j in range(8):
+                    aq_ret = 安全模式()
+                    if aq_ret == 1:
+                        # 出售
+                        damo.MoveTopy(181, 522)
+                        damo.Delaypy(200)
+                        damo.LeftClickpy()
+                        damo.Delaypy(1000)
                     Color = damo.GetColorpy(x + 5, y)
                     if Color == '4c9bad':
                         #高级装备
@@ -2060,13 +2103,40 @@ def 出售分解(ZZ):
                         # 不可出售装备
                         pass
                     else:
-                        print('没有装备')
                         no_zhuangbei = True
                         break
                     x += x_py
                 if no_zhuangbei:
                     break
                 y += y_py
+            #检查下HP药剂
+            FinStr = damo.FindPicEpy(92, 562, 120, 589, "hp.bmp", "000000", "0.9", 0)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                pass
+            else:
+                # 点击消耗栏
+                damo.MoveTopy(543, 245)
+                damo.Delaypy(200)
+                damo.LeftClickpy()
+                damo.Delaypy(500)
+                damo.MoveTopy(586, 182)
+                damo.Delaypy(500)
+                FinStr = damo.FindPicEpy(472, 257, 717, 469, "hp.bmp", "000000", "0.9", 0)
+                pos = FinStr.split('|')
+                if int(pos[1]) > 0:
+                    intx = int(pos[1])
+                    inty = int(pos[2])
+                    damo.MoveTopy(intx, inty)
+                    damo.Delaypy(500)
+                    damo.RightClickpy()
+                    damo.Delaypy(500)
+                    damo.LeftDownpy()
+                    damo.Delaypy(500)
+                    damo.MoveTopy(102, 573)
+                    damo.Delaypy(500)
+                    damo.LeftUppy()
+                    damo.Delaypy(500)
             清理游戏窗口()
     if zizhuangshuliang == 0:
         return 0
@@ -2087,7 +2157,27 @@ def 出售分解(ZZ):
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             damo.MoveTopy(255, 350)
-            damo.Delaypy(200)
+            damo.Delaypy(1000)
+            FinStr = damo.FindStrEpy(323, 370, 335, 382, "勾选", "ffae00-000000", 1)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                pass
+            else:
+                damo.MoveTopy(323 + 7, 370 + 7)
+                damo.Delaypy(200)
+                damo.LeftClickpy()
+                damo.Delaypy(500)
+            FinStr = damo.FindStrEpy(323, 384, 335, 396, "勾选", "ffae00-000000", 1)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                pass
+            else:
+                damo.MoveTopy(323 + 7, 384 + 7)
+                damo.Delaypy(200)
+                damo.LeftClickpy()
+                damo.Delaypy(500)
+            damo.MoveTopy(255, 350)
+            damo.Delaypy(500)
             damo.LeftClickpy()
             damo.Delaypy(2000)
             FinStr = damo.FindStrEpy(316, 269, 480, 313, "缺少分解道具", "ffffff-000000", 1)
@@ -2098,19 +2188,202 @@ def 出售分解(ZZ):
             else:
                 damo.KeyPresspy(13)
                 damo.Delaypy(4000)
+                安全模式()
                 清理游戏窗口()
                 return 1
-def 学习技能():
-    pass
 def 安全模式():
     FinStr = damo.FindStrEpy(335, 319, 396, 350, "确定解除", "ddc593-000000", 1)
     pos = FinStr.split('|')
     if int(pos[1]) > 0:
-        pass
-    FinStr = damo.FindStrEpy(312, 272, 483, 295, "解除安全模式", "ffffff-000000", 1)
-    pos = FinStr.split('|')
-    if int(pos[1]) > 0:
-        pass
+        xgis = get_ini('config/cfg.ini', '小果配置', '小果解安全')
+        xguer = get_ini('config/cfg.ini', '小果配置', '小果账号')
+        xgpwd = get_ini('config/cfg.ini', '小果配置', '小果密码')
+        prints(account.hao + '|' + account.mi + "出现安全模式，等待解除")
+        if xgis == '真':
+            prints(account.hao + '|' + account.mi + "出现安全模式，等待解除")
+            prints('小果解除安全模式')
+            p_qq = get_ini("config/记录.ini", "刷号记录", "当前账号")
+            xaoguo_return = xiaoguo.jiandanjieanquan(p_qq, xguer, xgpwd)
+            if xaoguo_return == True:
+                prints('小果解除安全模式 成功')
+                while True:
+                    prints(account.hao + '|' + account.mi + "出现安全模式，等待解除")
+                    damo.Delaypy(5000)
+                    FinStr = damo.FindStrEpy(312, 272, 483, 295, "解除安全模式", "ffffff-000000", 1)
+                    pos = FinStr.split('|')
+                    if int(pos[1]) > 0:
+                        damo.MoveTopy(400, 307)
+                        damo.Delaypy(200)
+                        damo.LeftClickpy()
+                        damo.Delaypy(1000)
+                        damo.MoveTopy(442, 332)
+                        damo.Delaypy(200)
+                        damo.LeftClickpy()
+                        damo.Delaypy(1000)
+                        break
+            else:
+                prints('小果解除安全模式 失败')
+
+        else:
+            while True:
+                prints(account.hao + '|' + account.mi + "出现安全模式，等待解除")
+                damo.Delaypy(5000)
+                FinStr = damo.FindStrEpy(312, 272, 483, 295, "解除安全模式", "ffffff-000000", 1)
+                pos = FinStr.split('|')
+                if int(pos[1]) > 0:
+                    damo.MoveTopy(400, 307)
+                    damo.Delaypy(200)
+                    damo.LeftClickpy()
+                    damo.Delaypy(1000)
+                    damo.MoveTopy(442, 332)
+                    damo.Delaypy(200)
+                    damo.LeftClickpy()
+                    damo.Delaypy(1000)
+                    break
+        return 1
+    return 0
+def 移动():
+    prints('移动')
+    index = 0
+    while True:
+        if index == 0:
+            向下()
+            FinStr = damo.FindStrEpy(660, 26, 743, 52, "斯曼工业基地", "e6c89b-000000", 1)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                弹起()
+                向右()
+                damo.Delaypy(1000)
+                弹起()
+                index = 1
+            FinStr = damo.FindStrEpy(660, 26, 743, 52, "克洛诺斯岛", "e6c89b-000000", 1)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                弹起()
+                index = 2.1
+        elif index == 1:
+            右上()
+            FinStr = damo.FindStrEpy(166, 53, 611, 249, "装备分解", "e6c89b-000000", 1)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                弹起()
+                break
+        elif index == 2.1:
+            左上()
+            FinStr = damo.FindStrEpy(660, 26, 743, 52, "斯曼工业基地", "e6c89b-000000", 1)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                弹起()
+                向下()
+                damo.Delaypy(1000)
+                弹起()
+                index = 2.2
+        elif index == 2.2:
+            左上()
+            FinStr = damo.FindPicEpy(28, 16, 521, 234, "地图中转.bmp", "000000", "0.9", 0)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                弹起()
+                index = 2.3
+        elif index == 2.3:
+            向右()
+            FinStr = damo.FindStrEpy(166, 53, 611, 249, "装备分解", "e6c89b-000000", 1)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                弹起()
+                break
+def 点击技能(x, y, x1, y1,is_tuodong):
+    #学满技能
+    damo.MoveTopy(x, y)
+    damo.Delaypy(500)
+    damo.LeftClickpy()
+    damo.Delaypy(500)
+    damo.KeyDownpy(16)
+    damo.Delaypy(500)
+    damo.LeftClickpy()
+    damo.Delaypy(500)
+    damo.KeyUppy(16)
+    damo.Delaypy(1000)
+    if is_tuodong == True:
+    #拖动技能
+        damo.MoveTopy(x + 3, y + 3)
+        damo.Delaypy(500)
+        damo.LeftDownpy()
+        damo.Delaypy(500)
+        damo.MoveTopy(x1, y1)
+        damo.Delaypy(500)
+        damo.LeftUppy()
+        damo.Delaypy(500)
+def 学习技能():
+    prints('学习技能')
+    is_wz = True
+    #检查技能摆放
+    for i in range(12):
+        FinStr = damo.FindPicEpy(326, 529, 714, 592, "召唤技能" + str(i + 1) + ".bmp", "000000", "0.9", 0)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            pass
+        else:
+            is_wz = False
+            break
+    if is_wz == False:
+        while True:
+            FinStr = damo.FindStrEpy(376, 28, 429, 51, "技能栏", "ffffff-000000", 1)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                damo.Delaypy(1000)
+                #魔法暴击
+                点击技能(265, 141, 0, 0, False)
+                #魔法背击
+                点击技能(346, 141, 0, 0, False)
+                #赫德尔
+                点击技能(424, 273, 638, 571, True)
+                #弗利特
+                点击技能(424, 476, 605, 539, True)
+                #鞭子
+                点击技能(238, 338, 605, 571, True)
+                damo.MoveTopy(546, 261)
+                damo.Delaypy(500)
+                damo.LeftDownpy()
+                damo.Delaypy(500)
+                damo.MoveTopy(546, 367)
+                damo.Delaypy(500)
+                damo.LeftUppy()
+                damo.Delaypy(500)
+                #桑德尔
+                点击技能(426, 209, 638, 536, True)
+                #狂化
+                点击技能(379, 274, 769, 536, True)
+                #冰
+                点击技能(49, 274, 670, 571, True)
+                #火
+                点击技能(97, 274, 703, 571, True)
+                #光
+                点击技能(143, 274, 737, 571, True)
+                #暗
+                点击技能(191, 274, 770, 571, True)
+                #路易斯
+                点击技能(426, 341, 704, 536, True)
+                #伊伽贝拉
+                点击技能(285, 411, 737, 539, True)
+                #牛王
+                点击技能(427, 475, 671, 539, True)
+                damo.Delaypy(1000)
+                #学习
+                damo.MoveTopy(209, 553)
+                damo.Delaypy(500)
+                damo.LeftClickpy()
+                damo.Delaypy(500)
+                #确认
+                damo.MoveTopy(361, 318)
+                damo.Delaypy(500)
+                damo.LeftClickpy()
+                damo.Delaypy(500)
+                清理游戏窗口()
+                break
+            else:
+                damo.KeyPresspy(75)
+                damo.Delaypy(1000)
 def while_():
     # 读取配置文档
     WeGame = get_ini('config/cfg.ini','主配置', 'WeGame')
@@ -2118,13 +2391,11 @@ def while_():
     CRuser = get_ini('config/cfg.ini','主配置', '若快账号')
     CRpwd = get_ini('config/cfg.ini','主配置', '若快密码')
     zhuanqian =get_ini('config/cfg.ini','主配置', '只转钱')
-    xgis = get_ini('config/cfg.ini','小果配置', '小果解安全')
-    xguer = get_ini('config/cfg.ini','小果配置', '小果账号')
-    xgpwd = get_ini('config/cfg.ini','小果配置', '小果密码')
     x = damo.GetScreenWidthpy()
     y = damo.GetScreenHeightpy()
     #进入正题
     while True:
+        is_60m = False
         liudiangengxin()
         saotubiao()
         shuaxinliebiao()
@@ -2147,13 +2418,11 @@ def while_():
             elif login_ret == 101:
                 continue
             damo.Delaypy(3000)
+            is_60m = True
         hwnd = damo.FindWindowpy("地下城与勇士", "地下城与勇士")
         if hwnd > 0:
             damo.MoveWindowpy(hwnd, 0, 0)
             damo.Delaypy(5000)
-            hwnda = damo.FindWindowpy("", "疯子打印机")
-            if hwnda > 0:
-                damo.SetWindowStatepy(hwnda, 12)
             Imok = True
             while True:
                 FinStr = damo.FindStrEpy(0, 0, x, y, "结束游戏", "ddc593-050505|ffffb8-000000", 1)
@@ -2245,19 +2514,70 @@ def while_():
                     if jinqizhicai() == 1:
                         Imok = False
                         break
-                    prints("等待60秒...")
-                    damo.Delaypy(4000 * 10)
-                    # 检测安全模式
-                    qingkongyouxichuangkou()
-                    jianceanquanmoshi(xgis, xguer, xgpwd)
+                    if is_60m == True:
+                        prints("等待60秒...")
+                        damo.Delaypy(4000 * 10)
+                        # 检测安全模式
+                        # 只兑换点券
+                        if zhuanqian == '真':
+                            fyj_return = fayoujian(CRuser, CRpwd)
+                            if fyj_return == 1:
+                                # 正常返回
+                                pass
+                            elif fyj_return == 2:
+                                prints('网络连接中断,重上')
+                                end_exsit(2)
+                                damo.Delaypy(2000)
+                                Imok = False
+                                break
+                            elif fyj_return == 3:
+                                prints('发送邮件超时,重上')
+                                end_exsit(2)
+                                damo.Delaypy(2000)
+                                Imok = False
+                                break
+                            prints("转账完成，换号")
+                            jiluwanchengshijian_zhuanqian()
+                            end_exsit(2)
+                            damo.Delaypy(2000)
+                            Imok = False
+                            break
+                        yongbingchuzhan()
                     qingkongyouxichuangkou()
                     csdq_ret = chushoudianquan()
                     qingkongyouxichuangkou()
                     if csdq_ret > 0:
                         jieshouyoujian()
                         qingkongyouxichuangkou()
-                    # 只兑换点券
-                    if zhuanqian == '真':
+                    qingkongyouxichuangkou()
+                    #学习技能
+                    学习技能()
+                    #移动到副本门口
+                    移动()
+                    break
+            if Imok == False:
+                continue
+            # 初始化参数
+            maoxiandengji = 4
+            qinglibeibao_cishu = 2
+            fubencishu = 0
+            Imok = True
+            while True:
+                while True:
+                    print('等待曼斯工业基地')
+                    damo.Delaypy(200)
+                    FinStr = damo.FindStrEpy(379, 441, 437, 468, "关闭", "ddc593-000000", 1)
+                    pos = FinStr.split('|')
+                    if int(pos[1]) > 0:
+                        qingkongyouxichuangkou()
+                    if zhongduan_cha() == 1:
+                        Imok = False
+                        break
+                    #疲劳刷完了
+                    color = damo.GetColorpy(339,553)
+                    if color == "0b0b0b" or color == "333333":
+                        prints('打印任务完成')
+                        #发送邮件
                         fyj_return = fayoujian(CRuser, CRpwd)
                         if fyj_return == 1:
                             # 正常返回
@@ -2266,292 +2586,260 @@ def while_():
                             prints('网络连接中断,重上')
                             end_exsit(2)
                             damo.Delaypy(2000)
+                            Imok = False
                             break
                         elif fyj_return == 3:
                             prints('发送邮件超时,重上')
                             end_exsit(2)
                             damo.Delaypy(2000)
+                            Imok = False
                             break
-                        prints("转账完成，换号")
-                        jiluwanchengshijian_zhuanqian()
-                        end_exsit(2)
-                        damo.Delaypy(2000)
+                        jieshouyoujian()
+                        # 记录完成时间
+                        jiluwanchengshijian()
+                        #换角色
+                        prints("PL刷完，换角色")
+                        juesechuli_ret = juesechuli(2)
+                        if juesechuli_ret == 0:
+                            prints("角色刷完，换号")
+                            end_exsit(2)
+                            damo.Delaypy(2000)
+                            Imok = False
+                            break
+                        if juesechuli_ret == 1:
+                            #正常返回
+                            pass
+                        elif juesechuli_ret == 2:
+                            prints("网络连接中断，重上")
+                            end_exsit(2)
+                            damo.Delaypy(2000)
+                            Imok = False
+                            break
+                        elif juesechuli_ret == 3:
+                            prints("角色处理超时，重上")
+                            end_exsit(2)
+                            damo.Delaypy(2000)
+                            Imok = False
+                            break
+                        #刷新列表
+                        tk.trickit()
+                        damo.Delaypy(5000)
+                        qingkongyouxichuangkou()
+                        #换完角色跳出从头开始
+                        Imok = False
                         break
-                    yongbingchuzhan()
-                    qingkongyouxichuangkou()
-                    break
-            if Imok == False:
-                continue
-            #进副本前准备工作
-            # 定义参数
-            jn_key = {'弗利特': 'q', '桑德尔': 'w', '牛头王': 'e', '路易斯': 'r', '伊伽贝拉': 't', '召唤兽狂化': 'y', '鞭子': 'a', '赫德尔': 's','冰': 'd', '火': 'f', '光': 'g', '暗': 'h'}
-            jn_time = {'伊伽贝拉': 200, '冰': 200, '火': 200, '光': 200, '暗': 200}
-            jn_now_time = {'弗利特': '2018-03-30 21:44:09', '桑德尔': '2018-03-30 21:44:09', '牛头王': '2018-03-30 21:44:09','路易斯': '2018-03-30 21:44:09', '伊伽贝拉': '2018-03-30 21:44:09', '召唤兽狂化': '2018-03-30 21:44:09','鞭子': '2018-03-30 21:44:09', '赫德尔': '2018-03-30 21:44:09', '冰': '2018-03-30 21:44:09','火': '2018-03-30 21:44:09', '光': '2018-03-30 21:44:09', '暗': '2018-03-30 21:44:09'}
-            jn_sf_time = {'弗利特': 1000, '桑德尔': 1100, '牛头王': 1500, '路易斯': 1300, '伊伽贝拉': 1300, '召唤兽狂化': 900, '鞭子': 200,'赫德尔': 1000, '冰': 1000, '火': 1000, '光': 1000, '暗': 1000}
-            # 初始化参数
-            maoxiandengji = 4
-            qinglibeibao_cishu = 2
-            fubencishu = 0
-            while True:
-                print('等待曼斯工业基地')
-                damo.Delaypy(200)
-                FinStr = damo.FindStrEpy(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    break
-                FinStr = damo.FindStrEpy(667, 27, 745, 51, "斯曼工业基地", "e6c89b-000000", 1)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    FinStr = damo.FindPicEpy(272, 483, 501, 544, "虚弱.bmp", "000000", "0.9", 0)
+                    FinStr = damo.FindStrEpy(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
-                        print('虚弱等待')
-                        continue
-                    出售分解(1)
-                    向右()
-                    while True:
-                        damo.Delaypy(200)
-                        FinStr = damo.FindStrEpy(509, 533, 583, 570, "练习模式", "ddc593-000000", 1)
+                        break
+                    FinStr = damo.FindStrEpy(667, 27, 745, 51, "斯曼工业基地", "e6c89b-000000", 1)
+                    pos = FinStr.split('|')
+                    if int(pos[1]) > 0:
+                        prints('副本门口处理')
+                        FinStr = damo.FindPicEpy(272, 483, 501, 544, "虚弱.bmp", "000000", "0.9", 0)
                         pos = FinStr.split('|')
                         if int(pos[1]) > 0:
-                            弹起()
-                            FinStr = damo.FindPicEpy(510, 366, 536, 395, "副本界面_格兰迪.bmp", "000000", "0.9", 0)
+                            print('虚弱等待')
+                            continue
+                        出售分解(1)
+                        向左()
+                        damo.Delaypy(500)
+                        向右()
+                        while True:
+                            damo.Delaypy(200)
+                            FinStr = damo.FindStrEpy(509, 533, 583, 570, "练习模式", "ddc593-000000", 1)
                             pos = FinStr.split('|')
                             if int(pos[1]) > 0:
-                                for i in range(5):
-                                    damo.KeyPresspy(37)
+                                弹起()
+                                FinStr = damo.FindPicEpy(510, 366, 536, 395, "副本界面_格兰迪.bmp", "000000", "0.9", 0)
+                                pos = FinStr.split('|')
+                                if int(pos[1]) > 0:
+                                    for i in range(5):
+                                        damo.KeyPresspy(37)
+                                        damo.Delaypy(200)
+                                    for i in range(maoxiandengji - 1):
+                                        damo.KeyPresspy(39)
+                                        damo.Delaypy(200)
+                                    damo.KeyPresspy(32)
                                     damo.Delaypy(200)
-                                for i in range(maoxiandengji - 1):
-                                    damo.KeyPresspy(39)
-                                    damo.Delaypy(200)
-                                damo.KeyPresspy(32)
-                                damo.Delaypy(200)
-                                damo.KeyPresspy(32)
-                                damo.Delaypy(3000)
-                            else:
-                                damo.KeyPresspy(38)
+                                    damo.KeyPresspy(32)
+                                    damo.Delaypy(3000)
+                                else:
+                                    damo.KeyPresspy(38)
+                                    damo.Delaypy(1000)
+                            FinStr = damo.FindStrEpy(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
+                            pos = FinStr.split('|')
+                            if int(pos[1]) > 0:
+                                break
+                        break
+                if Imok == False:
+                    break
+                xingwei = True
+                guanqia = 0
+                duobidihuo = False
+                Imok = True
+                time_is = True
+                while_time = datetime.datetime.now()
+                #游戏内循环执行
+                prints('进入副本')
+                while True:
+                    damo.Delaypy(200)
+                    if zhongduan_cha() == 1:
+                        Imok = False
+                        break
+                    if guanqia == 0:
+                        guanqia = 检查关卡()
+                    if xingwei:
+                        prints('关卡 = ' + str(guanqia))
+                        if guanqia > 0:
+                            if guanqia == 4:
+                                damo.KeyPresspy(37)
+                            elif guanqia == 5:
+                                damo.KeyPresspy(39)
+                            if guanqia > 1:
+                                damo.KeyPresspyCharpy('a')
+                                damo.Delaypy(800)
+                                damo.KeyPresspyCharpy('y')
                                 damo.Delaypy(1000)
-                        FinStr = damo.FindStrEpy(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            break
-                    break
-            xingwei = True
-            guanqia = 0
-            duobidihuo = False
-            #游戏内循环执行
-            while True:
-                damo.Delaypy(200)
-                if zhongduan_cha() == 1:
-                    break
-                if guanqia == 0:
-                    guanqia = 检查关卡()
-                if xingwei:
-                    print('关卡 = ' + str(guanqia))
-                    if guanqia > 0:
-                        if guanqia == 4:
-                            damo.KeyPresspy(37)
-                        elif guanqia == 5:
-                            damo.KeyPresspy(39)
-                        if guanqia > 1:
+                            xingwei = False
+                        if guanqia == 1:
+                            技能(1)
+                            damo.Delaypy(1000)
                             damo.KeyPresspyCharpy('a')
                             damo.Delaypy(800)
                             damo.KeyPresspyCharpy('y')
                             damo.Delaypy(1000)
-                        xingwei = False
-                    if guanqia == 1:
-                        技能(1)
-                    elif guanqia == 3:
-                        向右()
-                        damo.Delaypy(2000)
-                        弹起()
-                    elif guanqia == 5:
-                        向下()
-                        damo.Delaypy(3000)
-                        弹起()
-                    elif guanqia == 6:
-                        技能(2)
-                        右下()
-                        damo.Delaypy(2000)
-                        弹起()
-                    elif guanqia == 7:
-                        技能(2)
-                        duobidihuo = True
-                FinStr = damo.FindPicEpy(718, 25, 795, 105, "问号绿.bmp|问号黄.bmp", "000000", "0.9", 0)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    找门(guanqia)
-                    xingwei = True
-                    guanqia = 0
-                    continue
-                elif guanqia == 6:
-                    color = damo.GetColorpy(766, 90)
-                    if color == "00ff00":
+                        elif guanqia == 3:
+                            向右()
+                            damo.Delaypy(2000)
+                            弹起()
+                        elif guanqia == 5:
+                            向下()
+                            damo.Delaypy(3000)
+                            弹起()
+                        elif guanqia == 6:
+                            技能(2)
+                            右下()
+                            damo.Delaypy(2000)
+                            弹起()
+                        elif guanqia == 7:
+                            技能(2)
+                            duobidihuo = True
+                    FinStr = damo.FindPicEpy(718, 25, 795, 105, "问号绿.bmp|问号黄.bmp", "000000", "0.9", 0)
+                    pos = FinStr.split('|')
+                    if int(pos[1]) > 0:
                         找门(guanqia)
                         xingwei = True
-                        # 重新检查关卡,第七关除外
-                        guanqia += 1
+                        guanqia = 0
                         continue
-                FinStr = damo.FindPicEpy(0, 78, 799, 552, "可破坏.bmp", "000000", "0.9", 0)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    打石头()
-                FinStr = damo.FindPicEpy(0, 78, 799, 552, "wp.bmp", "000000", "0.9", 0)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    弹起()
-                    捡取()
-                FinStr = damo.FindPicEpy(337, 29, 451, 97, "奖励.bmp", "000000", "0.9", 0)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    duobidihuo = False
+                    elif guanqia == 6:
+                        color = damo.GetColorpy(766, 90)
+                        if color == "00ff00":
+                            找门(guanqia)
+                            xingwei = True
+                            # 重新检查关卡,第七关除外
+                            guanqia += 1
+                            continue
+                    #走到错误的关卡
+                    FinStr = damo.FindPicEpy(718, 25, 795, 105, "错关.bmp|错关1.bmp", "000000", "0.9", 0)
+                    pos = FinStr.split('|')
+                    if int(pos[1]) > 0:
+                        找门(guanqia)
+                        xingwei = True
+                        guanqia = 0
+                        continue
+                    FinStr = damo.FindPicEpy(0, 78, 799, 552, "可破坏.bmp", "000000", "0.9", 0)
+                    pos = FinStr.split('|')
+                    if int(pos[1]) > 0:
+                        打石头()
                     FinStr = damo.FindPicEpy(0, 78, 799, 552, "wp.bmp", "000000", "0.9", 0)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         弹起()
                         捡取()
-                FinStr = damo.FindPicEpy(612, 132, 735, 164, "通关.bmp", "000000", "0.9", 0)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    duobidihuo = False
-                    弹起()
-                    捡取()
-                    弹起()
-                    color = damo.GetColorpy(339, 553)
-                    if color == "0b0b0b" or color == "333333":
-                        print('返回城镇')
-                        fanhuichengzhen()
-                        damo.Delaypy(3000)
-                        break
-                    else:
-                        if fubencishu > qinglibeibao_cishu:
+                    FinStr = damo.FindPicEpy(337, 29, 451, 97, "奖励.bmp", "000000", "0.9", 0)
+                    pos = FinStr.split('|')
+                    if int(pos[1]) > 0:
+                        duobidihuo = False
+                    FinStr = damo.FindPicEpy(612, 132, 735, 164, "通关.bmp", "000000", "0.9", 0)
+                    pos = FinStr.split('|')
+                    if int(pos[1]) > 0:
+                        duobidihuo = False
+                        弹起()
+                        捡取()
+                        弹起()
+                        color = damo.GetColorpy(339, 553)
+                        if color == "0b0b0b" or color == "333333":
                             print('返回城镇')
                             fanhuichengzhen()
                             damo.Delaypy(3000)
-                            fubencishu = 0
                             break
                         else:
-                            fubencishu += 1
-                            清理游戏窗口()
-                            damo.KeyPresspyCharpy('f10')
-                            damo.Delaypy(5000)
-                            break
-                FinStr = damo.FindStrEpy(667, 27, 745, 51, "斯曼工业基地", "e6c89b-000000", 1)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    弹起()
-                    break
-                # 躲避
-                FinStr = damo.FindPicEpy(0, 78, 799, 552, "my.bmp", "000000", "0.9", 0)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    myX = int(pos[1])
-                    myY = int(pos[2])
-                    FinStr = damo.FindColorEpy(myX - 100, myY + 130, myX + 120, myY + 210,
-                                               "ff0094-101010|ff00ff-101010", 1.0, 0)
+                            if fubencishu > qinglibeibao_cishu:
+                                print('返回城镇')
+                                fanhuichengzhen()
+                                damo.Delaypy(3000)
+                                fubencishu = 0
+                                break
+                            else:
+                                fubencishu += 1
+                                清理游戏窗口()
+                                damo.KeyPresspyCharpy('f10')
+                                damo.Delaypy(5000)
+                                break
+                    FinStr = damo.FindStrEpy(667, 27, 745, 51, "斯曼工业基地", "e6c89b-000000", 1)
                     pos = FinStr.split('|')
-                    if int(pos[0]) > 0:
-                        rand = random.randint(1, 2)
-                        if rand == 1:
-                            向上()
-                            damo.Delaypy(1000)
-                            弹起()
-                        elif rand == 2:
-                            向下()
-                            damo.Delaypy(1000)
-                            弹起()
-                if duobidihuo:
-                    躲避地火()
-                    技能(2)
-                #疲劳刷完了
-                color = damo.GetColorpy(339,553)
-                if color == "0b0b0b" or color == "333333":
-                    prints("PL刷完，换角色")
-                    #发送邮件
-                    fyj_return = fayoujian(CRuser, CRpwd)
-
-                    if fyj_return == 1:
-                        # 正常返回
-                        pass
-                    elif fyj_return == 2:
-                        prints('网络连接中断,重上')
+                    if int(pos[1]) > 0:
+                        弹起()
+                        break
+                    # 躲避
+                    FinStr = damo.FindPicEpy(0, 78, 799, 552, "my.bmp", "000000", "0.9", 0)
+                    pos = FinStr.split('|')
+                    if int(pos[1]) > 0:
+                        myX = int(pos[1])
+                        myY = int(pos[2])
+                        FinStr = damo.FindColorEpy(myX - 100, myY + 130, myX + 120, myY + 210,"ff0094-101010|ff00ff-101010", 1.0, 0)
+                        pos = FinStr.split('|')
+                        if int(pos[0]) > 0:
+                            rand = random.randint(1, 2)
+                            if rand == 1:
+                                向上()
+                                damo.Delaypy(1000)
+                                弹起()
+                            elif rand == 2:
+                                向下()
+                                damo.Delaypy(1000)
+                                弹起()
+                    if duobidihuo:
+                        躲避地火()
+                        技能(2)
+                        color = damo.GetColorpy(52, 566)
+                        if color == '000000':
+                            damo.KeyPresspy(49)
+                    FinStr = damo.FindPicEpy(0, 0, x, y, "tgp_列表_dnf.bmp|tgp_列表_dnf1.bmp", "000000", "0.9", 0)
+                    pos = FinStr.split('|')
+                    if int(pos[1]) > 0:
+                        prints("游戏窗口消失")
                         end_exsit(2)
                         damo.Delaypy(2000)
+                        Imok = False
                         break
-                    elif fyj_return == 3:
-                        prints('发送邮件超时,重上')
-                        end_exsit(2)
-                        damo.Delaypy(2000)
-                        break
-                    jieshouyoujian()
-                    # 记录完成时间
-                    jiluwanchengshijian()
-                    #换角色
-                    juesechuli_ret = juesechuli(2)
-                    if juesechuli_ret == 0:
-                        prints("角色刷完，换号")
-                        end_exsit(2)
-                        damo.Delaypy(2000)
-                        break
-                    if juesechuli_ret == 1:
-                        #正常返回
-                        pass
-                    elif juesechuli_ret == 2:
-                        prints("网络连接中断，重上")
-                        end_exsit(2)
-                        damo.Delaypy(2000)
-                        break
-                    elif juesechuli_ret == 3:
-                        prints("角色处理超时，重上")
-                        end_exsit(2)
-                        damo.Delaypy(2000)
-                        break
-                    tk.trickit()
-                    damo.Delaypy(5000)
-                    prints("准备刷图")
-                    qingkongyouxichuangkou()
-                    while_time = datetime.datetime.now()
-
-                FinStr = damo.FindPicEpy(0, 0, x, y, "tgp_列表_dnf.bmp|tgp_列表_dnf1.bmp", "000000", "0.9", 0)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    prints("游戏窗口消失")
-                    end_exsit(2)
-                    damo.Delaypy(2000)
+                    #图内超时判断
+                    FinStr = damo.FindStrEpy(333, 571, 473, 597, "只能城镇交易", "ffff00-000000", 1)
+                    pos = FinStr.split('|')
+                    if int(pos[1]) > 0:
+                        time_is = True
+                        while_time = datetime.datetime.now()
+                    if time_is == True:
+                        while_time_now = datetime.datetime.now()
+                        time_temp =  while_time_now.minute - while_time.minute
+                        if time_temp > 5:
+                            prints("图内超时，重上")
+                            end_exsit(2)
+                            damo.Delaypy(2000)
+                            Imok = False
+                            break
+                if Imok == False:
                     break
-                FinStr = damo.FindStrEpy(379, 441, 437, 468, "关闭", "ddc593-000000", 1)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    qingkongyouxichuangkou()
-                #图内超时判断
-                FinStr = damo.FindStrEpy(333, 571, 473, 597, "只能城镇交易", "ffff00-000000", 1)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    time_is = True
-                    while_time = datetime.datetime.now()
-                if time_is == True:
-                    while_time_now = datetime.datetime.now()
-                    time_temp =  while_time_now.minute - while_time.minute
-                    if time_temp > 5:
-                        prints("图内超时，重上")
-                        end_exsit(2)
-                        damo.Delaypy(2000)
-                        break
-                # FinStr = damo.FindStrEpy(310, 307, 427, 361, "安全模式", "ddc593-000000", 1)
-                # pos = FinStr.split('|')
-                # if int(pos[1]) > 0:
-                #     prints(account.hao + '|' + account.mi + "出现安全模式，等待解除")
-                #     if xgis == '真':
-                #         prints('小果解除安全模式')
-                #         p_qq = get_ini("config/记录.ini", "刷号记录", "当前账号")
-                #         xaoguo_return = xiaoguo.jiandanjieanquan(p_qq, xguer, xgpwd)
-                #         if xaoguo_return == True:
-                #             prints('小果解除安全模式 成功')
-                #         else:
-                #             prints('小果解除安全模式 失败')
-                #     else:
-                #         prints(account.hao + '|' + account.mi + "出现安全模式，等待解除")
-                #         damo.Delaypy(5000)
-                #damo.Delaypy(1000)
-        damo.Delaypy(1000)
+            damo.Delaypy(1000)
 while_()
