@@ -2,8 +2,11 @@
 # -*- coding: UTF-8 -*-
 import os
 import win32com.client
-#V1.0
+import ctypes
+dll = ctypes.windll.LoadLibrary(os.getcwd() + '/testgame.dll' )
+dll.SetDllPathW(os.getcwd() + '/wiwl.dll',1)
 dw = win32com.client.Dispatch('tp.ten')
+print(dw.oirtfwRuyKtW())
 class bw():
     def __init__(self):
         self.dwreg = dw.RpoLrDm("weijiawlb1956e24a37f27f5cb5a7e139c2ecb2a", "python")
@@ -11,13 +14,18 @@ class bw():
         dw.MoodklurTCcT(0, os.getcwd() + "/soft.txt")
         dw.eqvC(0)
         try:
-            #模拟方式
-            dwreg = dw.pcGYt(4)
+            #盾
+            # dwreg = dw.fDcGGErqtSAZQ(1,'f1')
+            # if dwreg != 1:
+            #     print("驱动盾失败")
+            #     input()
+            #模拟方式4/2/5
+            dwreg = dw.pcGYt(2)
             if dwreg != 1:
                 print("驱动加载失败")
                 input()
             #鼠标真实模拟
-            dwreg = dw.VeEHgIhLMHXhfit(2, 22, 44)
+            dwreg = dw.VeEHgIhLMHXhfit(2, 12, 22)
             if dwreg != 1:
                 print("驱动加载失败")
                 input()
@@ -26,14 +34,14 @@ class bw():
             if dwreg != 1:
                 print("驱动加载失败")
                 input()
-            dwreg = dw.iMkvZyS('normal',200)
-            if dwreg != 1:
-                print("驱动加载失败")
-                input()
-            dwreg = dw.ikewGCvVxiZiv('normal',50)
-            if dwreg != 1:
-                print("驱动加载失败")
-                input()
+            # dwreg = dw.iMkvZyS('normal',200)
+            # if dwreg != 1:
+            #     print("驱动加载失败")
+            #     input()
+            # dwreg = dw.ikewGCvVxiZiv('normal',50)
+            # if dwreg != 1:
+            #     print("驱动加载失败")
+            #     input()
         except:
             print("驱动加载失败")
             input()
@@ -157,3 +165,5 @@ class bw():
         return dw.ByygUE(pid)
     def EnumProcesspy(self,name):
         return dw.jjuXyhE(name)
+    def DmGuardpy(self,enable,type):
+        return dw.fDcGGErqtSAZQ(enable,type)

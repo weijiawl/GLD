@@ -4,7 +4,7 @@ import tkinter
 from tkinter.ttk import Treeview
 import tkinter
 from tkinter import *
-import time
+import datetime
 import configparser
 import os
 import win_tk
@@ -64,7 +64,6 @@ def trickit():
         ids = ""
         hao_path = get_ini('config/cfg.ini', '主配置', '账号路径')
         pc_name = os.environ['COMPUTERNAME']
-        text(pc_name)
         for ic in range(500):
             num = get_ini(hao_path, pc_name, str(ic + 1))
             if num != "":
@@ -133,7 +132,7 @@ def win():
     root = tkinter.Tk()
     root.geometry('800x310+0+601')
     root.resizable(False, False)
-    root.title('疯子打印机V2.0.5')
+    root.title('打印机V2.0.15')
     frame = Frame(root)
     frame.place(x=0, y=10, width=610, height=300)
     # 滚动条

@@ -1,2 +1,2 @@
 cd /d "%~dp0"
-regsvr32 dm.dll /u
+regsvr32 wiwl.dll /u
