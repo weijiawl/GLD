@@ -2025,9 +2025,12 @@ def 技能(leixing):
         temp_name = ['弗利特','桑德尔','牛头王','路易斯','伊伽贝拉','赫德尔','冰','火','光','暗']
         for i in range(len(temp_name)):
             damo.KeyPresspyCharpy(jn_key[temp_name[i]])
+            time.sleep(0.05)
+            damo.KeyPresspyCharpy(jn_key[temp_name[i]])
+            time.sleep(0.05)
+            damo.KeyPresspyCharpy(jn_key[temp_name[i]])
             damo.Delaypy(jn_sf_time[temp_name[i]])
             jn_now_time[temp_name[i]] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
         damo.KeyPresspy(40)
         damo.KeyPresspy(38)
         damo.KeyPresspy(32)
@@ -2039,6 +2042,10 @@ def 技能(leixing):
             d2 = datetime.datetime.strptime(jn_now_time[temp_name[i]],'%Y-%m-%d %H:%M:%S')
             d3 = d1 - d2
             if d3.seconds > jn_time[temp_name[i]]:
+                damo.KeyPresspyCharpy(jn_key[temp_name[i]])
+                time.sleep(0.05)
+                damo.KeyPresspyCharpy(jn_key[temp_name[i]])
+                time.sleep(0.05)
                 damo.KeyPresspyCharpy(jn_key[temp_name[i]])
                 time.sleep(1.2)
                 jn_now_time[temp_name[i]] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -2790,7 +2797,7 @@ def while_():
                             Imok = False
                             break
                         #刷新列表
-                        tk.trickit()
+                        #tk.trickit()
                         time.sleep(5)
                         qingkongyouxichuangkou()
                         #换完角色跳出从头开始

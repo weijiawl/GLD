@@ -25,7 +25,7 @@ class bw():
                 print("驱动加载失败")
                 input()
             #鼠标真实模拟
-            dwreg = dw.VeEHgIhLMHXhfit(2, 12, 22)
+            dwreg = dw.VeEHgIhLMHXhfit(2, 8, 22)
             if dwreg != 1:
                 print("驱动加载失败")
                 input()
@@ -34,14 +34,14 @@ class bw():
             if dwreg != 1:
                 print("驱动加载失败")
                 input()
-            # dwreg = dw.iMkvZyS('normal',200)
-            # if dwreg != 1:
-            #     print("驱动加载失败")
-            #     input()
-            # dwreg = dw.ikewGCvVxiZiv('normal',50)
-            # if dwreg != 1:
-            #     print("驱动加载失败")
-            #     input()
+            dwreg = dw.iMkvZyS('normal',200)
+            if dwreg != 1:
+                print("驱动加载失败")
+                input()
+            dwreg = dw.ikewGCvVxiZiv('normal',50)
+            if dwreg != 1:
+                print("驱动加载失败")
+                input()
         except:
             print("驱动加载失败")
             input()
