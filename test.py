@@ -32,7 +32,7 @@ class HZ:
         pWrBuf = inputstr
         return self.objdll.M_KeyInputString(self.hdl, pWrBuf, len(inputstr)*2)
     #-----------------------------------Êó±ê----------------------------------
-    def MoveTopy(self,x,y,intx,inty):
+    def MoveTopy(self,intx,inty):
         return self.objdll.M_MoveTo3(self.hdl, intx, inty)
     #µ¥»÷
     def LeftClickpy(self,Nbr):
