@@ -8,6 +8,7 @@ import datetime
 import configparser
 import os
 import win_tk
+import psutil
 def set_ini(name, section, option, strs):
     try:
         cf = configparser.ConfigParser()
@@ -119,12 +120,25 @@ def trickit():
         gengxintongji()
     except:
         print('刷新列表失败')
+def kill_svchost():
+    for i in psutil.pids():
+        p = psutil.Process(i)
+        if p.name() == 'svchost.exe':
+            try:
+                print(p.username())
+                p_user = p.username()
+                if p_user.find('Administrator') >= 0:
+                    p.kill()
+            except:
+                print('访问错误')
 def end_jincheng():
     os.system('taskkill /F /IM Login.exe')
     os.system('taskkill /F /IM Login.exe')
-    os.system('taskkill /F /IM DNF.exe')
+    #os.system('taskkill /F /IM DNF.exe')
     os.system('taskkill /F /IM tgp_daemon.exe')
     os.system('taskkill /F /IM TPHelper.exe')
+    kill_svchost()
+    os.system('结束.bat')
 def text(temp):
     win_tk.lb.insert(END, temp + '\n')
     win_tk.lb.see(END)
@@ -132,7 +146,7 @@ def win():
     root = tkinter.Tk()
     root.geometry('800x310+0+601')
     root.resizable(False, False)
-    root.title('打印机V2.0.15')
+    root.title('疯子打印机V0512.1')
     frame = Frame(root)
     frame.place(x=0, y=10, width=610, height=300)
     # 滚动条
@@ -178,9 +192,11 @@ def win():
     def donothing():
         os.system('taskkill /F /IM Login.exe')
         os.system('taskkill /F /IM Login.exe')
-        os.system('taskkill /F /IM DNF.exe')
+        #os.system('taskkill /F /IM DNF.exe')
         os.system('taskkill /F /IM tgp_daemon.exe')
         os.system('taskkill /F /IM TPHelper.exe')
+        kill_svchost()
+        os.system('结束.bat')
         root.destroy()
     root.protocol("WM_DELETE_WINDOW",donothing)
     root.mainloop()

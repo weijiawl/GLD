@@ -142,16 +142,10 @@ class bw():
     #向指定窗口发送文本数据
     def SendStringpy(self,hwnd,strs):
         return dw.kCiSzKsz(hwnd,strs)
-    #设置窗口的大小
-    def SetWindowSizepy(self,hwnd,width,height):
-        return dw.XoMdHQXl(hwnd,width,height)
     #设置窗口的状态
     def SetWindowStatepy(self,hwnd,flag):
         return dw.MBghJbHdCA(hwnd,flag)
     #############################################系统类####################################################
-    #延时
-    def Delaypy(self,mis):
-        return dw.WUgpBX(mis)
     #运行指定的应用程序
     def RunApppy(self,path,mode):
         return dw.YCxTcNnrgFjR(path,mode)
@@ -161,9 +155,5 @@ class bw():
     #获取屏幕高度
     def GetScreenHeightpy(self):
         return dw.YDvVC()
-    def TerminateProcesspy(self,pid):
-        return dw.ByygUE(pid)
-    def EnumProcesspy(self,name):
-        return dw.jjuXyhE(name)
     def DmGuardpy(self,enable,type):
         return dw.fDcGGErqtSAZQ(enable,type)
