@@ -1,4 +1,19 @@
-****自动更新
-打码返回检查
-起飞无响应
-发邮件时中断
+学技能加限时
+清理窗口加限时
+图外加限时
+捡取次数限制
+
+
+KeyPresspy - KJDfekiHDh
+KeyDownpy - LKDFemrrh
+KeyUppy - LJDFnmeFSD
+GetKeyStatepy - CJdsfDH
+KeyPressStrpy - LbferJhd
+MoveTopy - UIKBudj
+LeftClickpy - PPWEbxbar
+LeftDoubleClickpy - KFNVCnehsdg
+LeftDownpy - cndjGdsbSdg
+LeftUppy - mboHdjGsV
+RightClickpy - XKkncvhe
+RightDownpy - jfgknrtBG
+RightUppy - MNXjhfejkhV

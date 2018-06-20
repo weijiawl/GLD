@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*-
 import ctypes
 dll = ctypes.windll.LoadLibrary('SAFEDLL.dll')
-
 class xgdx:
     def jieanquan(self,qq,qqpwd,shouji,xguer,xgmm,rkuer,rkmm):
         dll.SetKfUser('weijiawl'.encode("utf-8"))
@@ -14,7 +13,7 @@ class xgdx:
     def jiandanjieanquan(self,qq,xguer,xgmm):
         error = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         r = dll.SafeUp(qq.encode("utf-8"),error,256,xguer.encode("utf-8"),xgmm.encode("utf-8"))
+        print(r)
         if r == 2:
             return True
         return False
-

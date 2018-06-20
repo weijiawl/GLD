@@ -1364,7 +1364,6 @@ class datetime(date):
     instance of a tzinfo subclass. The remaining arguments may be ints.
     """
     __slots__ = date.__slots__ + time.__slots__
-
     def __new__(cls, year, month=None, day=None, hour=0, minute=0, second=0,
                 microsecond=0, tzinfo=None, *, fold=0):
         if isinstance(year, bytes) and len(year) == 10 and 1 <= year[2]&0x7F <= 12:
