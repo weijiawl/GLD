@@ -1,14 +1,14 @@
-import tkinter
 #!/usr/bin/python
 #-*- coding: UTF-8 -*-
+import public
 from tkinter.ttk import Treeview
 import tkinter
 from tkinter import *
-import datetime
 import configparser
 import os
 import win_tk
 import psutil
+import sys
 def set_ini(name, section, option, strs):
     try:
         cf = configparser.ConfigParser()
@@ -61,62 +61,58 @@ def trickit():
         if len(temp) > 0:
             for _ in map(win_tk.tree.delete, win_tk.tree.get_children("")):
                 pass
-        xianshihang = ""
-        ids = ""
+        xianshihang = 0
         hao_path = get_ini('config/cfg.ini', '主配置', '账号路径')
         pc_name = os.environ['COMPUTERNAME']
+        inde = 0
         for ic in range(500):
             num = get_ini(hao_path, pc_name, str(ic + 1))
             if num != "":
-                shijian = ""
-                zhuangtai = ""
-                dangqianjuese = ""
                 num_arr = num.split('=')
-                num_zt = get_ini('config/记录.ini', '封号', num_arr[0])
-                if num_zt == "":
-                    num_zt = get_ini('config/记录.ini', '制裁', num_arr[0])
-                    if num_zt == "":
-                        num_zt = get_ini('config/记录.ini', '完成', num_arr[0] + '_' + num_arr[2])
-                        if num_zt == "":
-                            num_zt = get_ini('config/记录.ini', '刷号记录', '当前账号')
-                            if num_zt != "":
-                                if num_zt == num_arr[0]:
-                                    if xianshihang == "":
-                                        xianshihang = num_zt
-                                    num_zt = get_ini('config/记录.ini', '刷号记录', '当前大区')
-                                    if num_zt == num_arr[2]:
-                                        zhuangtai = "打印中"
-                                        shijian = ""
-                        else:
-                            zhuangtai = "完成"
-                            shijian = ""
+                for i in range(int(num_arr[3])):
+                    dangqianjuese = ""
+                    zhuangtai = ""
+                    shijian = ""
+                    temp_ret = get_ini('config/记录.ini', '封号', num_arr[0])
+                    if temp_ret != "":
+                        zhuangtai = '封号'
+                        shijian = temp_ret
                     else:
-                        zhuangtai = "制裁"
-                        shijian = num_zt
-                else:
-                    zhuangtai = "封号"
-                    shijian = num_zt
-
-                if zhuangtai == '完成':
-                    dangqianjuese = num_arr[3]
-                elif zhuangtai == '打印中':
-                    dangqianjuese = get_ini('config/记录.ini', '刷号记录', "当前角色")
-                else:
-                    for i in range(int(num_arr[3])):
-                        dangqianjuese_str = get_ini('config/记录.ini', '完成时间',num_arr[0] + '_' + num_arr[2] + '_' + str(i + 1))
-                        if dangqianjuese_str != "":
-                            dangqianjuese = str(i + 1)
-                            break
-                id = win_tk.tree.insert('', ic,values=[str(ic + 1), num_arr[0], num_arr[2], num_arr[3], dangqianjuese,zhuangtai, shijian])
-                if ids == "":
-                    if xianshihang == num_arr[0]:
-                        ids = id
+                        temp_ret = get_ini('config/记录.ini', '制裁', num_arr[0])
+                        if temp_ret != "":
+                            zhuangtai = '制裁'
+                            shijian = temp_ret
+                        else:
+                            temp_ret = get_ini('config/记录.ini', '完成时间',num_arr[0] + '_' + num_arr[2] + '_' + str(i + 1))
+                            if temp_ret != "":
+                                zhuangtai = '完成'
+                                shijian = temp_ret
+                            else:
+                                temp_ret = get_ini('config/记录.ini', '刷号记录', '当前账号')
+                                if temp_ret == num_arr[0]:
+                                    temp_ret = get_ini('config/记录.ini', '刷号记录', '当前大区')
+                                    if temp_ret == num_arr[2]:
+                                        temp_ret = get_ini('config/记录.ini', '刷号记录', '当前角色')
+                                        if temp_ret == str(i + 1):
+                                            zhuangtai = '打印中'
+                    id = win_tk.tree.insert('', inde, values=[str(inde + 1), num_arr[0], num_arr[2], str(i + 1), dangqianjuese,zhuangtai, shijian])
+                    if zhuangtai == '封号':
+                        win_tk.tree.item(id, tags=('hongse'))
+                    elif zhuangtai == '制裁':
+                        win_tk.tree.item(id, tags=('zise'))
+                    elif zhuangtai == '完成':
+                        win_tk.tree.item(id, tags=('lvse'))
+                    elif zhuangtai == '打印中':
+                        win_tk.tree.item(id, tags=('lanse'))
+                        xianshihang = id
+                    win_tk.tree.tag_configure('hongse', background='#FF0000')
+                    win_tk.tree.tag_configure('zise', background='#9932CC')
+                    win_tk.tree.tag_configure('lvse', background='#00FF00')
+                    win_tk.tree.tag_configure('lanse', background='#7B68EE')
+                    inde += 1
             else:
                 break
-        if ids == "":
-            ids = id
-        win_tk.tree.see(ids)
-        set_ini("config/记录.ini", "更新", '刷新列表', 'False')
+        win_tk.tree.see(xianshihang)
         gengxintongji()
     except:
         print('刷新列表失败')
@@ -139,6 +135,8 @@ def end_jincheng():
     os.system('taskkill /F /IM TPHelper.exe')
     kill_svchost()
     os.system('结束.bat')
+def end_exit():
+    public.k = 2
 def text(temp):
     win_tk.lb.insert(END, temp + '\n')
     win_tk.lb.see(END)
@@ -146,7 +144,7 @@ def win():
     root = tkinter.Tk()
     root.geometry('800x310+0+601')
     root.resizable(False, False)
-    root.title('疯子打印机V0512.1')
+    root.title('疯子打印机0716.3')
     frame = Frame(root)
     frame.place(x=0, y=10, width=610, height=300)
     # 滚动条
@@ -178,25 +176,24 @@ def win():
     win_tk.tree.heading('c2', text='账号')
     win_tk.tree.heading('c3', text='大区')
     win_tk.tree.heading('c4', text='角色')
-    win_tk.tree.heading('c5', text='完成角色')
+    win_tk.tree.heading('c5', text=' ')
     win_tk.tree.heading('c6', text='状态')
     win_tk.tree.heading('c7', text='完成时间')
     win_tk.tree.pack(side=tkinter.LEFT, fill=tkinter.Y)
     # Treeview组件与垂直滚动条结合
     scrollBar.config(command=win_tk.tree.yview)
-    #gengxinyihang()
     # Button是一种按钮组件，与Label类似，只是多出了响应点击的功能
     #Button(frams, text='打印机启动', command=t_start).pack(side=TOP, anchor=S, fill=NONE, expand=NO)
-    Button(frams, text='打印机结束', command=end_jincheng).pack(side=TOP, anchor=S, fill=NONE, expand=NO)
+    Button(frams, text='打印机结束', command=end_exit).pack(side=TOP, anchor=S, fill=NONE, expand=NO)
     # Button(frams, text='Bottom').pack(side=TOP, anchor=S, fill=NONE , expand=NO)
-    def donothing():
-        os.system('taskkill /F /IM Login.exe')
-        os.system('taskkill /F /IM Login.exe')
-        #os.system('taskkill /F /IM DNF.exe')
-        os.system('taskkill /F /IM tgp_daemon.exe')
-        os.system('taskkill /F /IM TPHelper.exe')
-        kill_svchost()
-        os.system('结束.bat')
-        root.destroy()
-    root.protocol("WM_DELETE_WINDOW",donothing)
+    # def donothing():
+    #     os.system('taskkill /F /IM Login.exe')
+    #     os.system('taskkill /F /IM Login.exe')
+    #     #os.system('taskkill /F /IM DNF.exe')
+    #     os.system('taskkill /F /IM tgp_daemon.exe')
+    #     os.system('taskkill /F /IM TPHelper.exe')
+    #     kill_svchost()
+    #     os.system('结束.bat')
+    #     root.destroy()
+    root.protocol("WM_DELETE_WINDOW",end_exit)
     root.mainloop()
