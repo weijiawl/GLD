@@ -215,6 +215,8 @@ def loop():
                     else:
                         break
                 tcpCliSock.send(('ZH' + numstr).encode('gb2312'))
+                time.sleep(1)
+                发送记录()
                 is_zh = False
             while True:
                 try:
@@ -659,9 +661,7 @@ def zhongduan_cha():
                 log('三方', account.hao, '三方模块')
                 end_exsit(2)
                 time.sleep(2)
-                #重启电脑
-                run('shutdown -r', shell=True)
-                time.sleep(60)
+                重启机器(2)
                 return 1
             FinStr = dw.RsJCdWDvHA(234, 243, 562, 335, "制裁1小时", "ffffff-000000", 1)
             pos = FinStr.split('|')
@@ -676,9 +676,7 @@ def zhongduan_cha():
                 log('制裁', account.hao, '一小时')
                 end_exsit(2)
                 time.sleep(2)
-                #重启电脑
-                run('shutdown -r', shell=True)
-                time.sleep(60)
+                重启机器(2)
                 return 1
             FinStr = dw.RsJCdWDvHA(234, 243, 562, 335, "制裁一天", "ffffff-000000", 1)
             pos = FinStr.split('|')
@@ -692,9 +690,7 @@ def zhongduan_cha():
                 prints("制裁一天，换号")
                 log('制裁', account.hao, '一天')
                 end_exsit(2)
-                #重启电脑
-                run('shutdown -r', shell=True)
-                time.sleep(60)
+                重启机器(2)
                 return 1
             FinStr = dw.RsJCdWDvHA(234, 243, 562, 335, "制裁15天", "ffffff-000000", 1)
             pos = FinStr.split('|')
@@ -708,9 +704,7 @@ def zhongduan_cha():
                 prints("制裁15天，换号")
                 log('制裁', account.hao, '15天')
                 end_exsit(2)
-                #重启电脑
-                run('shutdown -r', shell=True)
-                time.sleep(60)
+                重启机器(2)
                 return 1
             prints('中断制裁未识别，请把【中断截图】文件夹中的截图发给作者')
             dw.BRjQifPapFtzcvC(234, 243, 562, 335, str(time.time()) + '.bmp')
@@ -1044,17 +1038,15 @@ def fayoujian(CRuser, CRpwd):
                     time.sleep(1)
                     xamo.PPWEbxbar(1)
                     time.sleep(1)
-                    if int(pos[0]) == 0:
-                        ws_sl = dw.ghKWigkPfdBCtSd(627, 313, 742, 396, "ffe3ab-000000", 1)
-                        ws_sl = re.sub("\D", "", ws_sl)
+                    ws_sl = dw.ghKWigkPfdBCtSd(627, 313, 742, 396, "ffe3ab-000000", 1)
+                    ws_sl = re.sub("\D", "", ws_sl)
+                    if int(ws_sl) - 200 > 0:
                         xamo.LbferJhd(str(int(ws_sl) - 200))
                         time.sleep(0.5)
                         xamo.KJDfekiHDh(13,1)
                         time.sleep(1)
-                        xamo.UIKBudj(0, 0)
-                    else:
-                        xamo.PPWEbxbar(1)
-                        time.sleep(1)
+                    xamo.UIKBudj(0, 0)
+                    time.sleep(0.5)
                     tianjiashuliang = tianjiashuliang + 1
                     wuse_is = False
             if tianjiashuliang >= 10:
@@ -1914,9 +1906,7 @@ def jinqizhicai():
             dw.BRjQifPapFtzcvC(812, 26, 1114, 114, os.getcwd() + '/' + str(time.time()) + '.bmp')
             end_exsit(2)
             time.sleep(2)
-        # 重启电脑
-        run('shutdown -r', shell=True)
-        time.sleep(60)
+        重启机器(2)
         return 1
     return 0
 def 捡取():
@@ -1973,7 +1963,7 @@ def 捡取():
             xamo.KJDfekiHDh(88,1)
             time.sleep(0.5)
         else:
-            FinStr = dw.uEKuRfCL(0, 78, 799, 552, "my.bmp", "000000", "1", 0)
+            FinStr = dw.uEKuRfCL(0, 78, 799, 552, "my.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 my_x = int(pos[1])
@@ -2748,6 +2738,7 @@ def 门票数量检查购买():
 def 移动(can):
     #can == 1 格蓝迪 can == 2 黄龙
     prints('移动')
+    coumai_index = 0
     检查累积在线奖励()
     if can == 1:
         prints('曼斯工业基地 --> 格兰迪门口')
@@ -2829,6 +2820,10 @@ def 移动(can):
                                     xamo.KJDfekiHDh(73, 1)
                                     time.sleep(0.5)
                                     购买物品('瞬间移动药剂', 1)
+                                    coumai_index += 1
+                                    if coumai_index > 5:
+                                        prints('购买次数超限')
+                                        重启机器(1)
                                     清理游戏窗口()
                                     jieshouyoujian()
                                     清理游戏窗口()
@@ -2936,6 +2931,10 @@ def 移动(can):
                                 xamo.KJDfekiHDh(73, 1)
                                 time.sleep(0.5)
                                 购买物品('瞬间移动药剂',1)
+                                coumai_index += 1
+                                if coumai_index > 5:
+                                    prints('购买次数超限')
+                                    重启机器(1)
                                 清理游戏窗口()
                                 jieshouyoujian()
                                 清理游戏窗口()
@@ -3026,6 +3025,10 @@ def 移动(can):
                                 xamo.KJDfekiHDh(73, 1)
                                 time.sleep(0.5)
                                 购买物品('瞬间移动药剂',1)
+                                coumai_index += 1
+                                if coumai_index > 5:
+                                    prints('购买次数超限')
+                                    重启机器(1)
                                 清理游戏窗口()
                                 jieshouyoujian()
                                 清理游戏窗口()
@@ -3102,6 +3105,45 @@ def 点击技能(x, y, x1, y1,is_tuodong):
         time.sleep(0.5)
         xamo.mboHdjGsV()
         time.sleep(0.5)
+def 清理游戏窗口_学技能():
+    xamo.UIKBudj(1, 1)
+    time.sleep(0.5)
+    xamo.PPWEbxbar(1)
+    time.sleep(0.5)
+    while True:
+        FinStr = dw.RsJCdWDvHA(378,296,494,369, "关闭", "ddc593-000000|ffffb8-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            intx = int(pos[1])
+            inty = int(pos[2])
+            xamo.UIKBudj(intx + 5, inty + 3)
+            time.sleep(0.2)
+            xamo.PPWEbxbar(1)
+            time.sleep(1)
+        FinStr = dw.RsJCdWDvHA(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            xamo.UIKBudj(594, 127)
+            time.sleep(0.2)
+            xamo.PPWEbxbar(1)
+            time.sleep(1)
+            time.sleep(0.5)
+            FinStr = dw.RsJCdWDvHA(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                xamo.UIKBudj(594, 127)
+                time.sleep(0.2)
+                xamo.PPWEbxbar(1)
+                time.sleep(1)
+            else:
+                break
+        else:
+            xamo.UIKBudj(1, 1)
+            time.sleep(0.5)
+            xamo.PPWEbxbar(1)
+            time.sleep(0.5)
+            xamo.KJDfekiHDh(27,1)
+            time.sleep(1)
 def 学习技能(zhiye):
     prints('学习技能')
     for t in range(3):
@@ -4192,6 +4234,13 @@ def 异常文本(str):
     file.write(str)  # 写入内容信息
     file.close()
     dw.AQkYZXxNfqMz(os.getcwd() + '\异常文本.txt', 0)
+def 重启机器(can):
+    if can == 1:
+        # 重启电脑
+        run('shutdown -r -t 0', shell=True)
+    elif can == 2:
+        run('shutdown -r', shell=True)
+        time.sleep(60)
 def while_():
     pc_name = get_pc_name()
     CDK = get_ini('注册码.ini', '注册码', pc_name, "")
@@ -4239,7 +4288,6 @@ def while_():
     # 进入正题
     tk.trickit()
     while True:
-        发送记录()
         is_60m = False
         saotubiao()
         shuaxinliebiao()
@@ -4289,6 +4337,7 @@ def while_():
             time.sleep(5)
             Imok = True
             while True:
+                发送记录()
                 time.sleep(0.5)
                 FinStr = dw.RsJCdWDvHA(0, 0, x, y, "结束游戏", "ddc593-050505|ffffb8-000000", 1)
                 pos = FinStr.split('|')
@@ -4388,7 +4437,7 @@ def while_():
                         break
                     if is_60m == True:
                         # 职业1 = 召唤：2 = 风法
-                        zhiye = 2
+                        zhiye = 1
                         # 关闭直播视频进程
                         run('taskkill /F /IM CrossProxy.exe', shell=True)
                         prints("等待60秒...")
@@ -4598,7 +4647,7 @@ def while_():
                                     Imok = False
                                     break
                                 # 刷新列表
-                                # tk.trickit()
+                                tk.trickit()
                                 time.sleep(5)
                                 qingkongyouxichuangkou()
                                 # 换完角色跳出从头开始

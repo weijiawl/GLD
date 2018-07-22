@@ -144,7 +144,7 @@ def win():
     root = tkinter.Tk()
     root.geometry('800x310+0+601')
     root.resizable(False, False)
-    root.title('疯子打印机0716.3')
+    root.title('疯子打印机0718.1')
     frame = Frame(root)
     frame.place(x=0, y=10, width=610, height=300)
     # 滚动条
