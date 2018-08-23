@@ -1,14 +1,18 @@
 # -*- coding: cp936 -*-
 import ctypes
-import string
 import time
 from ctypes import *  # 导入 ctypes 库中所有模块
 class HZ:
-    def __init__(self,x,y):
+    def __init__(self,x,y,nbr,VID=0x0,PID=0x0):
         self.objdll = ctypes.windll.LoadLibrary('dk.dll')
-        self.hdl = self.objdll.M_Open(1)
-        self.objdll.M_ResolutionUsed(self.hdl, x, y)
-        print("open handle = " + str(self.hdl))
+        if VID > 0x0:
+            self.hdl = self.objdll.M_Open_VidPid(VID,PID + nbr)
+            self.objdll.M_ResolutionUsed(self.hdl, x, y)
+            print("双头 open handle = " + str(self.hdl))
+        else:
+            self.hdl = self.objdll.M_Open(nbr)
+            self.objdll.M_ResolutionUsed(self.hdl, x, y)
+            print("单头 open handle = " + str(self.hdl))
         time.sleep(3)  # sleep 3s 加延时，延时期间将鼠标点到记事本里，方便调试用
     #-----------------------------------键盘----------------------------------
     # 单击
@@ -56,6 +60,10 @@ class HZ:
     #弹起右键
     def MNXjhfejkhV(self):
         return self.objdll.M_RightUp(self.hdl)
-# if __name__ == '__main__':
-#     te = HZ()
-#     print (te.MoveTopy(1920,1080,900,900))
+if __name__ == '__main__':
+    te = HZ(1366, 768, 1, 0xC317, 0xFF00)
+    print(te.UIKBudj(900,700))
+    print(te.UIKBudj(900, 600))
+    print(te.UIKBudj(900, 500))
+    print(te.UIKBudj(900, 400))
+    print(te.UIKBudj(900, 300))

@@ -8,7 +8,8 @@ import configparser
 import os
 import win_tk
 import psutil
-import sys
+import datetime
+import time
 def set_ini(name, section, option, strs):
     try:
         cf = configparser.ConfigParser()
@@ -20,14 +21,14 @@ def set_ini(name, section, option, strs):
         return 1
     except:
         return 0
-def get_ini(name, section, option):
+def get_ini(name, section, option,moren):
     try:
         cf = configparser.ConfigParser()
         cf.read(name)
         temp = cf.get(section, option)
         return temp
     except:
-        return ""
+        return moren
 def gengxintongji():
     F_hao = 0
     Z_hao = 0
@@ -62,37 +63,37 @@ def trickit():
             for _ in map(win_tk.tree.delete, win_tk.tree.get_children("")):
                 pass
         xianshihang = 0
-        hao_path = get_ini('config/cfg.ini', '主配置', '账号路径')
-        pc_name = os.environ['COMPUTERNAME']
+        hao_path = get_ini('config/cfg.ini', '主配置', '账号路径', "")
+        pc_name = get_ini('config/cfg.ini', '软件配置', 'pc_name', "")
         inde = 0
         for ic in range(500):
-            num = get_ini(hao_path, pc_name, str(ic + 1))
+            num = get_ini(hao_path, pc_name, str(ic + 1),"")
             if num != "":
                 num_arr = num.split('=')
                 for i in range(int(num_arr[3])):
                     dangqianjuese = ""
                     zhuangtai = ""
                     shijian = ""
-                    temp_ret = get_ini('config/记录.ini', '封号', num_arr[0])
+                    temp_ret = get_ini('config/记录.ini', '封号', num_arr[0], "")
                     if temp_ret != "":
                         zhuangtai = '封号'
                         shijian = temp_ret
                     else:
-                        temp_ret = get_ini('config/记录.ini', '制裁', num_arr[0])
+                        temp_ret = get_ini('config/记录.ini', '制裁', num_arr[0], "")
                         if temp_ret != "":
                             zhuangtai = '制裁'
                             shijian = temp_ret
                         else:
-                            temp_ret = get_ini('config/记录.ini', '完成时间',num_arr[0] + '_' + num_arr[2] + '_' + str(i + 1))
+                            temp_ret = get_ini('config/记录.ini', '完成时间',num_arr[0] + '_' + num_arr[2] + '_' + str(i + 1), "")
                             if temp_ret != "":
                                 zhuangtai = '完成'
                                 shijian = temp_ret
                             else:
-                                temp_ret = get_ini('config/记录.ini', '刷号记录', '当前账号')
+                                temp_ret = get_ini('config/记录.ini', '刷号记录', '当前账号',"")
                                 if temp_ret == num_arr[0]:
-                                    temp_ret = get_ini('config/记录.ini', '刷号记录', '当前大区')
+                                    temp_ret = get_ini('config/记录.ini', '刷号记录', '当前大区',"")
                                     if temp_ret == num_arr[2]:
-                                        temp_ret = get_ini('config/记录.ini', '刷号记录', '当前角色')
+                                        temp_ret = get_ini('config/记录.ini', '刷号记录', '当前角色',"")
                                         if temp_ret == str(i + 1):
                                             zhuangtai = '打印中'
                     id = win_tk.tree.insert('', inde, values=[str(inde + 1), num_arr[0], num_arr[2], str(i + 1), dangqianjuese,zhuangtai, shijian])
@@ -138,13 +139,15 @@ def end_jincheng():
 def end_exit():
     public.k = 2
 def text(temp):
-    win_tk.lb.insert(END, temp + '\n')
+    d2 = datetime.datetime.now().strftime('%d %H:%M:%S')
+    win_tk.lb.insert(END, d2 + ' ' + temp + '\n')
     win_tk.lb.see(END)
 def win():
     root = tkinter.Tk()
     root.geometry('800x310+0+601')
     root.resizable(False, False)
-    root.title('疯子打印机0718.1')
+    #'疯子打印机0819.1.'
+    root.title('疯子打印机V0823.A')
     frame = Frame(root)
     frame.place(x=0, y=10, width=610, height=300)
     # 滚动条
@@ -186,14 +189,6 @@ def win():
     #Button(frams, text='打印机启动', command=t_start).pack(side=TOP, anchor=S, fill=NONE, expand=NO)
     Button(frams, text='打印机结束', command=end_exit).pack(side=TOP, anchor=S, fill=NONE, expand=NO)
     # Button(frams, text='Bottom').pack(side=TOP, anchor=S, fill=NONE , expand=NO)
-    # def donothing():
-    #     os.system('taskkill /F /IM Login.exe')
-    #     os.system('taskkill /F /IM Login.exe')
-    #     #os.system('taskkill /F /IM DNF.exe')
-    #     os.system('taskkill /F /IM tgp_daemon.exe')
-    #     os.system('taskkill /F /IM TPHelper.exe')
-    #     kill_svchost()
-    #     os.system('结束.bat')
-    #     root.destroy()
+
     root.protocol("WM_DELETE_WINDOW",end_exit)
     root.mainloop()

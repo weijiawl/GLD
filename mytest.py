@@ -1,5 +1,10 @@
-X = 99
-def hider():
-    global T
-    T= X
+def tester(start):
+    state = start
+    def nested(label):
+        print(label, state)
+    return nested
+
+F = tester(0)
+F('spam')
+F('ham')
 

@@ -12,7 +12,6 @@ import random
 import test
 from socket import *
 import multiprocessing
-import shutil
 import md5
 import tk
 import threading
@@ -43,36 +42,24 @@ def set_ini(name, section, option, strs):
         return 1
     except:
         return 0
-
-dll = ctypes.windll.LoadLibrary(os.getcwd() + '/testgame.dll')
-dll.NFfyuHGvNTS(os.getcwd() + '/wiwl.dll',1)
-dw = win32com.client.Dispatch('tv.cc')
-dw.KBKDIaFTjE(os.getcwd() + "/Image")
-dw.ZcmXmGrwol(0, os.getcwd() + "/soft.txt")
-dw_ret = dw.VbXjmz("weijiawl95794bdf61a133a0415974c0c2c93e76", "python")
-dw.lrClHaBwmzW(0)
-
-print(dw.aVZsYLBIa(1,"pg"))
-print(dw.aVZsYLBIa(1,"phide"))
-print(dw.aVZsYLBIa(1,"dhide"))
-cc = get_ini('config/cfg.ini', '主配置', 'cc',"0")
-if cc == '1':
-    print(dw.aVZsYLBIa(1,"vv"))
-    print(dw.aVZsYLBIa(1,"hd"))
-    print(dw.aVZsYLBIa(1,"hd w <0>"))
-    print(dw.aVZsYLBIa(1,"pass"))
-
-# print(dw.aVZsYLBIa(1,"pass"))
-# print(dw.aVZsYLBIa(1,"h3 p <0>"))
-# print(dw.aVZsYLBIa(1,"h3 w <regsvr32.exe>"))
-# print(dw.aVZsYLBIa(1,"h3 w <cmd.exe>"))
-print('保护加载完成')
+#dll = ctypes.windll.LoadLibrary(os.getcwd() + '/testgame.dll')
+#dll.SetDllPathA(os.getcwd() + '/wiwl.dll',0)
+dw = win32com.client.Dispatch('dm.dmsoft')
+dw.SetDict(0, "soft.txt")
+dw.SetPath("Image")
+print(dw.Ver())
+dw_ret = dw.Reg("weijiawlb1956e24a37f27f5cb5a7e139c2ecb2a", "python S")
+dw.UseDict(0)
+pc_name =  get_ini('config/cfg.ini', '软件配置', 'pc_name', "")
+hwnd = dw.FindWindow("", pc_name)
+if hwnd > 0:
+    dw.MoveWindow(hwnd, -8, -31)
 time.sleep(1)
 xiaoguo = xg.xgdx()
-x = dw.yTKUBaTqevaYZRU()
-y = dw.vgtwHdrCtErzwk()
-xamo = test.HZ(x, y, 1)
-WMI = win32com.client.GetObject('winmgmts:')
+x = int(get_ini('config/cfg.ini', '主配置', 'x', "0"))
+y = int(get_ini('config/cfg.ini', '主配置', 'y', "0"))
+xamo = test.HZ(x, y, 1, 0xC317, 0xFF00)
+
 class account_value:
     def __init__(self, hao="", mi="", daqu="", zongjuese="", dangqianjuesi="",zhanghaobianhao="",zhanghaozongshu="",dituid=0):
         self.hao = hao
@@ -92,10 +79,7 @@ jn_time = {'伊伽贝拉': 200, '冰': 200, '火': 200, '光': 200, '暗': 200}
 jn_now_time = {'弗利特': '2018-03-30 21:44:09', '桑德尔': '2018-03-30 21:44:09', '牛头王': '2018-03-30 21:44:09','路易斯': '2018-03-30 21:44:09', '伊伽贝拉': '2018-03-30 21:44:09', '召唤兽狂化': '2018-03-30 21:44:09','鞭子': '2018-03-30 21:44:09', '赫德尔': '2018-03-30 21:44:09', '冰': '2018-03-30 21:44:09','火': '2018-03-30 21:44:09', '光': '2018-03-30 21:44:09', '暗': '2018-03-30 21:44:09'}
 jn_sf_time = {'弗利特': 0.8, '桑德尔': 0.9, '牛头王': 1.3, '路易斯': 1.1, '伊伽贝拉': 1.1, '召唤兽狂化': 0.8, '鞭子': 0.3,'赫德尔': 0.8, '冰': 0.8, '火': 0.8, '光': 0.8, '暗': 0.8}
 public_code = md5.get_disk_info()
-def addfile2autorun(path):
-    prints('写入开机自启')
-    #shutil.move('start.bat','C:/Users/Administrator/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/start.bat')
-    shutil.copyfile('start.bat','C:/Users/Administrator/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/start.bat')
+
 def 向左():
     if xamo.CJdsfDH(38) == 1:
         xamo.LJDFnmeFSD(38)
@@ -197,7 +181,7 @@ def 截图(x,y,x1,y1,name,is_b):
     im = ImageGrab.grab(bbox)
     if is_b:
         return im
-    im.save(name)
+    im.save(name)   #需要修改
 def 发送记录():
     try:
         with open('config/记录.ini', 'r') as f:
@@ -205,10 +189,71 @@ def 发送记录():
             tcpCliSock.send(('JL' + data).encode('gb2312'))
     except:
         pass
+def single_get_first(unicode1):
+    str1 = unicode1.encode('gbk')
+    try:
+        ord(str1)
+        return str1
+    except:
+        asc = str1[0] * 256 + str1[1] - 65536
+        if asc >= -20319 and asc <= -20284:
+            return 'a'
+        if asc >= -20283 and asc <= -19776:
+            return 'b'
+        if asc >= -19775 and asc <= -19219:
+            return 'c'
+        if asc >= -19218 and asc <= -18711:
+            return 'd'
+        if asc >= -18710 and asc <= -18527:
+            return 'e'
+        if asc >= -18526 and asc <= -18240:
+            return 'f'
+        if asc >= -18239 and asc <= -17923:
+            return 'g'
+        if asc >= -17922 and asc <= -17418:
+            return 'h'
+        if asc >= -17417 and asc <= -16475:
+            return 'j'
+        if asc >= -16474 and asc <= -16213:
+            return 'k'
+        if asc >= -16212 and asc <= -15641:
+            return 'l'
+        if asc >= -15640 and asc <= -15166:
+            return 'm'
+        if asc >= -15165 and asc <= -14923:
+            return 'n'
+        if asc >= -14922 and asc <= -14915:
+            return 'o'
+        if asc >= -14914 and asc <= -14631:
+            return 'p'
+        if asc >= -14630 and asc <= -14150:
+            return 'q'
+        if asc >= -14149 and asc <= -14091:
+            return 'r'
+        if asc >= -14090 and asc <= -13119:
+            return 's'
+        if asc >= -13118 and asc <= -12839:
+            return 't'
+        if asc >= -12838 and asc <= -12557:
+            return 'w'
+        if asc >= -12556 and asc <= -11848:
+            return 'x'
+        if asc >= -11847 and asc <= -11056:
+            return 'y'
+        if asc >= -11055 and asc <= -10247:
+            return 'z'
+        return ''
+def getPinyin(string):
+    if string == None:
+        return None
+    lst = list(string)
+    charLst = []
+    for l in lst:
+        charLst.append(single_get_first(l))
+    return ''.join(charLst)
 def loop():
     is_pc_name = True
     is_zh = True
-    pc_name = get_pc_name()
     number = get_ini('config/cfg.ini', '主配置', '账号路径', "")
     numstr = ""
     while True:
@@ -237,14 +282,6 @@ def loop():
                                 tcpCliSock.send('JT'.encode() + data)
                                 accept_data = tcpCliSock.recv(1024).decode()
                         tcpCliSock.send('JS'.encode())
-                    elif accept_data == 'chongqi':
-                        # 重启电脑
-                        run('shutdown -r -t 0', shell=True)
-                        time.sleep(60)
-                    elif accept_data == 'guanji':
-                        # 重启电脑
-                        run('shutdown -s -t 0', shell=True)
-                        time.sleep(60)
                 except:
                     tcpCliSock.send('RJ'.encode())#检查主机状态顺带发送心跳
         except:
@@ -292,8 +329,6 @@ def jiluwanchengshijian():
 def jiluwanchengshijian_zhuanqian():
     num = get_ini("config/记录.ini", "刷号记录", "当前账号","")
     set_ini('config/记录.ini', '转账', num,'完成')
-def get_pc_name():
-    return os.environ['COMPUTERNAME']
 def prints(strs):
     try:
         #print(strs)
@@ -308,8 +343,7 @@ def prints(strs):
     except:
         print("报错######打印信息失败")
 def shuaxinliebiao():
-    pass
-    #tk.trickit()
+    tk.trickit()
 def check_exsit(process_name):
     try:
         processCodeCov = WMI.ExecQuery('select * from Win32_Process where Name="%s"' % process_name)
@@ -319,8 +353,13 @@ def check_exsit(process_name):
             return 0
     except:
         return 0
-def end_exsit(LeiXing):
-    dw.AQkYZXxNfqMz('清理.bat',0)
+def end_exsit():
+    xamo.LKDFemrrh(91)
+    xamo.KJDfekiHDh(82,1)
+    xamo.LJDFnmeFSD(91)
+    time.sleep(1)
+    xamo.LbferJhd('C:\ql.bat')
+    xamo.KJDfekiHDh(13,1)
     time.sleep(5)
 def riqibijiao(p_now):
     try:
@@ -391,7 +430,6 @@ def dongjiechaxun(num):
 def get_account(path):
     prints("获取账号")
     try:
-        pc_name = get_pc_name()
         for ic in range(500):
             num = get_ini(path,pc_name,str(ic + 1),"")
             if num != "":
@@ -432,7 +470,6 @@ def get_account(path):
 def get_account_zhuanqian(path):
     prints("获取账号")
     try:
-        pc_name = get_pc_name()
         for ic in range(500):
             num = get_ini(path,pc_name,str(ic + 1),"")
             if num != "":
@@ -478,14 +515,14 @@ def juesechuli(leixing):
         juese_time = datetime.datetime.now()
         while True:
             time.sleep(0.5)
-            FinStr = dw.RsJCdWDvHA(507, 531, 593, 564, "结束游戏", "ddc593-000000", 1)
+            FinStr = dw.FindStrE(507, 531, 593, 564, "结束游戏", "ddc593-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 break
             else:
                 xamo.KJDfekiHDh(27,1)
                 time.sleep(3)
-                FinStr = dw.RsJCdWDvHA(360, 459, 413, 477, "选择角色", "e6c89b-000000", 1)
+                FinStr = dw.FindStrE(360, 459, 413, 477, "选择角色", "e6c89b-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     intx = int(pos[1])
@@ -518,7 +555,7 @@ def juesechuli(leixing):
                 juese = str(i+1)
         while True:
             time.sleep(0.5)
-            FinStr = dw.RsJCdWDvHA(507, 531, 593, 564, "结束游戏", "ddc593-000000", 1)
+            FinStr = dw.FindStrE(507, 531, 593, 564, "结束游戏", "ddc593-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 if int(juese) <= 8:
@@ -558,7 +595,7 @@ def juesechuli(leixing):
                     xamo.PPWEbxbar(1)
                 #等级检查关闭，不到84自动练级
                 #检查等级
-                lv = dw.ghKWigkPfdBCtSd(p_x[int(juese) - juese_index], p_y[int(juese) - juese_index], p_x[int(juese) - juese_index] + 60,p_y[int(juese) - juese_index] + 18, "d1b994-000000", 1)
+                lv = dw.Ocr(p_x[int(juese) - juese_index], p_y[int(juese) - juese_index], p_x[int(juese) - juese_index] + 60,p_y[int(juese) - juese_index] + 18, "d1b994-000000", 1)
                 if lv != "":
                     lv = re.sub("\D", "", lv)
                     if int(lv) < 85:
@@ -588,41 +625,41 @@ def juesechuli(leixing):
                 time.sleep(0.2)
                 xamo.KFNVCnehsdg(1)
                 time.sleep(5)
-            FinStr = dw.RsJCdWDvHA(379, 441, 437, 468, "关闭", "ddc593-000000", 1)
+            FinStr = dw.FindStrE(379, 441, 437, 468, "关闭", "ddc593-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 account.dangqianjuese = juese
                 set_ini('config/记录.ini', '刷号记录', "当前角色", juese)
                 return 1
-            FinStr = dw.uEKuRfCL(365, 356, 418, 384, "签到.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(365, 356, 418, 384, "签到.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 account.dangqianjuese = juese
                 set_ini('config/记录.ini', '刷号记录', "当前角色", juese)
                 return 1
-            FinStr = dw.RsJCdWDvHA(307, 106, 585, 304, "赛丽亚", "f7d65a-000000", 1)
+            FinStr = dw.FindStrE(307, 106, 585, 304, "赛丽亚", "f7d65a-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 account.dangqianjuese = juese
                 set_ini('config/记录.ini', '刷号记录', "当前角色", juese)
                 return 1
-            FinStr = dw.uEKuRfCL(768, 1, 800, 31, "图外.bmp|图外1.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(768, 1, 800, 31, "图外.bmp|图外1.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 account.dangqianjuese = juese
                 set_ini('config/记录.ini', '刷号记录', "当前角色", juese)
                 return 1
-            # FinStr = dw.uEKuRfCL(768, 1, 800, 31, "图内.bmp", "000000", "0.9", 0)
+            # FinStr = dw.FindPicE(768, 1, 800, 31, "图内.bmp", "000000", "0.9", 0)
             # pos = FinStr.split('|')
             # if int(pos[1]) > 0:
             #     account.dangqianjuese = juese
             #     set_ini('config/记录.ini', '刷号记录', "当前角色", juese)
             #     return 1
-            FinStr = dw.RsJCdWDvHA(359, 283, 435, 299, "网络连接中断", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(359, 283, 435, 299, "网络连接中断", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 return 2
-            FinStr = dw.uEKuRfCL(242, 430, 316, 490, "金麦克.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(242, 430, 316, 490, "金麦克.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -646,7 +683,7 @@ def juesechuli(leixing):
         prints("报错######选择角色失败")
         input()
 def zhongduan_cha():
-    FinStr = dw.RsJCdWDvHA(348, 267, 463, 324, "网络连接中断", "ffffff-000000", 1)
+    FinStr = dw.FindStrE(348, 267, 463, 324, "网络连接中断", "ffffff-000000", 1)
     pos = FinStr.split('|')
     if int(pos[1]) > 0:
         prints("网络连接中断")
@@ -660,19 +697,18 @@ def zhongduan_cha():
         time.sleep(1)
         xamo.mboHdjGsV()
         time.sleep(1)
-        FinStr = dw.RsJCdWDvHA(234, 243, 562, 400, "确认", "ddc593-000000", 1)
+        FinStr = dw.FindStrE(234, 243, 562, 400, "确认", "ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
-            FinStr = dw.RsJCdWDvHA(234, 243, 562, 335, "第三方模块", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(234, 243, 562, 335, "第三方模块", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 prints("第三方模块，重启")
                 log('三方', account.hao, '三方模块')
-                end_exsit(2)
+                end_exsit()
                 time.sleep(2)
-                重启机器(2)
                 return 1
-            FinStr = dw.RsJCdWDvHA(234, 243, 562, 335, "制裁1小时", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(234, 243, 562, 335, "制裁1小时", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 d1 = datetime.datetime.now()
@@ -683,11 +719,10 @@ def zhongduan_cha():
                 set_ini("config/记录.ini", "制裁", num, n_days.strftime("%Y-%m-%d %H:%M:%S"))
                 prints("制裁一个小时，换号")
                 log('制裁', account.hao, '一小时')
-                end_exsit(2)
+                end_exsit()
                 time.sleep(2)
-                重启机器(2)
                 return 1
-            FinStr = dw.RsJCdWDvHA(234, 243, 562, 335, "制裁一天", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(234, 243, 562, 335, "制裁一天", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 d1 = datetime.datetime.now()
@@ -698,10 +733,9 @@ def zhongduan_cha():
                 set_ini("config/记录.ini", "制裁", num, n_days.strftime("%Y-%m-%d %H:%M:%S"))
                 prints("制裁一天，换号")
                 log('制裁', account.hao, '一天')
-                end_exsit(2)
-                重启机器(2)
+                end_exsit()
                 return 1
-            FinStr = dw.RsJCdWDvHA(234, 243, 562, 335, "制裁15天", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(234, 243, 562, 335, "制裁15天", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 d1 = datetime.datetime.now()
@@ -712,19 +746,14 @@ def zhongduan_cha():
                 set_ini("config/记录.ini", "制裁", num, n_days.strftime("%Y-%m-%d %H:%M:%S"))
                 prints("制裁15天，换号")
                 log('制裁', account.hao, '15天')
-                end_exsit(2)
-                重启机器(2)
+                end_exsit()
                 return 1
             prints('中断制裁未识别，请把【中断截图】文件夹中的截图发给作者')
-            dw.BRjQifPapFtzcvC(234, 243, 562, 335, str(time.time()) + '.bmp')
+            dw.Capture(234, 243, 562, 335, str(time.time()) + '.bmp')
         else:
             prints("只是中断没有制裁，重上")
-            end_exsit(2)
+            end_exsit()
             time.sleep(2)
-        return 1
-    FinStr = dw.uEKuRfCL(0, 0, x, y, "tgp_开始游戏.bmp", "000000", "1", 0)
-    pos = FinStr.split('|')
-    if int(pos[1]) > 0:
         return 1
     return 0
 def jianceanquanmoshi(p_xgis,p_xguer,p_xgpwd):
@@ -732,7 +761,7 @@ def jianceanquanmoshi(p_xgis,p_xguer,p_xgpwd):
         prints("检查安全模式")
         qingkongyouxichuangkou()
         while True:
-            FinStr = dw.RsJCdWDvHA(307, 106, 585, 304, "赛丽亚", "f7d65a-000000", 1)
+            FinStr = dw.FindStrE(307, 106, 585, 304, "赛丽亚", "f7d65a-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -745,7 +774,7 @@ def jianceanquanmoshi(p_xgis,p_xguer,p_xgpwd):
                 time.sleep(2)
                 xamo.KFNVCnehsdg(1)
                 time.sleep(2)
-            FinStr = dw.RsJCdWDvHA(210, 511, 276, 539, "出售", "ddc593-000000", 1)
+            FinStr = dw.FindStrE(210, 511, 276, 539, "出售", "ddc593-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intxa = int(pos[1])
@@ -771,7 +800,7 @@ def jianceanquanmoshi(p_xgis,p_xguer,p_xgpwd):
                     time.sleep(1)
                     xamo.UIKBudj(608, 176)
                     time.sleep(1)
-                    FinStr = dw.uEKuRfCL(473, 258, 715, 409, "黑曜石.bmp|血滴石.bmp|金刚石.bmp|紫玛瑙.bmp|迪卡斯印章.bmp", "000000", "0.9", 0)
+                    FinStr = dw.FindPicE(473, 258, 715, 409, "黑曜石.bmp|血滴石.bmp|金刚石.bmp|紫玛瑙.bmp|迪卡斯印章.bmp", "000000", "0.9", 0)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         intx = int(pos[1])
@@ -786,7 +815,7 @@ def jianceanquanmoshi(p_xgis,p_xguer,p_xgpwd):
                         time.sleep(2)
                     else:
                         break
-                    FinStr = dw.RsJCdWDvHA(310, 307, 427, 361, "安全模式", "ddc593-000000", 1)
+                    FinStr = dw.FindStrE(310, 307, 427, 361, "安全模式", "ddc593-000000", 1)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         prints(account.hao + '|' + account.mi + "出现安全模式，等待解除")
@@ -800,7 +829,7 @@ def jianceanquanmoshi(p_xgis,p_xguer,p_xgpwd):
                                 prints('小果解除安全模式 失败')
                         while True:
                             # 等待解除安全模式
-                            FinStr = dw.RsJCdWDvHA(287, 250, 496, 319, "退出安全模式", "ffffff-000000", 1)
+                            FinStr = dw.FindStrE(287, 250, 496, 319, "退出安全模式", "ffffff-000000", 1)
                             pos = FinStr.split('|')
                             if int(pos[1]) > 0:
                                 intx = int(pos[1])
@@ -821,9 +850,8 @@ def qingkongyouxichuangkou():
             ql_time_now = datetime.datetime.now()
             time_temp = ql_time_now.minute - ql_time.minute
             if time_temp > 1:
-                prints('清理游戏窗口超时,重启')
-                重启机器(2)
-            FinStr = dw.uEKuRfCL(585, 117, 628, 140, "关闭系统菜单.bmp", "000000", "0.9", 0)
+                pass
+            FinStr = dw.FindPicE(585, 117, 628, 140, "关闭系统菜单.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -832,7 +860,7 @@ def qingkongyouxichuangkou():
                 time.sleep(0.5)
                 xamo.PPWEbxbar(1)
                 time.sleep(0.5)
-                FinStr = dw.RsJCdWDvHA(307, 242, 362, 274, "邮件箱", "e6c89b-000000", 1)
+                FinStr = dw.FindStrE(307, 242, 362, 274, "邮件箱", "e6c89b-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     xamo.UIKBudj(intx + 10, inty + 5)
@@ -876,7 +904,7 @@ def fayoujian(CRuser, CRpwd):
             name = temp[0]
             kuaqu = temp[1]
         while True:
-            FinStr = dw.RsJCdWDvHA(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
+            FinStr = dw.FindStrE(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 xamo.UIKBudj(334, 235)
@@ -886,7 +914,7 @@ def fayoujian(CRuser, CRpwd):
             else:
                 xamo.KJDfekiHDh(27,1)
                 time.sleep(3)
-            FinStr = dw.RsJCdWDvHA(338, 138, 419, 169, "邮件保管箱", "ddc593-000000", 1)
+            FinStr = dw.FindStrE(338, 138, 419, 169, "邮件保管箱", "ddc593-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 break
@@ -900,13 +928,13 @@ def fayoujian(CRuser, CRpwd):
                 return 3
             time.sleep(0.5)
         #检查金币
-        number = dw.ghKWigkPfdBCtSd(610, 529, 700, 549,"e6c89b-000000",1)
+        number = dw.Ocr(610, 529, 700, 549,"e6c89b-000000",1)
         if int(number) < int(money):
             prints("游戏币不够设置的金额")
             qingkongyouxichuangkou()
             return
         while True:
-            FinStr = dw.RsJCdWDvHA(278, 139, 341, 171, "发送邮件", "ddc593-000000", 1)
+            FinStr = dw.FindStrE(278, 139, 341, 171, "发送邮件", "ddc593-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -919,7 +947,7 @@ def fayoujian(CRuser, CRpwd):
                 time.sleep(1)
                 xamo.PPWEbxbar(1)
                 time.sleep(2)
-            FinStr = dw.RsJCdWDvHA(202, 169, 246, 191, "收件人", "ddc593-000000", 1)
+            FinStr = dw.FindStrE(202, 169, 246, 191, "收件人", "ddc593-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -928,9 +956,7 @@ def fayoujian(CRuser, CRpwd):
                 time.sleep(1)
                 xamo.PPWEbxbar(1)
                 time.sleep(3)
-                hwnd = dw.bcGT("地下城与勇士", "地下城与勇士")
-                if hwnd > 0:
-                    dw.gshNarIzNfhm(hwnd, name)
+                #输入收件人
                 time.sleep(3)
                 xamo.UIKBudj(intx + 203, inty + 5)
                 time.sleep(1)
@@ -949,7 +975,7 @@ def fayoujian(CRuser, CRpwd):
                 return 3
             time.sleep(0.5)
         while True:
-            FinStr = dw.RsJCdWDvHA(315, 261, 451, 294, "选择接收区", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(315, 261, 451, 294, "选择接收区", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -972,7 +998,7 @@ def fayoujian(CRuser, CRpwd):
                     xamo.PPWEbxbar(1)
                     time.sleep(3)
                     while True:
-                        FinStr = dw.RsJCdWDvHA(323, 307, 369, 475, kuaqu, "ddc593-000000", 1)
+                        FinStr = dw.FindStrE(323, 307, 369, 475, kuaqu, "ddc593-000000", 1)
                         pos = FinStr.split('|')
                         if int(pos[1]) > 0:
                             intx = int(pos[1])
@@ -1029,7 +1055,7 @@ def fayoujian(CRuser, CRpwd):
         tianjiashuliang = 0
         wuse_is = True
         while True:
-            FinStr = dw.uEKuRfCL(472, 256, 767, 436, "魔刹石.bmp|挑战书.bmp|无尽的永恒.bmp|数据芯片.bmp|迷幻晶石.bmp|强烈之痕迹.bmp|矛盾的结晶体.bmp|浓缩的异界精髓.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(472, 256, 767, 436, "魔刹石.bmp|挑战书.bmp|无尽的永恒.bmp|数据芯片.bmp|迷幻晶石.bmp|强烈之痕迹.bmp|矛盾的结晶体.bmp|浓缩的异界精髓.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -1044,7 +1070,7 @@ def fayoujian(CRuser, CRpwd):
             else:
                 break
             if wuse_is:
-                FinStr = dw.uEKuRfCL(472, 256, 767, 436, "无色小晶体.bmp", "000000", "0.9", 0)
+                FinStr = dw.FindPicE(472, 256, 767, 436, "无色小晶体.bmp", "000000", "0.9", 0)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     intx = int(pos[1])
@@ -1053,7 +1079,7 @@ def fayoujian(CRuser, CRpwd):
                     time.sleep(1)
                     xamo.PPWEbxbar(1)
                     time.sleep(1)
-                    ws_sl = dw.ghKWigkPfdBCtSd(627, 313, 742, 396, "ffe3ab-000000", 1)
+                    ws_sl = dw.Ocr(627, 313, 742, 396, "ffe3ab-000000", 1)
                     ws_sl = re.sub("\D", "", ws_sl)
                     if int(ws_sl) - 200 > 0:
                         xamo.LbferJhd(str(int(ws_sl) - 200))
@@ -1080,7 +1106,7 @@ def fayoujian(CRuser, CRpwd):
         xamo.PPWEbxbar(1)
         time.sleep(3)
         while True:
-            FinStr = dw.uEKuRfCL(472, 260, 716, 413, "紫色卡片.bmp|粉色卡片.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(472, 260, 716, 413, "紫色卡片.bmp|粉色卡片.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -1127,14 +1153,14 @@ def fayoujian(CRuser, CRpwd):
         xamo.PPWEbxbar(2)
         time.sleep(3)
         while True:
-            FinStr = dw.uEKuRfCL(232, 69, 693, 499, "发邮件验证码.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(232, 69, 693, 499, "发邮件验证码.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 time.sleep(1)
                 intx = int(pos[1])
                 inty = int(pos[2])
                 #打码
-                dw.BRjQifPapFtzcvC(intx - 207, inty - 22, intx - 78, inty + 30, os.getcwd() + "/ver.jpg")
+                dw.Capture(intx - 207, inty - 22, intx - 78, inty + 30, os.getcwd() + "/ver.jpg")
                 time.sleep(0.5)
                 dc = rk.RClient(CRuser, CRpwd, "92131", "4e1ce1108f244c6381d5bcfdbe368ae4")
                 im = open(os.getcwd() + '/ver.jpg', 'rb').read()
@@ -1156,7 +1182,7 @@ def fayoujian(CRuser, CRpwd):
                 time.sleep(1)
                 xamo.PPWEbxbar(1)
                 time.sleep(5)
-                FinStr = dw.RsJCdWDvHA(346, 278, 449, 309, "已成功发送邮件", "ffffff-000000", 1)
+                FinStr = dw.FindStrE(346, 278, 449, 309, "已成功发送邮件", "ffffff-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     qingkongyouxichuangkou()
@@ -1187,7 +1213,7 @@ def fayoujian(CRuser, CRpwd):
     except:
         prints("报错######发送邮件失败")
 def 区服选择(x,y,qu):
-    FinStr = dw.RsJCdWDvHA(0, 0, x, y, "区服选择", "f0f0f0-000000", 1)
+    FinStr = dw.FindStrE(0, 0, x, y, "区服选择", "f0f0f0-000000", 1)
     pos = FinStr.split('|')
     if int(pos[1]) > 0:
         time.sleep(1)
@@ -1210,7 +1236,7 @@ def 区服选择(x,y,qu):
             xianlu = '网通'
         elif fuwuqi == '辽宁' or fuwuqi == '吉林' or fuwuqi == '黑龙' or fuwuqi == '河南' or fuwuqi == '山东' or fuwuqi == '西北':
             xianlu = '网通'
-        FinStr = dw.RsJCdWDvHA(intx, inty, intx + 200, inty + 200, xianlu , "b3b3b3-000000", 1)
+        FinStr = dw.FindStrE(intx, inty, intx + 200, inty + 200, xianlu , "b3b3b3-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             xamo.UIKBudj(int(pos[1]) + 10, int(pos[2]) + 3)
@@ -1223,7 +1249,7 @@ def 区服选择(x,y,qu):
             qu_weizhi = qu.index(qu_temp[0:1])
             #截取0到数字出现的位置中间的文本
             qu_qianzhui = qu[0:qu_weizhi]
-            FinStr = dw.RsJCdWDvHA(intx, inty, intx + 700, inty + 470, qu_qianzhui + "区", "3c3c3c-000000", 1)
+            FinStr = dw.FindStrE(intx, inty, intx + 700, inty + 470, qu_qianzhui + "区", "3c3c3c-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 xamo.UIKBudj(int(pos[1]) + 10, int(pos[2]) + 3)
@@ -1235,7 +1261,7 @@ def 区服选择(x,y,qu):
                 time.sleep(0.2)
                 xamo.PPWEbxbar(2)
                 time.sleep(2)
-                FinStr = dw.RsJCdWDvHA(intx, inty, intx + 700, inty + 470, qu, "3c3c3c-000000", 1)
+                FinStr = dw.FindStrE(intx, inty, intx + 700, inty + 470, qu, "3c3c3c-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     xamo.UIKBudj(int(pos[1]) + 10, int(pos[2]) + 3)
@@ -1247,11 +1273,9 @@ def 区服选择(x,y,qu):
                     time.sleep(0.2)
                     xamo.PPWEbxbar(1)
                     time.sleep(2)
-def login(CRuser,CRpwd,path,WeGame,money_is):
+def login(CRuser,CRpwd,path,WeGame,money_is,x,y):
     prints("登录账号")
     account_path = path
-    x = dw.yTKUBaTqevaYZRU()
-    y = dw.vgtwHdrCtErzwk()
     login_time = datetime.datetime.now()
     while True:
         liudiangengxin()
@@ -1262,33 +1286,29 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
         if hao == "":
             prints('没有可刷账号，等待6点更新')
             time.sleep(30)
-            #return 101
         else:
             break
     tk.trickit()
-    dw.AQkYZXxNfqMz(WeGame,0)
+    FinStr = dw.FindPicE(0, 0, x, y, "WeGame.bmp", "000000", "0.9", 0)
+    pos = FinStr.split('|')
+    if int(pos[1]) > 0:
+        intx = int(pos[1])
+        inty = int(pos[2])
+        xamo.UIKBudj(intx + 10, inty + 10)
+        time.sleep(0.2)
+        xamo.PPWEbxbar(1)
+        xamo.PPWEbxbar(1)
+        xamo.PPWEbxbar(1)
+        time.sleep(0.5)
+    else:
+        prints('没有找到WeGame图标')
     # 恢复打印机窗口
     try:
         MC_cishu = 0
         shubiaodianji = False
         while True:
             time.sleep(0.5)
-            # if jc_DNF:
-            #     hwnd = dw.bcGT("地下城与勇士", "地下城与勇士")
-            #     if hwnd > 0:
-            #         prints('结束WeGame进程')
-            #         run('taskkill /F /IM tgp_daemon.exe', shell=True)
-            #         jc_DNF = not jc_DNF
-            # FinStr = dw.uEKuRfCL(0, 0, x, y, "tgp挤掉.bmp", "000000", "1", 0)
-            # pos = FinStr.split('|')
-            # if int(pos[1]) > 0:
-            #     if check_exsit("DNF.exe") == 0:
-            #         dw.AQkYZXxNfqMz('清理.bat', 0)
-            #         time.sleep(60)
-            #         login_time = datetime.datetime.now()
-            #         dw.AQkYZXxNfqMz(WeGame, 0)
-            #         shubiaodianji = False
-            FinStr = dw.uEKuRfCL(0, 0, x, y, "tgp_登录.bmp|tgp_登录1.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(0, 0, x, y, "tgp_登录.bmp|tgp_登录1.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -1319,7 +1339,7 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
                 xamo.PPWEbxbar(1)
                 time.sleep(2)
                 xamo.UIKBudj(intx - 30, inty - 30)
-            FinStr = dw.RsJCdWDvHA(0, 0, x, y, "拖动滑块", "000000-000000", 1)
+            FinStr = dw.FindStrE(0, 0, x, y, "拖动滑块", "000000-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 prints('验证码')
@@ -1344,7 +1364,7 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
                 xamo.mboHdjGsV()
                 time.sleep(5)
                 #确认后延迟大点
-            FinStr = dw.uEKuRfCL(0, 0, x, y, "密错.bmp", "000000", "1", 0)
+            FinStr = dw.FindPicE(0, 0, x, y, "密错.bmp", "000000", "1", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 MC_cishu += 1
@@ -1355,11 +1375,11 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
                     time.sleep(1)
                 else:
                     return 4
-            FinStr = dw.uEKuRfCL(0, 0, x, y, "冻结.bmp", "000000", "1", 0)
+            FinStr = dw.FindPicE(0, 0, x, y, "冻结.bmp", "000000", "1", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 return 5
-            FinStr = dw.uEKuRfCL(0, 0, x, y, "tgp_跳过.bmp", "000000", "1", 0)
+            FinStr = dw.FindPicE(0, 0, x, y, "tgp_跳过.bmp", "000000", "1", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -1368,7 +1388,7 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
                 time.sleep(0.2)
                 xamo.PPWEbxbar(1)
                 time.sleep(1)
-            FinStr = dw.RsJCdWDvHA(0, 0, x, y, "今日推荐", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(0, 0, x, y, "今日推荐", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -1377,7 +1397,7 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
                 time.sleep(0.2)
                 xamo.PPWEbxbar(1)
                 time.sleep(1)
-            FinStr = dw.uEKuRfCL(0, 0, x, y, "tgp_主页.bmp|tgp_主页1.bmp", "000000", "1", 0)
+            FinStr = dw.FindPicE(0, 0, x, y, "tgp_主页.bmp|tgp_主页1.bmp", "000000", "1", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -1386,7 +1406,7 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
                 time.sleep(0.2)
                 xamo.PPWEbxbar(1)
                 time.sleep(1)
-            FinStr = dw.uEKuRfCL(0, 0, x, y, "更新游戏.bmp", "000000", "1", 0)
+            FinStr = dw.FindPicE(0, 0, x, y, "更新游戏.bmp", "000000", "1", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -1395,12 +1415,12 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
                 time.sleep(0.5)
                 xamo.PPWEbxbar(1)
                 time.sleep(1)
-            FinStr = dw.uEKuRfCL(0, 0, x, y, "tgp_开始游戏.bmp", "000000", "1", 0)
+            FinStr = dw.FindPicE(0, 0, x, y, "tgp_开始游戏.bmp", "000000", "1", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intxa = int(pos[1])
                 intya = int(pos[2])
-                FinStr = dw.RsJCdWDvHA(intxa - 321 , intya - 16, intxa - 199, intya + 30, qu, "3c3c3c-000000", 1)
+                FinStr = dw.FindStrE(intxa - 321 , intya - 16, intxa - 199, intya + 30, qu, "3c3c3c-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     xamo.UIKBudj(intxa + 20, intya + 10)
@@ -1412,7 +1432,7 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
                     time.sleep(0.2)
                     xamo.PPWEbxbar(1)
                     time.sleep(2)
-                    FinStr = dw.RsJCdWDvHA(intxa - 326, intya - 186, intxa - 100, intya, qu, "3c3c3c-000000", 1)
+                    FinStr = dw.FindStrE(intxa - 326, intya - 186, intxa - 100, intya, qu, "3c3c3c-000000", 1)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         intx = int(pos[1])
@@ -1423,7 +1443,7 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
                         time.sleep(2)
                     else:
                         prints('大区列表未找到')
-                        FinStr = dw.RsJCdWDvHA(intxa - 326, intya - 186, intxa - 100, intya, "其他大区", "0095ff-000000",1)
+                        FinStr = dw.FindStrE(intxa - 326, intya - 186, intxa - 100, intya, "其他大区", "0095ff-000000",1)
                         pos = FinStr.split('|')
                         if int(pos[1]) > 0:
                             intx = int(pos[1])
@@ -1434,7 +1454,7 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
                             time.sleep(5)
                             区服选择(x,y,qu)
             else:
-                FinStr = dw.uEKuRfCL(0, 0, x, y, "tgp_列表_dnf.bmp|tgp_列表_dnf1.bmp", "000000", "1", 0)
+                FinStr = dw.FindPicE(0, 0, x, y, "tgp_列表_dnf.bmp|tgp_列表_dnf1.bmp", "000000", "1", 0)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     intx = int(pos[1])
@@ -1443,7 +1463,7 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
                     time.sleep(0.2)
                     xamo.PPWEbxbar(1)
                     time.sleep(1)
-            FinStr = dw.RsJCdWDvHA(0, 0, x, y, "优化跳过", "3c3c3c-000000", 1)
+            FinStr = dw.FindStrE(0, 0, x, y, "优化跳过", "3c3c3c-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -1457,7 +1477,7 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
                 xamo.PPWEbxbar(1)
                 time.sleep(2)
                 shubiaodianji = True
-            FinStr = dw.RsJCdWDvHA(0, 0, x, y, "跳过检测", "2098ff-000000", 1)
+            FinStr = dw.FindStrE(0, 0, x, y, "跳过检测", "2098ff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -1467,29 +1487,33 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
                 xamo.PPWEbxbar(1)
                 time.sleep(1)
                 shubiaodianji = True
-            FinStr = dw.uEKuRfCL(0, 0, x, y, "tgp_登录失败.bmp", "000000", "1", 0)
+            FinStr = dw.FindPicE(0, 0, x, y, "tgp_登录失败.bmp", "000000", "1", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 return 0
-            FinStr = dw.RsJCdWDvHA(0, 0, x, y, "连接频道失败", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(0, 0, x, y, "连接频道失败", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 return 0
-            FinStr = dw.RsJCdWDvHA(0, 0, x, y, "结束游戏", "ddc593-000000|ffffb8-000000", 0.9)
+            FinStr = dw.FindStrE(0, 0, x, y, "结束游戏", "ddc593-000000|ffffb8-000000", 0.9)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 prints('角色界面')
-                return 1
-            FinStr = dw.RsJCdWDvHA(0, 0, x, y, "冒险团|系统|已开启拍卖行", "3c9b3e-000000|ffffb8-000000|ff3232-000000", 1)
-            pos = FinStr.split('|')
-            if int(pos[1]) > 0:
                 prints('移动窗口')
-                hwnd = dw.bcGT("地下城与勇士", "地下城与勇士")
-                if hwnd > 0:
-                    dw.pkSC(hwnd, 0, 0)
-                    time.sleep(5)
-                    shubiaodianji = not shubiaodianji
+                intx = int(pos[1])
+                inty = int(pos[2])
+                time.sleep(3)
+                xamo.UIKBudj(intx - 144, inty - 530)
+                time.sleep(0.2)
+                xamo.cndjGdsbSdg()
+                time.sleep(0.2)
+                xamo.UIKBudj(379, 9)
+                time.sleep(0.2)
+                xamo.mboHdjGsV()
+                time.sleep(0.5)
+                shubiaodianji = not shubiaodianji
                 prints('移动窗口完成')
+                return 1
             if shubiaodianji:
                 xamo.UIKBudj(2, 2)
                 time.sleep(0.2)
@@ -1507,7 +1531,7 @@ def login(CRuser,CRpwd,path,WeGame,money_is):
         prints("报错######登录账号失败")
         input()
 def fenghaojianhcha():
-    FinStr = dw.RsJCdWDvHA(359, 283, 435, 299, "网络连接中断", "ffffff-000000", 1)
+    FinStr = dw.FindStrE(359, 283, 435, 299, "网络连接中断", "ffffff-000000", 1)
     pos = FinStr.split('|')
     if int(pos[1]) > 0:
         prints("网络连接中断")
@@ -1521,13 +1545,13 @@ def fenghaojianhcha():
         time.sleep(1)
         xamo.mboHdjGsV()
         time.sleep(2)
-        FinStr = dw.RsJCdWDvHA(234, 243, 562, 400, "确认", "ddc593-000000", 1)
+        FinStr = dw.FindStrE(234, 243, 562, 400, "确认", "ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
-            FinStr = dw.RsJCdWDvHA(238, 243, 562, 335, "停封5天", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(238, 243, 562, 335, "停封5天", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
-                number = dw.ghKWigkPfdBCtSd(414, 291, 526, 307, "ffffff-000000", 1)
+                number = dw.Ocr(414, 291, 526, 307, "ffffff-000000", 1)
                 if number != "":
                     number = number.replace('/','-',2)
                     number = number.replace('/',' ',1)
@@ -1548,10 +1572,10 @@ def fenghaojianhcha():
                         num = get_ini("config/记录.ini", "刷号记录", "当前账号","")
                         set_ini("config/记录.ini", "封号", num, n_days.strftime("%Y-%m-%d %H:%M:%S"))
                 return 'F5'
-            FinStr = dw.RsJCdWDvHA(238, 243, 562, 335, "停封7天", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(238, 243, 562, 335, "停封7天", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
-                number = dw.ghKWigkPfdBCtSd(414, 291, 526, 307, "ffffff-000000", 1)
+                number = dw.Ocr(414, 291, 526, 307, "ffffff-000000", 1)
                 if number != "":
                     number = number.replace('/','-',2)
                     number = number.replace('/',' ',1)
@@ -1572,7 +1596,7 @@ def fenghaojianhcha():
                         num = get_ini("config/记录.ini", "刷号记录", "当前账号","")
                         set_ini("config/记录.ini", "封号", num, n_days.strftime("%Y-%m-%d %H:%M:%S"))
                 return 'F7'
-            FinStr = dw.RsJCdWDvHA(234, 243, 562, 335, "永久封号", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(234, 243, 562, 335, "永久封号", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 d1 = datetime.datetime.now()
@@ -1583,19 +1607,19 @@ def fenghaojianhcha():
                 num = get_ini("config/记录.ini", "刷号记录", "当前账号","")
                 set_ini("config/记录.ini", "封号", num, n_days.strftime("%Y-%m-%d %H:%M:%S"))
                 return 'F100'
-            FinStr = dw.RsJCdWDvHA(234, 243, 562, 335, "第三方模块", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(234, 243, 562, 335, "第三方模块", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 prints("第三方模块，重启")
                 log('三方', account.hao, "三方模块")
-                end_exsit(2)
+                end_exsit()
                 time.sleep(2)
                 return 'F0'
             prints('封号类型未识别，请把【中断截图】文件夹中的截图发给作者')
-            dw.BRjQifPapFtzcvC(234, 243, 562, 335, str(time.time()) + '.bmp')
+            dw.Capture(234, 243, 562, 335, str(time.time()) + '.bmp')
         else:
             return 'F0'
-    FinStr = dw.RsJCdWDvHA(234, 243, 562, 335, "此ID已在游戏", "ffffff-000000", 1)
+    FinStr = dw.FindStrE(234, 243, 562, 335, "此ID已在游戏", "ffffff-000000", 1)
     pos = FinStr.split('|')
     if int(pos[1]) > 0:
         return 'F101'
@@ -1603,7 +1627,7 @@ def fenghaojianhcha():
 def yongbingchuzhan():
     prints('佣兵出战')
     while True:
-        FinStr = dw.RsJCdWDvHA(390, 85, 440, 120, "佣兵", "ffffb8-000000|ddc593-000000", 1)
+        FinStr = dw.FindStrE(390, 85, 440, 120, "佣兵", "ffffb8-000000|ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             intx = int(pos[1])
@@ -1612,7 +1636,7 @@ def yongbingchuzhan():
             time.sleep(1)
             xamo.PPWEbxbar(1)
             time.sleep(1)
-            FinStr = dw.uEKuRfCL(510, 325, 604, 363, "佣兵_领取奖励.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(510, 325, 604, 363, "佣兵_领取奖励.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -1632,7 +1656,7 @@ def yongbingchuzhan():
                 xamo.PPWEbxbar(1)
                 time.sleep(2)
                 qingkongyouxichuangkou()
-            FinStr = dw.uEKuRfCL(513, 323, 599, 363, "佣兵_佣兵出战.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(513, 323, 599, 363, "佣兵_佣兵出战.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -1648,12 +1672,12 @@ def yongbingchuzhan():
                 time.sleep(2)
                 qingkongyouxichuangkou()
                 break
-            FinStr = dw.uEKuRfCL(503, 323, 614, 369, "佣兵_取消出战.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(503, 323, 614, 369, "佣兵_取消出战.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 qingkongyouxichuangkou()
                 break
-            FinStr = dw.uEKuRfCL(513, 323, 599, 363, "佣兵_佣兵出战_灰.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(513, 323, 599, 363, "佣兵_佣兵出战_灰.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 qingkongyouxichuangkou()
@@ -1731,12 +1755,12 @@ def chushoudianquan():
     prints('兑换点券')
     int_quan = 0
     while True:
-        FinStr = dw.RsJCdWDvHA(578, 401, 784, 560, "整理", "ddc593-000000", 1)
+        FinStr = dw.FindStrE(578, 401, 784, 560, "整理", "ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             intx = int(pos[1])
             inty = int(pos[2])
-            number = dw.ghKWigkPfdBCtSd(intx - 178, inty + 45, intx - 124, inty + 69, "e6c89b-000000", 1)
+            number = dw.Ocr(intx - 178, inty + 45, intx - 124, inty + 69, "e6c89b-000000", 1)
             number = re.sub("\D", "", number)
             prints('点券 = ' + number)
             if int(number) >= 1000:
@@ -1758,17 +1782,17 @@ def chushoudianquan():
     while True:
         if wenzi == '':
             return 1
-        FinStr = dw.RsJCdWDvHA(41, 534,114, 566, "寄售金币", "ddc593-000000", 1)
+        FinStr = dw.FindStrE(41, 534,114, 566, "寄售金币", "ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
-            FinStr = dw.uEKuRfCL(160, 545, 191, 573, "商城.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(160, 545, 191, 573, "商城.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 xamo.UIKBudj(761, 24)
                 time.sleep(0.5)
                 xamo.PPWEbxbar(1)
                 time.sleep(2)
-            FinStr = dw.RsJCdWDvHA(34, 148, 89, 418, wenzi, "ddc593-000000", 1)
+            FinStr = dw.FindStrE(34, 148, 89, 418, wenzi, "ddc593-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -1783,7 +1807,7 @@ def chushoudianquan():
                 xamo.PPWEbxbar(1)
                 time.sleep(1)
                 for i in range(10):
-                    FinStr = dw.RsJCdWDvHA(484, 122, 540, 309, '购买', "ffb400-000000", 1)
+                    FinStr = dw.FindStrE(484, 122, 540, 309, '购买', "ffb400-000000", 1)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         #购买
@@ -1802,7 +1826,7 @@ def chushoudianquan():
                         aq_ret = 安全模式()
                         if aq_ret == 1:
                            break
-                        FinStr = dw.RsJCdWDvHA(293, 235, 503, 356, '拍卖行不存在', "ffffff-000000", 1)
+                        FinStr = dw.FindStrE(293, 235, 503, 356, '拍卖行不存在', "ffffff-000000", 1)
                         pos = FinStr.split('|')
                         if int(pos[1]) > 0:
                             xamo.UIKBudj(400, 319)
@@ -1810,7 +1834,7 @@ def chushoudianquan():
                             xamo.PPWEbxbar(1)
                             time.sleep(0.5)
                             while True:
-                                FinStr = dw.uEKuRfCL(160, 545, 191, 573, "商城.bmp", "000000", "0.9", 0)
+                                FinStr = dw.FindPicE(160, 545, 191, 573, "商城.bmp", "000000", "0.9", 0)
                                 pos = FinStr.split('|')
                                 if int(pos[1]) > 0:
                                     xamo.UIKBudj(400, 557)
@@ -1830,7 +1854,7 @@ def chushoudianquan():
                                     xamo.PPWEbxbar(1)
                                     time.sleep(3)
                             break
-                        FinStr = dw.RsJCdWDvHA(293, 235, 503, 356, '完成竞拍', "ffffff-000000", 1)
+                        FinStr = dw.FindStrE(293, 235, 503, 356, '完成竞拍', "ffffff-000000", 1)
                         pos = FinStr.split('|')
                         if int(pos[1]) > 0:
                             xamo.UIKBudj(400, 319)
@@ -1839,7 +1863,7 @@ def chushoudianquan():
                             time.sleep(0.5)
                             break
                     #红色购买
-                    FinStr = dw.RsJCdWDvHA(484, 122, 540, 309, '购买', "ff3232-000000", 1)
+                    FinStr = dw.FindStrE(484, 122, 540, 309, '购买', "ff3232-000000", 1)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         if wenzi == '一千万':
@@ -1863,7 +1887,7 @@ def chushoudianquan():
             xamo.PPWEbxbar(1)
             time.sleep(1)
 def jieshouyoujian():
-        FinStr = dw.uEKuRfCL(263, 462, 533, 551, "邮件.bmp|邮件1.bmp", "202020", "0.9", 0)
+        FinStr = dw.FindPicE(263, 462, 533, 551, "邮件.bmp|邮件1.bmp", "202020", "0.9", 0)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             intx = int(pos[1])
@@ -1872,7 +1896,7 @@ def jieshouyoujian():
             time.sleep(1)
             xamo.PPWEbxbar(1)
             time.sleep(3)
-            FinStr = dw.RsJCdWDvHA(338, 138, 419, 169, "邮件保管箱", "ddc593-000000", 1)
+            FinStr = dw.FindStrE(338, 138, 419, 169, "邮件保管箱", "ddc593-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 time.sleep(1)
@@ -1881,7 +1905,7 @@ def jieshouyoujian():
                 xamo.PPWEbxbar(1)
                 time.sleep(3)
                 for i in range(10):
-                    FinStr = dw.RsJCdWDvHA(345, 275, 450, 308, "邮件领取完毕", "ffffff-000000", 1)
+                    FinStr = dw.FindStrE(345, 275, 450, 308, "邮件领取完毕", "ffffff-000000", 1)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         break
@@ -1892,11 +1916,11 @@ def search(path, word):
         if os.path.isfile(fp) and word in filename:
             return fp
 def jinqizhicai():
-    FinStr = dw.RsJCdWDvHA(812, 26, 1114, 114, "近期出现异常|制裁", "e6c89b-050505|ff3232-050505", 1)
+    FinStr = dw.FindStrE(812, 26, 1114, 114, "近期出现异常|制裁", "e6c89b-050505|ff3232-050505", 1)
     pos = FinStr.split('|')
     if int(pos[1]) > 0:
         num = get_ini("config/记录.ini", "刷号记录", "当前账号","")
-        a = dw.ghKWigkPfdBCtSd(812, 26, 1114, 114, "e6c89b-050505|ff3232-050505", 1)
+        a = dw.Ocr(812, 26, 1114, 114, "e6c89b-050505|ff3232-050505", 1)
         if a.find('小时') > -1:
             arr = a.split('小时')
             temp_h = re.sub("\D", "", arr[0][-5:])
@@ -1910,7 +1934,7 @@ def jinqizhicai():
             n_days = d1 + delta
             set_ini("config/记录.ini", "制裁", num, n_days.strftime("%Y-%m-%d %H:%M:%S"))
             prints("出现制裁,已记录制裁时间，换号")
-            end_exsit(2)
+            end_exsit()
             time.sleep(2)
         else:
             d1 = datetime.datetime.now()
@@ -1921,10 +1945,9 @@ def jinqizhicai():
             set_ini("config/记录.ini", "制裁", num, n_days.strftime("%Y-%m-%d %H:%M:%S"))
             prints("出现制裁等待一小时，换号")
             prints('近期制裁，请把文件夹中的截图发给作者')
-            dw.BRjQifPapFtzcvC(812, 26, 1114, 114, os.getcwd() + '/' + str(time.time()) + '.bmp')
-            end_exsit(2)
+            dw.Capture(812, 26, 1114, 114, os.getcwd() + '/' + str(time.time()) + '.bmp')
+            end_exsit()
             time.sleep(2)
-        重启机器(2)
         return 1
     return 0
 def 捡取():
@@ -1973,7 +1996,7 @@ def 捡取():
                     time.sleep(0.5)
                     弹起()
                 break
-        FinStr = dw.uEKuRfCL(0,78,799,552,"捡1.bmp|捡2.bmp|捡3.bmp|捡4.bmp","050505","0.95",0)
+        FinStr = dw.FindPicE(0,78,799,552,"捡1.bmp|捡2.bmp|捡3.bmp|捡4.bmp","050505","0.95",0)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             弹起()
@@ -1981,7 +2004,7 @@ def 捡取():
             xamo.KJDfekiHDh(88,1)
             time.sleep(0.5)
         else:
-            FinStr = dw.uEKuRfCL(0, 78, 799, 552, "my.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(0, 78, 799, 552, "my.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 my_x = int(pos[1])
@@ -2004,7 +2027,7 @@ def 捡取():
                     向右()
                     time.sleep(0.5)
                     弹起()
-            FinStr = dw.uEKuRfCL(0,78,799,552,"wp.bmp","000000","1",1)
+            FinStr = dw.FindPicE(0,78,799,552,"wp.bmp","000000","1",1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 wp_x = int(pos[1])
@@ -2032,7 +2055,7 @@ def 捡取():
                     右上()
                 elif my_y+my_y_py < wp_y+wp_y_py:
                     右下()
-        time.sleep(0.02)
+        time.sleep(0.001)
 def 判断方向(num):
     if num == 1:
         return "右"
@@ -2055,7 +2078,7 @@ def 检查关卡():
     x = [730, 748, 766, 766, 766, 784,784, 748, 748]
     y = [55, 55, 55, 73, 91, 91,74, 91, 74]
     for i in range(9):
-        color = dw.LYqISzEsHWMD(x[i],y[i])
+        color = dw.GetColor(x[i],y[i])
         if color == "0000ff":
             return i + 1
     return 0
@@ -2068,6 +2091,9 @@ def 找门(guanqia,p,jianqu):
     wp_x_py = 12
     wp_y_py = 14
     z_g = 检查关卡()
+    if guanqia == 0:
+        guanqia = 检查关卡()
+    prints('关卡 = ' + str(guanqia))
     fangxiang = 判断方向(guanqia)
     if fangxiang == "右":
         x,y,x1,y1 = 689,130,791,525
@@ -2090,11 +2116,11 @@ def 找门(guanqia,p,jianqu):
         my_y = 0
         wp_x = 0
         wp_y = 0
-        # FinStr = dw.uEKuRfCL(0,78,799,552, "可破坏.bmp", "000000", "0.9", 0)
+        # FinStr = dw.FindPicE(0,78,799,552, "可破坏.bmp", "000000", "0.9", 0)
         # pos = FinStr.split('|')
         # if int(pos[1]) > 0:
         #     打石头()
-        FinStr = dw.uEKuRfCL(0, 78, 799, 552, "my.bmp", "000000", "0.9", 0)
+        FinStr = dw.FindPicE(0, 78, 799, 552, "my.bmp", "000000", "0.9", 0)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             my_x = int(pos[1])
@@ -2117,7 +2143,7 @@ def 找门(guanqia,p,jianqu):
                 向右()
                 time.sleep(0.5)
                 弹起()
-        FinStr = dw.uEKuRfCL(x,y,x1,y1,pic,"000000","0.9",0)
+        FinStr = dw.FindPicE(x,y,x1,y1,pic,"000000","0.9",0)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             wp_x = int(pos[1])
@@ -2152,13 +2178,13 @@ def 找门(guanqia,p,jianqu):
                 elif my_y+my_y_py < wp_y+wp_y_py:
                     右下()
         if jianqu == '真':
-            FinStr = dw.uEKuRfCL(0,78,799,552,"wp.bmp","000000","0.9",0)
+            FinStr = dw.FindPicE(0,78,799,552,"wp.bmp","000000","0.9",0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 弹起()
                 捡取()
         if p == 0:
-            FinStr = dw.uEKuRfCL(718,25,795,105, "问号绿.bmp|问号黄.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(718,25,795,105, "问号绿.bmp|问号黄.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 pass
@@ -2172,7 +2198,7 @@ def 找门(guanqia,p,jianqu):
                 break
         d2 = datetime.datetime.now()
         d3 = d2 - d1
-        if d3.seconds > 15:
+        if d3.seconds > 10:
             Rnd = random.randint(1,4)
             if Rnd == 1:
                 向上()
@@ -2224,12 +2250,12 @@ def 打石头():
                 time.sleep(0.5)
                 弹起()
             break
-        FinStr = dw.uEKuRfCL(0, 78, 799, 552, "my.bmp", "000000", "0.9", 0)
+        FinStr = dw.FindPicE(0, 78, 799, 552, "my.bmp", "000000", "0.9", 0)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             my_x = int(pos[1])
             my_y = int(pos[2])
-        FinStr = dw.uEKuRfCL(0, 78, 799, 552, "可破坏.bmp", "000000", "0.9", 1)
+        FinStr = dw.FindPicE(0, 78, 799, 552, "可破坏.bmp", "000000", "0.9", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             wp_x = int(pos[1])
@@ -2238,11 +2264,11 @@ def 打石头():
             弹起()
             break
         if my_x > 0 and my_y > 0 and wp_x > 0 and wp_y > 0:
-            FinStr = dw.uEKuRfCL(my_x - 80, my_y + 125, my_x + 140, my_y + 200, "可破坏.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(my_x - 80, my_y + 125, my_x + 140, my_y + 200, "可破坏.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 弹起()
-                FinStr = dw.uEKuRfCL(530, 561, 562, 593, "鞭子.bmp|双翼风刃.bmp", "000000", "0.9", 0)
+                FinStr = dw.FindPicE(530, 561, 562, 593, "鞭子.bmp|双翼风刃.bmp", "000000", "0.9", 0)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     xamo.KJDfekiHDh(65,1)
@@ -2301,12 +2327,12 @@ def 躲避地火(jianqu):
         my_y = 0
         wp_x = 0
         wp_y = 0
-        FinStr = dw.uEKuRfCL(0, 78, 799, 552, "my.bmp", "000000", "0.9", 0)
+        FinStr = dw.FindPicE(0, 78, 799, 552, "my.bmp", "000000", "0.9", 0)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             my_x = int(pos[1])
             my_y = int(pos[2])
-        FinStr = dw.AIdCpitUAXsF(0, 78, 799, 492, "0000ff-000000", "1", 5)
+        FinStr = dw.FindColorE(0, 78, 799, 492, "0000ff-000000", "1", 5)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             wp_x = int(pos[0])
@@ -2337,23 +2363,23 @@ def 躲避地火(jianqu):
                 elif my_y + my_y_py < wp_y + wp_y_py:
                     右下()
         if jianqu == '真':
-            FinStr = dw.uEKuRfCL(0, 78, 799, 552, "wp.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(0, 78, 799, 552, "wp.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 弹起()
                 捡取()
-        FinStr = dw.uEKuRfCL(337, 29, 451, 97, "奖励.bmp", "000000", "0.9", 0)
+        FinStr = dw.FindPicE(337, 29, 451, 97, "奖励.bmp", "000000", "0.9", 0)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             break
-        FinStr = dw.uEKuRfCL(612, 132, 735, 164, "通关.bmp", "000000", "0.9", 0)
+        FinStr = dw.FindPicE(612, 132, 735, 164, "通关.bmp", "000000", "0.9", 0)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             break
 def fanhuichengzhen():
     try:
         while True:
-            FinStr = dw.RsJCdWDvHA(451, 427, 535, 501, "返回城镇", "e6c89b-000000", 1)
+            FinStr = dw.FindStrE(451, 427, 535, 501, "返回城镇", "e6c89b-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -2382,9 +2408,8 @@ def 清理游戏窗口():
         ql_time_now = datetime.datetime.now()
         time_temp = ql_time_now.minute - ql_time.minute
         if time_temp > 1:
-            prints('清理游戏窗口超时,重启')
-            重启机器(2)
-        FinStr = dw.RsJCdWDvHA(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
+            pass
+        FinStr = dw.FindStrE(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             xamo.UIKBudj(594, 127)
@@ -2392,7 +2417,7 @@ def 清理游戏窗口():
             xamo.PPWEbxbar(1)
             time.sleep(1)
             time.sleep(0.5)
-            FinStr = dw.RsJCdWDvHA(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
+            FinStr = dw.FindStrE(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 xamo.UIKBudj(594, 127)
@@ -2413,7 +2438,7 @@ def 出售分解(ZZ):
     bz_is = int(get_ini('config/cfg.ini', '游戏配置', '白装处理',"0"))
     zz_is = int(get_ini('config/cfg.ini', '游戏配置', '紫装处理',"0"))
     fenjieshuliang = 0
-    FinStr = dw.RsJCdWDvHA(0, 53, 611, 249, "装备分解", "e6c89b-000000", 1)
+    FinStr = dw.FindStrE(0, 53, 611, 249, "装备分解", "e6c89b-000000", 1)
     pos = FinStr.split('|')
     if int(pos[1]) > 0:
         intx = int(pos[1])
@@ -2426,11 +2451,11 @@ def 出售分解(ZZ):
         time.sleep(0.2)
         xamo.PPWEbxbar(1)
         time.sleep(3)
-        FinStr = dw.RsJCdWDvHA(578, 401, 784, 560, "整理", "ddc593-000000", 1)
+        FinStr = dw.FindStrE(578, 401, 784, 560, "整理", "ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             #装备需要修理自动弹出
-            FinStr = dw.RsJCdWDvHA(396, 218, 465, 352, "取消", "ddc593-000000", 1)
+            FinStr = dw.FindStrE(396, 218, 465, 352, "取消", "ddc593-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 intx = int(pos[1])
@@ -2469,7 +2494,7 @@ def 出售分解(ZZ):
                         time.sleep(0.2)
                         xamo.PPWEbxbar(1)
                         time.sleep(1)
-                    Color = dw.LYqISzEsHWMD(x + 5, y)
+                    Color = dw.GetColor(x + 5, y)
                     if Color == '4c9bad':
                         #高级装备
                         if bz_is == 0:
@@ -2532,7 +2557,7 @@ def 出售分解(ZZ):
                     break
                 y += y_py
             #检查下HP药剂
-            FinStr = dw.uEKuRfCL(92, 562, 120, 589, "hp.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(92, 562, 120, 589, "hp.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 pass
@@ -2544,7 +2569,7 @@ def 出售分解(ZZ):
                 time.sleep(0.5)
                 xamo.UIKBudj(586, 182)
                 time.sleep(0.5)
-                FinStr = dw.uEKuRfCL(472, 257, 717, 469, "hp.bmp", "000000", "0.9", 0)
+                FinStr = dw.FindPicE(472, 257, 717, 469, "hp.bmp", "000000", "0.9", 0)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     intx = int(pos[1])
@@ -2562,7 +2587,7 @@ def 出售分解(ZZ):
             清理游戏窗口()
     if fenjieshuliang == 0:
         return 0
-    FinStr = dw.RsJCdWDvHA(0, 53, 611, 249, "装备分解", "e6c89b-000000", 1)
+    FinStr = dw.FindStrE(0, 53, 611, 249, "装备分解", "e6c89b-000000", 1)
     pos = FinStr.split('|')
     if int(pos[1]) > 0:
         intx = int(pos[1])
@@ -2575,12 +2600,12 @@ def 出售分解(ZZ):
         time.sleep(0.2)
         xamo.PPWEbxbar(1)
         time.sleep(3)
-        FinStr = dw.RsJCdWDvHA(578, 401, 784, 560, "整理", "ddc593-000000", 1)
+        FinStr = dw.FindStrE(578, 401, 784, 560, "整理", "ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             xamo.UIKBudj(255, 350)
             time.sleep(1)
-            FinStr = dw.RsJCdWDvHA(323, 370, 335, 382, "勾选", "ffae00-000000", 1)
+            FinStr = dw.FindStrE(323, 370, 335, 382, "勾选", "ffae00-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 pass
@@ -2589,7 +2614,7 @@ def 出售分解(ZZ):
                 time.sleep(0.2)
                 xamo.PPWEbxbar(1)
                 time.sleep(0.5)
-            FinStr = dw.RsJCdWDvHA(323, 384, 335, 396, "勾选", "ffae00-000000", 1)
+            FinStr = dw.FindStrE(323, 384, 335, 396, "勾选", "ffae00-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 pass
@@ -2602,7 +2627,7 @@ def 出售分解(ZZ):
             time.sleep(0.5)
             xamo.PPWEbxbar(1)
             time.sleep(2)
-            FinStr = dw.RsJCdWDvHA(316, 269, 480, 313, "缺少分解道具", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(316, 269, 480, 313, "缺少分解道具", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 清理游戏窗口()
@@ -2614,7 +2639,7 @@ def 出售分解(ZZ):
                 清理游戏窗口()
                 return 1
 def 安全模式():
-    FinStr = dw.RsJCdWDvHA(335, 319, 396, 350, "确定解除", "ddc593-000000", 1)
+    FinStr = dw.FindStrE(335, 319, 396, 350, "确定解除", "ddc593-000000", 1)
     pos = FinStr.split('|')
     if int(pos[1]) > 0:
         xgis = get_ini('config/cfg.ini', '小果配置', '小果解安全',"假")
@@ -2631,7 +2656,7 @@ def 安全模式():
                 while True:
                     prints(account.hao + '|' + account.mi + "出现安全模式，等待小果解除")
                     time.sleep(5)
-                    FinStr = dw.RsJCdWDvHA(312, 272, 483, 295, "解除安全模式", "ffffff-000000", 1)
+                    FinStr = dw.FindStrE(312, 272, 483, 295, "解除安全模式", "ffffff-000000", 1)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         xamo.UIKBudj(400, 307)
@@ -2645,12 +2670,11 @@ def 安全模式():
                         break
             else:
                 prints('小果解除安全模式 失败')
-
         else:
             while True:
                 prints(account.hao + '|' + account.mi + "出现安全模式，等待手动解除")
                 time.sleep(5)
-                FinStr = dw.RsJCdWDvHA(312, 272, 483, 295, "解除安全模式", "ffffff-000000", 1)
+                FinStr = dw.FindStrE(312, 272, 483, 295, "解除安全模式", "ffffff-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     xamo.UIKBudj(400, 307)
@@ -2666,7 +2690,7 @@ def 安全模式():
     return 0
 def 购买黄龙入选资格():
     prints('购买黄龙入选资格')
-    FinStr = dw.RsJCdWDvHA(164, 129, 773, 373, "武器锻造", "e6c89b-000000", 1)
+    FinStr = dw.FindStrE(164, 129, 773, 373, "武器锻造", "e6c89b-000000", 1)
     pos = FinStr.split('|')
     if int(pos[1]) > 0:
         intx = int(pos[1])
@@ -2679,7 +2703,7 @@ def 购买黄龙入选资格():
         time.sleep(0.2)
         xamo.PPWEbxbar(1)
         time.sleep(3)
-        FinStr = dw.RsJCdWDvHA(578, 401, 784, 560, "整理", "ddc593-000000", 1)
+        FinStr = dw.FindStrE(578, 401, 784, 560, "整理", "ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             time.sleep(1)
@@ -2780,7 +2804,7 @@ def 移动(can):
                 time.sleep(5)
                 弹起()
                 清理游戏窗口()
-                FinStr = dw.RsJCdWDvHA(652, 26, 743, 52, "斯曼工业基地", "e6c89b-000000", 1)
+                FinStr = dw.FindStrE(652, 26, 743, 52, "斯曼工业基地", "e6c89b-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     向右()
@@ -2791,14 +2815,14 @@ def 移动(can):
                     弹起()
                     index = 1
                 else:
-                    FinStr = dw.RsJCdWDvHA(652, 26, 743, 52, "克洛诺斯岛", "e6c89b-000000", 1)
+                    FinStr = dw.FindStrE(652, 26, 743, 52, "克洛诺斯岛", "e6c89b-000000", 1)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         time.sleep(1)
                         index = 2.1
                     else:
                         while True:
-                            FinStr = dw.RsJCdWDvHA(430, 366, 588, 586, "重量", "e6c89b-000000", 1)
+                            FinStr = dw.FindStrE(430, 366, 588, 586, "重量", "e6c89b-000000", 1)
                             pos = FinStr.split('|')
                             if int(pos[1]) > 0:
                                 time.sleep(0.5)
@@ -2807,7 +2831,7 @@ def 移动(can):
                                 xamo.PPWEbxbar(1)
                                 time.sleep(1)
                                 xamo.UIKBudj(595, 172)
-                                FinStr = dw.uEKuRfCL(474, 262, 715, 469, "瞬间移动药剂.bmp", "000000", "0.9", 0)
+                                FinStr = dw.FindPicE(474, 262, 715, 469, "瞬间移动药剂.bmp", "000000", "0.9", 0)
                                 pos = FinStr.split('|')
                                 if int(pos[1]) > 0:
                                     xamo.UIKBudj(int(pos[1]), int(pos[2]))
@@ -2847,7 +2871,6 @@ def 移动(can):
                                     coumai_index += 1
                                     if coumai_index > 5:
                                         prints('购买次数超限')
-                                        重启机器(1)
                                     清理游戏窗口()
                                     jieshouyoujian()
                                     清理游戏窗口()
@@ -2857,14 +2880,14 @@ def 移动(can):
                         break
             elif index == 1:
                 右上()
-                FinStr = dw.RsJCdWDvHA(166, 53, 611, 249, "装备分解", "e6c89b-000000", 1)
+                FinStr = dw.FindStrE(166, 53, 611, 249, "装备分解", "e6c89b-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     弹起()
                     break
             elif index == 2.1:
                 左上()
-                FinStr = dw.RsJCdWDvHA(660, 26, 743, 52, "斯曼工业基地", "e6c89b-000000", 1)
+                FinStr = dw.FindStrE(660, 26, 743, 52, "斯曼工业基地", "e6c89b-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     弹起()
@@ -2874,14 +2897,14 @@ def 移动(can):
                     index = 2.2
             elif index == 2.2:
                 左上()
-                FinStr = dw.uEKuRfCL(0, 16, 521, 234, "地图中转.bmp", "000000", "0.9", 0)
+                FinStr = dw.FindPicE(0, 16, 521, 234, "地图中转.bmp", "000000", "0.9", 0)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     弹起()
                     index = 2.3
             elif index == 2.3:
                 向右()
-                FinStr = dw.RsJCdWDvHA(166, 53, 611, 249, "装备分解", "e6c89b-000000", 1)
+                FinStr = dw.FindStrE(166, 53, 611, 249, "装备分解", "e6c89b-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     弹起()
@@ -2901,7 +2924,7 @@ def 移动(can):
                 向下()
                 time.sleep(5)
                 清理游戏窗口()
-                FinStr = dw.RsJCdWDvHA(658, 24, 751, 53, "素喃", "e6c89b-000000", 1)
+                FinStr = dw.FindStrE(658, 24, 751, 53, "素喃", "e6c89b-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     弹起()
@@ -2909,7 +2932,7 @@ def 移动(can):
                 else:
                     弹起()
                     while True:
-                        FinStr = dw.RsJCdWDvHA(430, 366, 588, 586, "重量", "e6c89b-000000", 1)
+                        FinStr = dw.FindStrE(430, 366, 588, 586, "重量", "e6c89b-000000", 1)
                         pos = FinStr.split('|')
                         if int(pos[1]) > 0:
                             time.sleep(0.5)
@@ -2918,7 +2941,7 @@ def 移动(can):
                             xamo.PPWEbxbar(1)
                             time.sleep(1)
                             xamo.UIKBudj(595, 172)
-                            FinStr = dw.uEKuRfCL(474, 262, 715, 469, "瞬间移动药剂.bmp", "000000", "0.9", 0)
+                            FinStr = dw.FindPicE(474, 262, 715, 469, "瞬间移动药剂.bmp", "000000", "0.9", 0)
                             pos = FinStr.split('|')
                             if int(pos[1]) > 0:
                                 xamo.UIKBudj(int(pos[1]), int(pos[2]))
@@ -2958,7 +2981,6 @@ def 移动(can):
                                 coumai_index += 1
                                 if coumai_index > 5:
                                     prints('购买次数超限')
-                                    重启机器(1)
                                 清理游戏窗口()
                                 jieshouyoujian()
                                 清理游戏窗口()
@@ -2968,14 +2990,14 @@ def 移动(can):
                     break
             if index == 1:
                 左上()
-                FinStr = dw.uEKuRfCL(7, 76, 607, 383, "地图中转2.bmp", "000000", "0.9", 0)
+                FinStr = dw.FindPicE(7, 76, 607, 383, "地图中转2.bmp", "000000", "0.9", 0)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     弹起()
                     index = 2
             if index == 2:
                 右下()
-                FinStr = dw.RsJCdWDvHA(70, 85, 605, 367, "装备分解", "e6c89b-000000", 1)
+                FinStr = dw.FindStrE(70, 85, 605, 367, "装备分解", "e6c89b-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     弹起()
@@ -2995,7 +3017,7 @@ def 移动(can):
                 向下()
                 time.sleep(5)
                 清理游戏窗口()
-                FinStr = dw.RsJCdWDvHA(658, 24, 751, 53, "素喃", "e6c89b-000000", 1)
+                FinStr = dw.FindStrE(658, 24, 751, 53, "素喃", "e6c89b-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     弹起()
@@ -3003,7 +3025,7 @@ def 移动(can):
                 else:
                     弹起()
                     while True:
-                        FinStr = dw.RsJCdWDvHA(430, 366, 588, 586, "重量", "e6c89b-000000", 1)
+                        FinStr = dw.FindStrE(430, 366, 588, 586, "重量", "e6c89b-000000", 1)
                         pos = FinStr.split('|')
                         if int(pos[1]) > 0:
                             time.sleep(0.5)
@@ -3012,7 +3034,7 @@ def 移动(can):
                             xamo.PPWEbxbar(1)
                             time.sleep(1)
                             xamo.UIKBudj(595, 172)
-                            FinStr = dw.uEKuRfCL(474, 262, 715, 469, "瞬间移动药剂.bmp", "000000", "0.9", 0)
+                            FinStr = dw.FindPicE(474, 262, 715, 469, "瞬间移动药剂.bmp", "000000", "0.9", 0)
                             pos = FinStr.split('|')
                             if int(pos[1]) > 0:
                                 xamo.UIKBudj(int(pos[1]), int(pos[2]))
@@ -3052,7 +3074,6 @@ def 移动(can):
                                 coumai_index += 1
                                 if coumai_index > 5:
                                     prints('购买次数超限')
-                                    重启机器(1)
                                 清理游戏窗口()
                                 jieshouyoujian()
                                 清理游戏窗口()
@@ -3062,14 +3083,14 @@ def 移动(can):
                     break
             if index == 1:
                 左下()
-                FinStr = dw.uEKuRfCL(88, 84, 354, 479, "地图中转3.bmp", "000000", "0.9", 0)
+                FinStr = dw.FindPicE(88, 84, 354, 479, "地图中转3.bmp", "000000", "0.9", 0)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     弹起()
                     index = 2
             if index == 2:
                 右下()
-                FinStr = dw.RsJCdWDvHA(290, 86, 522, 403, "武器锻造", "e6c89b-000000", 1)
+                FinStr = dw.FindStrE(290, 86, 522, 403, "武器锻造", "e6c89b-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     弹起()
@@ -3087,14 +3108,14 @@ def 移动(can):
             time.sleep(0.2)
             if index == 0:
                 左上()
-                FinStr = dw.uEKuRfCL(96, 84, 676, 349, "地图中转4.bmp", "000000", "0.9", 0)
+                FinStr = dw.FindPicE(96, 84, 676, 349, "地图中转4.bmp", "000000", "0.9", 0)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     弹起()
                     index = 1
             if index == 1:
                 右上()
-                FinStr = dw.RsJCdWDvHA(70, 85, 605, 367, "装备分解", "e6c89b-000000", 1)
+                FinStr = dw.FindStrE(70, 85, 605, 367, "装备分解", "e6c89b-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     弹起()
@@ -3103,7 +3124,7 @@ def 移动(can):
                     弹起()
                     break
     return 0
-def 点击技能(x, y, x1, y1,is_tuodong):
+def 点击技能(x, y, x1, y1,is_tuodong,t):
     #学满技能
     xamo.UIKBudj(x, y)
     time.sleep(0.5)
@@ -3114,21 +3135,22 @@ def 点击技能(x, y, x1, y1,is_tuodong):
     xamo.PPWEbxbar(1)
     time.sleep(0.5)
     xamo.LJDFnmeFSD(16)
-    time.sleep(1)
+    time.sleep(0.5)
     if is_tuodong:
-    #拖动技能
-        xamo.UIKBudj(x + 3, y + 3)
-        time.sleep(0.5)
-        xamo.cndjGdsbSdg()
-        time.sleep(0.5)
-        xamo.UIKBudj(x + 5, y + 5)
-        time.sleep(0.5)
-        xamo.UIKBudj(x1, y1)
-        time.sleep(0.5)
-        xamo.UIKBudj(x1+3, y1+3)
-        time.sleep(0.5)
-        xamo.mboHdjGsV()
-        time.sleep(0.5)
+        if t != 0:
+            #拖动技能
+            xamo.UIKBudj(x + 3, y + 3)
+            time.sleep(0.2)
+            xamo.cndjGdsbSdg()
+            time.sleep(0.2)
+            xamo.UIKBudj(x + 5, y + 5)
+            time.sleep(0.2)
+            xamo.UIKBudj(x1, y1)
+            time.sleep(0.2)
+            xamo.UIKBudj(x1+3, y1+3)
+            time.sleep(0.2)
+            xamo.mboHdjGsV()
+            time.sleep(0.2)
 def 清理游戏窗口_学技能():
     xamo.UIKBudj(1, 1)
     time.sleep(0.5)
@@ -3140,8 +3162,7 @@ def 清理游戏窗口_学技能():
         time_temp = ql_time_now.minute - ql_time.minute
         if time_temp > 1:
             prints('清理游戏窗口超时,重启')
-            重启机器(2)
-        FinStr = dw.RsJCdWDvHA(378,296,494,369, "关闭", "ddc593-000000|ffffb8-000000", 1)
+        FinStr = dw.FindStrE(378,296,494,369, "关闭", "ddc593-000000|ffffb8-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             intx = int(pos[1])
@@ -3150,7 +3171,7 @@ def 清理游戏窗口_学技能():
             time.sleep(0.2)
             xamo.PPWEbxbar(1)
             time.sleep(1)
-        FinStr = dw.RsJCdWDvHA(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
+        FinStr = dw.FindStrE(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             xamo.UIKBudj(594, 127)
@@ -3158,7 +3179,7 @@ def 清理游戏窗口_学技能():
             xamo.PPWEbxbar(1)
             time.sleep(1)
             time.sleep(0.5)
-            FinStr = dw.RsJCdWDvHA(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
+            FinStr = dw.FindStrE(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 xamo.UIKBudj(594, 127)
@@ -3181,7 +3202,7 @@ def 学习技能(zhiye):
         if zhiye == 2: #风法
             #检查技能摆放
             for i in range(10):
-                FinStr = dw.uEKuRfCL(528, 523, 715, 593, "风法技能" + str(i + 1) + ".bmp", "000000", "0.9", 0)
+                FinStr = dw.FindPicE(528, 523, 715, 593, "风法技能" + str(i + 1) + ".bmp", "000000", "0.9", 0)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     pass
@@ -3190,12 +3211,12 @@ def 学习技能(zhiye):
                     break
             if not is_wz:
                 while True:
-                    FinStr = dw.RsJCdWDvHA(376, 28, 429, 51, "技能栏", "ffffff-000000", 1)
+                    FinStr = dw.FindStrE(376, 28, 429, 51, "技能栏", "ffffff-000000", 1)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         time.sleep(1)
                         #关闭学习技能帮助界面
-                        FinStr = dw.RsJCdWDvHA(24, 132, 89, 164, "学习技能", "ffee88-000000", 1)
+                        FinStr = dw.FindStrE(24, 132, 89, 164, "学习技能", "ffee88-000000", 1)
                         pos = FinStr.split('|')
                         if int(pos[1]) > 0:
                             xamo.UIKBudj(519, 295)
@@ -3224,20 +3245,20 @@ def 学习技能(zhiye):
                             time.sleep(1)
                             prints('技能初始化成功')
                         #物理暴击
-                        点击技能(224, 141, 0, 0, False)
+                        点击技能(224, 141, 0, 0, False,t)
                         #物理背击
-                        点击技能(304, 141, 0, 0, False)
+                        点击技能(304, 141, 0, 0, False,t)
                         #流风决
-                        点击技能(285, 475, 771, 571, True)
+                        点击技能(285, 475, 771, 571, True,t)
                         #棍棒精通
-                        点击技能(426, 410, 0, 0, False)
+                        点击技能(426, 410, 0, 0, False,t)
                         for t in range(20):
-                            FinStr = dw.RsJCdWDvHA(4, 257, 27, 273, "30", "8c8c8c-000000", 1)
+                            FinStr = dw.FindStrE(4, 257, 27, 273, "30", "8c8c8c-000000", 1)
                             pos = FinStr.split('|')
                             if int(pos[1]) > 0:
                                 break
                             else:
-                                FinStr = dw.RsJCdWDvHA(4, 389, 27, 409, "40", "8c8c8c-000000", 1)
+                                FinStr = dw.FindStrE(4, 389, 27, 409, "40", "8c8c8c-000000", 1)
                                 pos = FinStr.split('|')
                                 if int(pos[1]) > 0:
                                     break
@@ -3247,36 +3268,36 @@ def 学习技能(zhiye):
                                     xamo.PPWEbxbar(1)
                                     time.sleep(0.5)
                         #凤鸣冲击
-                        点击技能(239, 209, 672, 571, True)
+                        点击技能(239, 209, 672, 571, True,t)
                         #游离之风
-                        点击技能(332, 210, 638, 571, True)
+                        点击技能(332, 210, 638, 571, True,t)
                         #双翼风刃
-                        点击技能(333, 277, 605, 571, True)
+                        点击技能(333, 277, 605, 571, True,t)
                         #风暴之眼
-                        点击技能(333, 343, 605, 536, True)
+                        点击技能(333, 343, 605, 536, True,t)
                         #真空旋风破
-                        点击技能(287, 410, 705, 571, True)
+                        点击技能(287, 410, 705, 571, True,t)
                         #风暴之拳
-                        点击技能(191, 477, 738, 571, True)
+                        点击技能(191, 477, 738, 571, True,t)
                         for t in range(8):
                             xamo.UIKBudj(547, 517)
                             time.sleep(0.2)
                             xamo.PPWEbxbar(1)
                             time.sleep(0.5)
                         #万象风龙阵
-                        点击技能(239, 274, 736, 536, True)
+                        点击技能(239, 274, 736, 536, True,t)
                         #御风之力
-                        点击技能(331, 274, 0, 0, False)
+                        点击技能(331, 274, 0, 0, False,t)
                         #风神决
-                        点击技能(191, 411, 0, 0, False)
+                        点击技能(191, 411, 0, 0, False,t)
                         #风卷残云
-                        点击技能(285, 411, 672, 536, True)
+                        点击技能(285, 411, 672, 536, True,t)
                         #游龙惊风破
-                        点击技能(333, 411, 640, 539, True)
+                        点击技能(333, 411, 640, 539, True,t)
                         #九霄风雷
-                        点击技能(191, 476, 704, 536, True)
+                        点击技能(191, 476, 704, 536, True,t)
                         #无限风域
-                        点击技能(379, 476, 771, 536, True)
+                        点击技能(379, 476, 771, 536, True,t)
                         time.sleep(1)
                         #学习
                         xamo.UIKBudj(209, 553)
@@ -3300,7 +3321,7 @@ def 学习技能(zhiye):
         elif zhiye == 1: #召唤
             #检查技能摆放
             for i in range(12):
-                FinStr = dw.uEKuRfCL(528, 523, 715, 593, "召唤技能" + str(i + 1) + ".bmp", "000000", "0.9", 0)
+                FinStr = dw.FindPicE(528, 523, 715, 593, "召唤技能" + str(i + 1) + ".bmp", "000000", "0.9", 0)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     pass
@@ -3309,12 +3330,12 @@ def 学习技能(zhiye):
                     break
             if not is_wz:
                 while True:
-                    FinStr = dw.RsJCdWDvHA(376, 28, 429, 51, "技能栏", "ffffff-000000", 1)
+                    FinStr = dw.FindStrE(376, 28, 429, 51, "技能栏", "ffffff-000000", 1)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         time.sleep(1)
                         #关闭学习技能帮助界面
-                        FinStr = dw.RsJCdWDvHA(24, 132, 89, 164, "学习技能", "ffee88-000000", 1)
+                        FinStr = dw.FindStrE(24, 132, 89, 164, "学习技能", "ffee88-000000", 1)
                         pos = FinStr.split('|')
                         if int(pos[1]) > 0:
                             xamo.UIKBudj(519, 295)
@@ -3376,13 +3397,13 @@ def 学习技能(zhiye):
                         time.sleep(1)
 def 检查负重():
     for i in range(10):
-        FinStr = dw.RsJCdWDvHA(430, 366, 588, 586, "重量", "e6c89b-000000", 1)
+        FinStr = dw.FindStrE(430, 366, 588, 586, "重量", "e6c89b-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             time.sleep(0.5)
             intx = int(pos[1])
             inty = int(pos[2])
-            color = dw.LYqISzEsHWMD(intx + 95, inty + 8)
+            color = dw.GetColor(intx + 95, inty + 8)
             if color == 'd62929':
                 xamo.KJDfekiHDh(73, 1)
                 return 1
@@ -3398,7 +3419,7 @@ def 检查负重():
     return 0
 def 检查物品数量(wp_tab,name,num):
     for i in range(10):
-        FinStr = dw.RsJCdWDvHA(430, 366, 588, 586, "重量", "e6c89b-000000", 1)
+        FinStr = dw.FindStrE(430, 366, 588, 586, "重量", "e6c89b-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             time.sleep(0.5)
@@ -3419,10 +3440,10 @@ def 检查物品数量(wp_tab,name,num):
             time.sleep(1)
             xamo.UIKBudj(595, 172)
             time.sleep(0.5)
-            FinStr = dw.uEKuRfCL(474, 262, 769, 469, name + ".bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(474, 262, 769, 469, name + ".bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
-                wp_sl = dw.ghKWigkPfdBCtSd(int(pos[1]) - 4, int(pos[2]) - 10, int(pos[1]) + 22, int(pos[2]),"ffffff-000000", 1)
+                wp_sl = dw.Ocr(int(pos[1]) - 4, int(pos[2]) - 10, int(pos[1]) + 22, int(pos[2]),"ffffff-000000", 1)
                 if wp_sl != '':
                     wp_sl = re.sub("\D", "", wp_sl)
                     if int(wp_sl) >= num:
@@ -3438,7 +3459,7 @@ def 检查物品数量(wp_tab,name,num):
             time.sleep(1)
     return 0
 def 检查累积在线奖励():
-    FinStr = dw.RsJCdWDvHA(148,11, 418, 72, "累计在线得好礼", "ffc800-000000", 1)
+    FinStr = dw.FindStrE(148,11, 418, 72, "累计在线得好礼", "ffc800-000000", 1)
     pos = FinStr.split('|')
     if int(pos[1]) > 0:
         intx = int(pos[1])
@@ -3459,6 +3480,31 @@ def 检查累积在线奖励():
         time.sleep(0.2)
         xamo.PPWEbxbar(1)
         time.sleep(0.5)
+def 输入汉字(str):
+    x = int(get_ini('config/cfg.ini', '主配置', 'x', "0"))
+    y = int(get_ini('config/cfg.ini', '主配置', 'y', "0"))
+    Imsrf = False
+    for i in range(10):
+        FinStr = dw.FindPicE(0, y - 42, x, y, "搜狗_图标1.bmp|搜狗_图标2.bmp|搜狗_图标3.bmp", "000000", "0.9", 0)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            Imsrf = not Imsrf
+            break
+        else:
+            xamo.LKDFemrrh(17)
+            xamo.KJDfekiHDh(16,1)
+            xamo.LJDFnmeFSD(17)
+            time.sleep(0.5)
+    if not Imsrf:
+        prints('未安装搜狗输入法或隐藏了右下角小任务栏')
+        input()
+    if str == '瞬间移动药剂':
+        xamo.LbferJhd('sjydyj')
+    elif str == '//移动物品':
+        xamo.LbferJhd('ydwp')
+    time.sleep(0.5)
+    xamo.KJDfekiHDh(49,1)
+    time.sleep(0.5)
 def 购买物品(name,num):
     prints('购买物品')
     prints('购买' + str(num) + '个' + name)
@@ -3470,7 +3516,7 @@ def 购买物品(name,num):
         if d3.seconds > 200:
             弹起()
             return 0
-        FinStr = dw.RsJCdWDvHA(609, 75, 669, 110, "默认设置", "ddc593-000000", 1)
+        FinStr = dw.FindStrE(609, 75, 669, 110, "默认设置", "ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             time.sleep(1)
@@ -3486,13 +3532,11 @@ def 购买物品(name,num):
             time.sleep(0.2)
             xamo.PPWEbxbar(1)
             time.sleep(1)
-            hwnd = dw.bcGT("地下城与勇士", "地下城与勇士")
-            if hwnd > 0:
-                dw.gshNarIzNfhm(hwnd, name)
+            输入汉字(name)
             time.sleep(1)
             Fok = False
             for i in range(20):
-                FinStr = dw.RsJCdWDvHA(483, 115, 544, 497, "一口价", "ffb400-000000|ff3232-000000", 1)
+                FinStr = dw.FindStrE(483, 115, 544, 497, "一口价", "ffb400-000000|ff3232-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     Fok = True
@@ -3506,10 +3550,10 @@ def 购买物品(name,num):
                     time.sleep(0.5)
                     xamo.PPWEbxbar(1)
                     time.sleep(1)
-                    FinStr = dw.RsJCdWDvHA(474, 104, 761, 531, "数量", "ffe3ab-000000", 1)
+                    FinStr = dw.FindStrE(474, 104, 761, 531, "数量", "ffe3ab-000000", 1)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
-                        wp_sl = dw.ghKWigkPfdBCtSd(int(pos[1]) + 24, int(pos[2]) - 3, int(pos[1]) + 80, int(pos[2]) + 16, "ffe3ab-000000", 1)
+                        wp_sl = dw.Ocr(int(pos[1]) + 24, int(pos[2]) - 3, int(pos[1]) + 80, int(pos[2]) + 16, "ffe3ab-000000", 1)
                         if wp_sl != '':
                             wp_sl = re.sub("\D", "", wp_sl)
                             if int(wp_sl) > shuliang:
@@ -3526,12 +3570,12 @@ def 购买物品(name,num):
                     ret_aqms = 安全模式()
                     if ret_aqms == 1:
                         return 0
-                    FinStr = dw.RsJCdWDvHA(278, 251, 507, 343, "所持金币不足", "ffffff-000000", 1)
+                    FinStr = dw.FindStrE(278, 251, 507, 343, "所持金币不足", "ffffff-000000", 1)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         prints('金币不足，等待60秒，筹够钱后回到这个界面')
                         time.sleep(60)
-                    FinStr = dw.RsJCdWDvHA(308, 233, 490, 354, "完成竞拍", "ffffff-000000", 1)
+                    FinStr = dw.FindStrE(308, 233, 490, 354, "完成竞拍", "ffffff-000000", 1)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         xamo.KJDfekiHDh(13, 1)
@@ -3568,7 +3612,7 @@ def 购买免修():
     清理游戏窗口()
     gmmx_time = datetime.datetime.now()
     while True:
-        FinStr = dw.uEKuRfCL(0, 0, 800, 600, "服务列表.bmp", "000000", "0.9", 0)
+        FinStr = dw.FindPicE(256, 518, 542, 613, "服务列表.bmp", "000000", "0.9", 0)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             intx = int(pos[1])
@@ -3579,10 +3623,10 @@ def 购买免修():
             time.sleep(1)
         else:
             break
-        FinStr = dw.RsJCdWDvHA(0, 0, 800, 600, "优惠券礼盒", "ffffff-000000", 1)
+        FinStr = dw.FindStrE(191, 99, 647, 276, "优惠券礼盒", "ffffff-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
-            FinStr = dw.RsJCdWDvHA(0, 0, 800, 600, "自动修理", "ffffff-000000", 1)
+            FinStr = dw.FindStrE(140, 158, 615, 501, "自动修理", "ffffff-000000", 1)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 return 1
@@ -3595,10 +3639,10 @@ def 购买免修():
     清理游戏窗口()
     prints('购买自动修理')
     while True:
-        FinStr = dw.RsJCdWDvHA(92, 540, 171, 579, "积分", "ffffff-000000", 1)
+        FinStr = dw.FindStrE(92, 540, 171, 579, "积分", "ffffff-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
-            number = dw.ghKWigkPfdBCtSd(325, 547, 410, 570, "ffffff-000000", 1)
+            number = dw.Ocr(325, 547, 410, 570, "ffffff-000000", 1)
             number = re.sub("\D", "", number)
             if int(number) > 500:
                 break
@@ -3626,7 +3670,7 @@ def 购买免修():
         d3 = gmmx_time_now - gmmx_time
         if d3.seconds > 100:
             return 0
-        FinStr = dw.RsJCdWDvHA(425, 40, 720, 79, "装饰类", "ddc593-000000", 1)
+        FinStr = dw.FindStrE(425, 40, 720, 79, "装饰类", "ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             #点击优惠类
@@ -3635,7 +3679,7 @@ def 购买免修():
             xamo.PPWEbxbar(1)
             time.sleep(1)
             for tn in range(3):
-                FinStr = dw.RsJCdWDvHA(17, 107, 419, 527, "魔王之契约", "ffffff-000000", 1)
+                FinStr = dw.FindStrE(17, 107, 419, 527, "魔王之契约", "ffffff-000000", 1)
                 pos = FinStr.split('|')
                 if int(pos[1]) > 0:
                     intx = int(pos[1])
@@ -3655,7 +3699,7 @@ def 购买免修():
             time.sleep(0.2)
             xamo.PPWEbxbar(1)
             time.sleep(1)
-        FinStr = dw.RsJCdWDvHA(370, 98, 431, 122, "结算窗口", "ffffff-000000", 1)
+        FinStr = dw.FindStrE(370, 98, 431, 122, "结算窗口", "ffffff-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             #点击下拉
@@ -3699,7 +3743,7 @@ def 打怪_风法(GK):
         d3 = dgff_time_now - dgff_time
         if d3.seconds > 30:
             break
-        FinStr = dw.uEKuRfCL(0, 78, 799, 552, "my.bmp", "000000", "1", 0)
+        FinStr = dw.FindPicE(0, 78, 799, 552, "my.bmp", "000000", "1", 0)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             my_x = int(pos[1])
@@ -3722,7 +3766,7 @@ def 打怪_风法(GK):
                 向右()
                 time.sleep(0.5)
                 弹起()
-        FinStr = dw.AIdCpitUAXsF(0, 78, 799, 552, "ff0094-101010|ff00ff-101010", 1.0, 0)
+        FinStr = dw.FindColorE(0, 78, 799, 552, "ff0094-101010|ff00ff-101010", 1.0, 0)
         pos = FinStr.split('|')
         if int(pos[0]) > 0:
             gw_x = int(pos[0])
@@ -3746,7 +3790,7 @@ def 打怪_风法(GK):
                         x = 533
                         y = 533
                         for c in range(3):
-                            FinStr = dw.AIdCpitUAXsF(x, y, x + 22, y + 20, "ffffff-000000", 1.0, 0)
+                            FinStr = dw.FindColorE(x, y, x + 22, y + 20, "ffffff-000000", 1.0, 0)
                             pos = FinStr.split('|')
                             if int(pos[0]) > 0:
                                 pass
@@ -3764,7 +3808,7 @@ def 打怪_风法(GK):
                                     time.sleep(0.5)
                                     break
                             x += 30
-                    FinStr = dw.uEKuRfCL(531, 561, 715, 596, "双翼风刃.bmp|游离之风.bmp|凤鸣冲击.bmp|真空旋风破.bmp", "000000", "0.9", 0)
+                    FinStr = dw.FindPicE(531, 561, 715, 596, "双翼风刃.bmp|游离之风.bmp|凤鸣冲击.bmp|真空旋风破.bmp", "000000", "0.9", 0)
                     pos = FinStr.split('|')
                     if int(pos[1]) > 0:
                         if int(pos[0]) == 0:
@@ -3801,7 +3845,7 @@ def 打怪_风法(GK):
                     右上()
                 elif my_y + my_y_py < gw_y + gw_y_py:
                     右下()
-        time.sleep(0.02)
+        time.sleep(0.001)
 def 设置():
     prints('设置')
     sz_time = datetime.datetime.now()
@@ -3811,7 +3855,7 @@ def 设置():
         if d3.seconds > 100:
             弹起()
             return 0
-        FinStr = dw.RsJCdWDvHA(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
+        FinStr = dw.FindStrE(195, 189, 260, 216, "我的信息", "e6c89b-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             xamo.UIKBudj(279, 442)
@@ -3828,7 +3872,7 @@ def 设置():
         if d3.seconds > 100:
             弹起()
             return 0
-        FinStr = dw.RsJCdWDvHA(163, 421, 260, 478, "快捷键设置", "ddcc99-000000|ddc593-000000", 1)
+        FinStr = dw.FindStrE(163, 421, 260, 478, "快捷键设置", "ddcc99-000000|ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             intx = int(pos[1])
@@ -3837,7 +3881,7 @@ def 设置():
             time.sleep(0.2)
             xamo.PPWEbxbar(1)
             time.sleep(1)
-        FinStr = dw.RsJCdWDvHA(328, 296, 418, 346, "聊天快捷键", "96ff1e-000000", 1)
+        FinStr = dw.FindStrE(328, 296, 418, 346, "聊天快捷键", "96ff1e-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             intx = int(pos[1])
@@ -3852,9 +3896,7 @@ def 设置():
             xamo.PPWEbxbar(1)
             time.sleep(1)
             xamo.KJDfekiHDh(8,10)
-            hwnd = dw.bcGT("地下城与勇士", "地下城与勇士")
-            if hwnd > 0:
-                dw.gshNarIzNfhm(hwnd, '//移动物品')
+            输入汉字('//移动物品')
             #点击输入框
             xamo.UIKBudj(327, 362)
             time.sleep(0.2)
@@ -3868,119 +3910,10 @@ def 设置():
             time.sleep(1)
             清理游戏窗口()
             return 1
-def 购买礼盒():
-    gmlh_time = datetime.datetime.now()
-    while True:
-        FinStr = dw.RsJCdWDvHA(92, 540, 171, 579, "积分", "ffffff-000000", 1)
-        pos = FinStr.split('|')
-        if int(pos[1]) > 0:
-            number = dw.ghKWigkPfdBCtSd(325, 547, 410, 570, "ffffff-000000", 1)
-            number = re.sub("\D", "", number)
-            if int(number) >= 520:
-                break
-            else:
-                prints("点券不够，再充值" + str(520-int(number)) + "点")
-                time.sleep(5)
-                # 刷新点券
-                xamo.UIKBudj(400, 557)
-                time.sleep(0.2)
-                xamo.PPWEbxbar(1)
-                time.sleep(1)
-        else:
-            xamo.UIKBudj(481, 577)
-            time.sleep(0.2)
-            xamo.PPWEbxbar(1)
-            time.sleep(1)
-            gmlh_time_now = datetime.datetime.now()
-            d3 = gmlh_time_now - gmlh_time
-            if d3.seconds > 300:
-                return 0
-    while True:
-        FinStr = dw.RsJCdWDvHA(575, 45, 631, 79, "装饰类", "ddc593-000000", 1)
-        pos = FinStr.split('|')
-        if int(pos[1]) > 0:
-            # 点击道具
-            xamo.UIKBudj(281, 58)
-            time.sleep(0.2)
-            xamo.PPWEbxbar(1)
-            time.sleep(1)
-            FinStr = dw.RsJCdWDvHA(21, 110, 423, 225, "浪漫之约礼包", "ffffff-000000", 1)
-            pos = FinStr.split('|')
-            if int(pos[1]) > 0:
-                intx = int(pos[1])
-                inty = int(pos[2])
-                xamo.UIKBudj(intx + 46, inty + 76)
-                time.sleep(0.2)
-                xamo.PPWEbxbar(1)
-                time.sleep(1)
-            else:
-                xamo.UIKBudj(281, 58)
-                time.sleep(0.2)
-                xamo.PPWEbxbar(1)
-                time.sleep(1)
-        else:
-            # 点击道具大类
-            xamo.UIKBudj(414, 23)
-            time.sleep(0.2)
-            xamo.PPWEbxbar(1)
-            time.sleep(1)
-        FinStr = dw.RsJCdWDvHA(353, 88, 443, 133, "结算窗口", "ffffff-000000", 1)
-        pos = FinStr.split('|')
-        if int(pos[1]) > 0:
-            #购买
-            xamo.UIKBudj(503, 476)
-            time.sleep(0.2)
-            xamo.PPWEbxbar(1)
-            time.sleep(2)
-            xamo.KJDfekiHDh(13,1)
-            return 1
-def 打开礼盒():
-    while True:
-        FinStr = dw.RsJCdWDvHA(578, 401, 784, 560, "整理", "ddc593-000000", 1)
-        pos = FinStr.split('|')
-        if int(pos[1]) > 0:
-            intx = int(pos[1])
-            inty = int(pos[2])
-            xamo.UIKBudj(intx - 131, inty - 233)
-            time.sleep(0.2)
-            xamo.PPWEbxbar(1)
-            time.sleep(1)
-            FinStr = dw.uEKuRfCL(452, 198, 737, 465, "浪漫之约礼包.bmp", "000000", "0.9", 0)
-            pos = FinStr.split('|')
-            if int(pos[1]) > 0:
-                intx = int(pos[1])
-                inty = int(pos[2])
-                xamo.UIKBudj(intx +5, inty + 5)
-                time.sleep(0.2)
-                xamo.XKkncvhe(3)
-                time.sleep(1)
-                return  1
-        else:
-            xamo.KJDfekiHDh(73,1)
-            time.sleep(2)
-def 检查礼盒():
-    while True:
-        FinStr = dw.RsJCdWDvHA(578, 401, 784, 560, "整理", "ddc593-000000", 1)
-        pos = FinStr.split('|')
-        if int(pos[1]) > 0:
-            intx = int(pos[1])
-            inty = int(pos[2])
-            xamo.UIKBudj(intx - 131, inty - 233)
-            time.sleep(0.2)
-            xamo.PPWEbxbar(1)
-            time.sleep(1)
-            FinStr = dw.uEKuRfCL(452, 198, 737, 465, "浪漫心动礼盒.bmp", "000000", "0.9", 0)
-            pos = FinStr.split('|')
-            if int(pos[1]) > 0:
-                return 1
-            return 0
-        else:
-            xamo.KJDfekiHDh(73, 1)
-            time.sleep(2)
 def 上架礼盒():
     sjlh_time = datetime.datetime.now()
     while True:
-        FinStr = dw.RsJCdWDvHA(609, 75, 669, 110, "默认设置", "ddc593-000000", 1)
+        FinStr = dw.FindStrE(609, 75, 669, 110, "默认设置", "ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             time.sleep(1)
@@ -3999,7 +3932,7 @@ def 上架礼盒():
             return 0
     sjlh_time = datetime.datetime.now()
     while True:
-        FinStr = dw.RsJCdWDvHA(215, 448, 267, 473, "竞拍价", "ddc593-000000", 1)
+        FinStr = dw.FindStrE(215, 448, 267, 473, "竞拍价", "ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             #点击消耗栏
@@ -4007,7 +3940,7 @@ def 上架礼盒():
             time.sleep(0.2)
             xamo.PPWEbxbar(1)
             time.sleep(1)
-            FinStr = dw.uEKuRfCL(466, 252, 721, 420, "浪漫心动礼盒.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(466, 252, 721, 420, "浪漫心动礼盒.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 x = int(pos[1])
@@ -4048,10 +3981,10 @@ def 上架礼盒():
         d3 = sjlh_time_now - sjlh_time
         if d3.seconds > 200:
             return 0
-        FinStr = dw.RsJCdWDvHA(317, 328, 356, 425, "每个", "ddc593-000000", 1)
+        FinStr = dw.FindStrE(317, 328, 356, 425, "每个", "ddc593-000000", 1)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
-            number = dw.ghKWigkPfdBCtSd(314, 376, 441, 393, "ddc593-000000", 1)
+            number = dw.Ocr(314, 376, 441, 393, "ddc593-000000", 1)
             number = re.sub("\D", "", number)
             #一口价
             xamo.UIKBudj(417, 480)
@@ -4102,7 +4035,7 @@ def 关卡构造(zhiye,guanqia):
             # 游离之风 S
             xamo.KJDfekiHDh(83, 1)
             time.sleep(0.2)
-        FinStr = dw.uEKuRfCL(14, 129, 124, 181, "DPS.bmp", "000000", "0.9", 0)
+        FinStr = dw.FindPicE(14, 129, 124, 181, "DPS.bmp", "000000", "0.9", 0)
         pos = FinStr.split('|')
         if int(pos[1]) > 0:
             myX = int(pos[1])
@@ -4148,7 +4081,7 @@ def 关卡构造(zhiye,guanqia):
             #点击左
             xamo.KJDfekiHDh(37, 1)
             time.sleep(0.1)
-            FinStr = dw.uEKuRfCL(531, 561, 715, 596, "双翼风刃.bmp|游离之风.bmp|凤鸣冲击.bmp|真空旋风破.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(531, 561, 715, 596, "双翼风刃.bmp|游离之风.bmp|凤鸣冲击.bmp|真空旋风破.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 if int(pos[0]) == 0:
@@ -4183,7 +4116,7 @@ def 关卡构造(zhiye,guanqia):
             #点击右
             xamo.KJDfekiHDh(39, 1)
             time.sleep(0.1)
-            FinStr = dw.uEKuRfCL(531, 561, 715, 596, "双翼风刃.bmp|游离之风.bmp|凤鸣冲击.bmp|真空旋风破.bmp", "000000", "0.9", 0)
+            FinStr = dw.FindPicE(531, 561, 715, 596, "双翼风刃.bmp|游离之风.bmp|凤鸣冲击.bmp|真空旋风破.bmp", "000000", "0.9", 0)
             pos = FinStr.split('|')
             if int(pos[1]) > 0:
                 if int(pos[0]) == 0:
@@ -4202,7 +4135,7 @@ def 关卡构造(zhiye,guanqia):
             time.sleep(0.3)
             弹起()
             # 万象风龙阵 T
-            xamo.KJDfekiHDh(84, 2)
+            xamo.KJDfekiHDh(84, 4)
             time.sleep(3)
             # 风暴之眼 Q
             xamo.KJDfekiHDh(81, 1)
@@ -4233,10 +4166,13 @@ def 关卡构造(zhiye,guanqia):
             duobidihuo = True
         elif zhiye == 2:
             右上()
-            time.sleep(0.4)
+            time.sleep(0.2)
             向右()
             time.sleep(0.1)
             弹起()
+            # 风卷残云 E
+            xamo.KJDfekiHDh(69, 2)
+            time.sleep(0.5)
             # 风暴之拳 G
             xamo.KJDfekiHDh(71, 1)
             time.sleep(1)
@@ -4246,9 +4182,6 @@ def 关卡构造(zhiye,guanqia):
             # 九霄风雷 R
             xamo.KJDfekiHDh(82, 2)
             time.sleep(1.5)
-            # 风卷残云 E
-            xamo.KJDfekiHDh(69, 2)
-            time.sleep(0.5)
             # 风暴之眼 Q
             xamo.KJDfekiHDh(81, 1)
             time.sleep(0.6)
@@ -4263,906 +4196,646 @@ def 异常文本(str):
     file = open('异常文本.txt', 'w')
     file.write(str)  # 写入内容信息
     file.close()
-    dw.AQkYZXxNfqMz(os.getcwd() + '\异常文本.txt', 0)
+    dw.RunApp(os.getcwd() + '\异常文本.txt', 0)
 def 重启机器(can):
-    if can == 1:
+    pass
+    # if can == 1:
         # 重启电脑
-        run('shutdown -r -t 0', shell=True)
-    elif can == 2:
-        run('shutdown -r', shell=True)
-        time.sleep(60)
+    # run('shutdown -r -t 0', shell=True)
+    # elif can == 2:
+    # run('shutdown -r', shell=True)
+    # time.sleep(60)
+def 赛丽亚房间(is_60m,zhiye,CRuser, CRpwd,x,y):
+    duihuandianquan = get_ini('config/cfg.ini', '主配置', '兑换点券',"假")
+    goumaimianxiu = get_ini('config/cfg.ini', '主配置', '购买免修',"假")
+    zhuanqian = get_ini('config/cfg.ini', '主配置', '只转钱', "假")
+    time.sleep(5)
+    Imok = True
+    while True:
+        发送记录()
+        time.sleep(0.5)
+        FinStr = dw.FindStrE(0, 0, x, y, "结束游戏", "ddc593-050505|ffffb8-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            prints('检查封号中断')
+            time.sleep(5)
+            fenghao_return = fenghaojianhcha()
+            if fenghao_return == 'F5':
+                prints("账号停封5天，换号")
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+            elif fenghao_return == 'F7':
+                prints("账号停封7天，换号")
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+            elif fenghao_return == 'F0':
+                prints('只是中断没有封号，重上')
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+            elif fenghao_return == 'F100':
+                prints("永久封号，换号")
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+            elif fenghao_return == 'F101':
+                prints("此ID已在游戏中，重上")
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+            # 选择角色
+            juesechuli_ret = juesechuli(1)
+            if juesechuli_ret == 0:
+                prints("角色刷完，换号")
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+            elif juesechuli_ret == 1:
+                prints("角色更换完成")
+            elif juesechuli_ret == 2:
+                prints("网络连接中断，重上")
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+            elif juesechuli_ret == 3:
+                prints("角色处理超时，重上")
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+            time.sleep(10)
+            # 刷新列表
+            shuaxinliebiao()
+        FinStr = dw.FindStrE(379, 441, 437, 468, "关闭", "ddc593-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            if jinqizhicai() == 1:
+                Imok = False
+                break
+            time.sleep(3)
+            intx = int(pos[1])
+            inty = int(pos[2])
+            xamo.UIKBudj(intx + 5, inty + 3)
+            time.sleep(1)
+            xamo.PPWEbxbar(1)
+            time.sleep(1)
+            qingkongyouxichuangkou()
+        FinStr = dw.FindPicE(365, 356, 418, 384, "签到.bmp", "000000", "0.9", 0)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            if jinqizhicai() == 1:
+                Imok = False
+                break
+            time.sleep(1)
+            qingkongyouxichuangkou()
+        FinStr = dw.FindPicE(114, 59, 739, 306, "叉.bmp", "000000", "0.9", 0)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            if jinqizhicai() == 1:
+                Imok = False
+                break
+            time.sleep(1)
+            qingkongyouxichuangkou()
+        FinStr = dw.FindStrE(307, 106, 585, 304, "赛丽亚", "f7d65a-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            if jinqizhicai() == 1:
+                Imok = False
+                break
+            if is_60m:
+                # 职业1 = 召唤：2 = 风法
+                prints("等待60秒...")
+                time.sleep(10)
+                xamo.UIKBudj(1119, 43)
+                time.sleep(0.5)
+                xamo.PPWEbxbar(1)
+                time.sleep(1)
+                xamo.UIKBudj(1119, 108)
+                time.sleep(0.5)
+                xamo.PPWEbxbar(2)
+                time.sleep(1)
+                if jinqizhicai() == 1:
+                    Imok = False
+                    break
+                time.sleep(30)
+                # 只兑换点券
+                if zhuanqian == '真':
+                    chushoudianquan()
+                    清理游戏窗口()
+                    jieshouyoujian()
+                    清理游戏窗口()
+                    fyj_return = fayoujian(CRuser, CRpwd)
+                    if fyj_return == 1:
+                        # 正常返回
+                        pass
+                    elif fyj_return == 2:
+                        prints('网络连接中断,重上')
+                        end_exsit()
+                        time.sleep(2)
+                        Imok = False
+                        break
+                    elif fyj_return == 3:
+                        prints('发送邮件超时,重上')
+                        end_exsit()
+                        time.sleep(2)
+                        Imok = False
+                        break
+                    prints("礼盒处理完成，换号")
+                    jiluwanchengshijian_zhuanqian()
+                    end_exsit()
+                    time.sleep(2)
+                    Imok = False
+                    break
+                检查累积在线奖励()
+                # 设置
+                shezhi = get_ini('config/设置.ini', '设置', account.hao + '_' + account.daqu, "假")
+                if shezhi != '真':
+                    sz_ret = 设置()
+                    if sz_ret == 1:
+                        set_ini('config/设置.ini', '设置', account.hao + '_' + account.daqu, '真')
+                        prints('快捷键设置成功')
+                    else:
+                        prints('快捷键设置失败')
+            if goumaimianxiu == '真':
+                购买免修()
+                清理游戏窗口()
+            if duihuandianquan == "真":
+                csdq_ret = chushoudianquan()
+                清理游戏窗口()
+                if csdq_ret > 0:
+                    jieshouyoujian()
+                    清理游戏窗口()
+            # 学习技能
+            # 格兰迪才学习技能
+            if account.dituid == 1:
+                学习技能(zhiye)
+            # 检查门票
+            if account.dituid == 2:
+                ret_mp = 门票数量检查购买()
+                if ret_mp == 1:
+                    jieshouyoujian()
+                    清理游戏窗口()
+                    yd_ret = 移动(3)
+                    if yd_ret == 1:
+                        prints('移动位置超时')
+                        end_exsit()
+                        time.sleep(2)
+                        Imok = False
+                        break
+                    购买黄龙入选资格()
+                    清理游戏窗口()
+                    yd_ret = 移动(4)
+                    if yd_ret == 1:
+                        prints('移动位置超时')
+                        end_exsit()
+                        time.sleep(2)
+                        Imok = False
+                        break
+                else:
+                    # 移动到副本门口
+                    yd_ret = 移动(2)
+                    if yd_ret == 1:
+                        prints('移动位置超时')
+                        end_exsit()
+                        time.sleep(2)
+                        Imok = False
+            if account.dituid == 1:
+                # 移动到副本门口
+                yd_ret = 移动(1)
+                if yd_ret == 1:
+                    prints('移动位置超时')
+                    end_exsit()
+                    time.sleep(2)
+                    Imok = False
+            break
+        FinStr = dw.FindStrE(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            break
+        FinStr = dw.FindStrE(667, 27, 745, 51, "斯曼工业基地", "e6c89b-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            break
+    return Imok
+def 副本门口(pl_color,CRuser, CRpwd):
+    maoxiandengji = int(get_ini('config/cfg.ini', '游戏配置', '冒险等级', "4"))
+    Imok = True
+    menkou_time = datetime.datetime.now()
+    while True:
+        time.sleep(0.05)
+        menkou_time_now = datetime.datetime.now()
+        time_temp = menkou_time_now.minute - menkou_time.minute
+        if time_temp > 6:
+            prints("图外超时，重上")
+            end_exsit()
+            time.sleep(2)
+            Imok = False
+            break
+        FinStr = dw.FindStrE(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            break
+        FinStr = dw.FindStrE(379, 441, 437, 468, "关闭", "ddc593-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            qingkongyouxichuangkou()
+        if zhongduan_cha() == 1:
+            Imok = False
+            break
+        # 疲劳刷完了
+        color = dw.GetColor(339, 553)
+        if color == "0b0b0b" or color == "333333" or color == pl_color:
+            time.sleep(1)
+            FinStr = dw.FindStrE(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                break
+            prints('打印任务完成')
+            出售分解(1)
+            jieshouyoujian()
+            # 发送邮件
+            fyj_return = fayoujian(CRuser, CRpwd)
+            if fyj_return == 1:
+                # 正常返回
+                pass
+            elif fyj_return == 2:
+                prints('网络连接中断,重上')
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+            elif fyj_return == 3:
+                prints('发送邮件超时,重上')
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+            # 记录完成时间
+            jiluwanchengshijian()
+            # 刷新列表
+            tk.trickit()
+            # 换角色
+            prints("PL刷完，换角色")
+            juesechuli_ret = juesechuli(2)
+            if juesechuli_ret == 0:
+                prints("角色刷完，换号")
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+            if juesechuli_ret == 1:
+                # 正常返回
+                prints('角色处理完成')
+                pass
+            elif juesechuli_ret == 2:
+                prints("网络连接中断，重上")
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+            elif juesechuli_ret == 3:
+                prints("角色处理超时，重上")
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+            # 刷新列表
+            tk.trickit()
+            time.sleep(5)
+            qingkongyouxichuangkou()
+            # 换完角色跳出从头开始
+            Imok = False
+            break
+        FinStr = dw.FindStrE(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            break
+        FinStr = dw.FindStrE(667, 27, 745, 51, "斯曼工业基地", "e6c89b-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            prints('副本门口处理')
+            检查累积在线奖励()
+            FinStr = dw.FindPicE(272, 483, 501, 544, "虚弱.bmp", "000000", "0.9", 0)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                intx = int(pos[1])
+                inty = int(pos[2])
+                xamo.UIKBudj(intx + 3, inty + 3)
+                time.sleep(0.2)
+                xamo.PPWEbxbar(1)
+                time.sleep(1)
+                xamo.UIKBudj(426, 403)
+                time.sleep(0.2)
+                xamo.PPWEbxbar(1)
+                time.sleep(10)
+                清理游戏窗口()
+                menkou_time = datetime.datetime.now()
+                continue
+            出售分解(1)
+            向左()
+            time.sleep(0.5)
+            向右()
+            xuantu_time = datetime.datetime.now()
+            while True:
+                time.sleep(0.05)
+                xuantu_time_now = datetime.datetime.now()
+                time_temp = xuantu_time_now.minute - xuantu_time.minute
+                if time_temp > 2:
+                    prints("选图超时，重上")
+                    end_exsit()
+                    time.sleep(2)
+                    Imok = False
+                    break
+                if zhongduan_cha() == 1:
+                    Imok = False
+                    break
+                time.sleep(0.2)
+                FinStr = dw.FindStrE(509, 533, 583, 570, "练习模式", "ddc593-000000", 1)
+                pos = FinStr.split('|')
+                if int(pos[1]) > 0:
+                    time.sleep(1)
+                    弹起()
+                    FinStr = dw.FindPicE(412, 347, 555, 409, "副本界面_格兰迪.bmp|副本界面_格兰迪1.bmp", "000000", "0.9", 0)
+                    pos = FinStr.split('|')
+                    if int(pos[1]) > 0:
+                        for i in range(5):
+                            xamo.KJDfekiHDh(37, 1)
+                            time.sleep(0.2)
+                        for i in range(maoxiandengji):
+                            xamo.KJDfekiHDh(39, 1)
+                            time.sleep(0.2)
+                        xamo.KJDfekiHDh(32, 3)
+                        time.sleep(0.2)
+                        xamo.KJDfekiHDh(32, 3)
+                        time.sleep(3)
+                    else:
+                        xamo.KJDfekiHDh(38, 1)
+                        time.sleep(1)
+                FinStr = dw.FindStrE(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
+                pos = FinStr.split('|')
+                if int(pos[1]) > 0:
+                    break
+            break
+    return Imok
+def 格蓝迪图内(zhiye, jianqu,pl_color):
+    prints('捡取 = ' + str(jianqu))
+    xingwei = True
+    guanqia = 0
+    duobidihuo = False
+    Imok = True
+    time_is = True
+    while_time = datetime.datetime.now()
+    # 游戏内循环执行
+    prints('进入副本')
+    while True:
+        time.sleep(0.05)
+        if zhongduan_cha() == 1:
+            Imok = False
+            break
+        if guanqia == 0:
+            guanqia = 检查关卡()
+        if xingwei:
+            # 关卡7再次检查确认
+            # 如果还能在小地图找到人物，证明走错了关卡，就按关卡检查的返回
+            if guanqia == 7:
+                guanqia_temp = 检查关卡()
+                if guanqia_temp > 0:
+                    guanqia = guanqia_temp
+            if guanqia > 0:
+                duobidihuo = 关卡构造(zhiye, guanqia)
+                xingwei = not xingwei
+        FinStr = dw.FindPicE(0, 78, 799, 552, "可破坏.bmp", "000000", "0.9", 0)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            打石头()
+        if str(jianqu) == '真':
+            FinStr = dw.FindPicE(0, 78, 799, 552, "wp.bmp", "000000", "0.9", 0)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                弹起()
+                捡取()
+                FinStr = dw.FindPicE(0, 78, 799, 552, "可破坏.bmp", "000000", "0.9", 0)
+                pos = FinStr.split('|')
+                if int(pos[1]) > 0:
+                    打石头()
+        FinStr = dw.FindPicE(718, 25, 795, 105, "问号绿.bmp|问号黄.bmp", "000000", "0.9", 0)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            找门(guanqia, 0, jianqu)
+            time.sleep(1)
+            xingwei = True
+            guanqia = 0
+            continue
+        else:
+            # 走到错误的关卡,Boss前一关按照走错处理
+            FinStr = dw.FindPicE(718, 25, 795, 105, "错关.bmp|错关1.bmp", "000000", "0.9", 0)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                找门(guanqia, 1, jianqu)
+                time.sleep(1)
+                xingwei = True
+                if guanqia == 6:
+                    guanqia += 1
+                else:
+                    guanqia = 0
+                continue
+            else:
+                if zhiye == 2:
+                    if guanqia == 5:
+                        向左()
+                        time.sleep(0.5)
+                        弹起()
+                    打怪_风法(guanqia)
+        FinStr = dw.FindPicE(612, 132, 735, 164, "通关.bmp", "000000", "0.9", 0)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            duobidihuo = False
+            弹起()
+            boss关捡取()
+            弹起()
+            清理游戏窗口()
+            color = dw.GetColor(339, 553)
+            if color == "0b0b0b" or color == "333333" or color == pl_color:
+                print('返回城镇')
+                fanhuichengzhen()
+                time.sleep(3)
+                break
+            else:
+                fz_ret = 检查负重()
+                if fz_ret == 1:
+                    fanhuichengzhen()
+                    time.sleep(3)
+                    break
+                else:
+                    xamo.KJDfekiHDh(121, 1)
+                    time.sleep(1)
+                    xamo.KJDfekiHDh(121, 1)
+                    time.sleep(1)
+                    xamo.KJDfekiHDh(121, 1)
+                    time.sleep(5)
+                    break
+        FinStr = dw.FindStrE(667, 27, 745, 51, "斯曼工业基地", "e6c89b-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            弹起()
+            break
+        if zhiye == 1:
+            # 躲避
+            FinStr = dw.FindPicE(0, 78, 799, 552, "my.bmp", "000000", "0.9", 0)
+            pos = FinStr.split('|')
+            if int(pos[1]) > 0:
+                myX = int(pos[1])
+                myY = int(pos[2])
+                FinStr = dw.FindColorE(myX - 100, myY + 130, myX + 120, myY + 210, "ff0094-101010|ff00ff-101010", 1.0,
+                                         0)
+                pos = FinStr.split('|')
+                if int(pos[0]) > 0:
+                    rand = random.randint(1, 2)
+                    if rand == 1:
+                        向上()
+                        time.sleep(1)
+                        弹起()
+                    elif rand == 2:
+                        向下()
+                        time.sleep(1)
+                        弹起()
+            if duobidihuo:
+                躲避地火(jianqu)
+                技能(2)
+                color = dw.GetColor(52, 566)
+                if color == '000000':
+                    xamo.KJDfekiHDh(49, 1)
+        # 图内超时判断
+        FinStr = dw.FindStrE(333, 571, 473, 597, "只能城镇交易", "ffff00-000000", 1)
+        pos = FinStr.split('|')
+        if int(pos[1]) > 0:
+            time_is = True
+            while_time = datetime.datetime.now()
+        if time_is:
+            while_time_now = datetime.datetime.now()
+            time_temp = while_time_now.minute - while_time.minute
+            if time_temp > 6:
+                prints("图内超时，重上")
+                end_exsit()
+                time.sleep(2)
+                Imok = False
+                break
+    return Imok
 def while_():
-    pc_name = get_pc_name()
     CDK = get_ini('注册码.ini', '注册码', pc_name, "")
     if CDK == '':
         #没有注册码
+        print('没有注册码')
         异常文本('没有注册码')
         os._exit(1)
     else:
         ret = connect.login(CDK + '|' + public_code)
         if ret == '0':
             # 登录异常
+            print('登录异常')
             异常文本('登录异常')
             os._exit(1)
         elif ret == '102':
             # 注册码到期
+            print('注册码到期')
             异常文本('注册码到期')
             os._exit(1)
         elif ret == '1':
             #正常
             pass
-    # 读取配置文档
+    #读取配置文档
+    # x = 1366
+    # y = 768
+    x = int(get_ini('config/cfg.ini', '主配置', 'x',"0"))
+    y = int(get_ini('config/cfg.ini', '主配置', 'y',"0"))
     WeGame = get_ini('config/cfg.ini', '主配置', 'WeGame',"")
     number = get_ini('config/cfg.ini', '主配置', '账号路径',"")
     CRuser = get_ini('config/cfg.ini', '主配置', '若快账号',"")
     CRpwd = get_ini('config/cfg.ini', '主配置', '若快密码',"")
-    zhuanqian = get_ini('config/cfg.ini', '主配置', '只转钱',"假")
-    duihuandianquan = get_ini('config/cfg.ini', '主配置', '兑换点券',"假")
     jianqu = get_ini('config/cfg.ini', '主配置', '捡取',"假")
-    goumaimianxiu = get_ini('config/cfg.ini', '主配置', '购买免修',"假")
     ditu = get_ini('config/cfg.ini', '游戏配置', '地图',"假")
     pl = get_ini('config/cfg.ini', '游戏配置', '疲劳处理',"1")
+    zhuanqian = get_ini('config/cfg.ini', '主配置', '只转钱', "假")
     pl_color = 'ffffff'
     if pl == '1':
         pl_color = 'b30026'
-    if ditu == '假':
-        prints('未选择地图，停止')
-        input()
-    else:
-        account.dituid = int(ditu)
+        if ditu == '假':
+            prints('未选择地图，停止')
+            input()
+        else:
+            account.dituid = int(ditu)
     zy = get_ini('config/cfg.ini', '主配置', '职业', '101')
     if zy == '101':
         zhiye = 2
     else:
         zhiye = int(zy) + 1
     # 职业1 = 召唤：2 = 风法
-    x = dw.yTKUBaTqevaYZRU()
-    y = dw.vgtwHdrCtErzwk()
-
     prints('捡取 = ' + str(jianqu))
     # 进入正题
     tk.trickit()
     while True:
         is_60m = False
-        saotubiao()
-        shuaxinliebiao()
-        # 游戏内执行一次
-        ret_cess = dw.aaizn("DNF.exe")
-        prints(ret_cess)
-        if ret_cess == '':
-            # 结束全部进程
-            end_exsit(2)
+        color = dw.GetColor(1, 1)
+        if color == '3a6ea5':
+            saotubiao()
+            shuaxinliebiao()
+            # 游戏内执行一次
+            end_exsit()
             # 登录成功返回窗口句柄
-            login_ret = login(CRuser, CRpwd, number, WeGame, zhuanqian)
+            login_ret = login(CRuser, CRpwd, number, WeGame, zhuanqian,x,y)
             prints('登录成功')
             if login_ret == 0:
                 prints("连接频道失败，重上")
-                end_exsit(2)
+                end_exsit()
                 time.sleep(2)
                 continue
             elif login_ret == 3:
                 prints("登录超时，重上")
-                end_exsit(2)
+                end_exsit()
                 time.sleep(2)
                 continue
             elif login_ret == 4:
                 login_num = get_ini("config/记录.ini", "刷号记录", "当前账号", "")
                 set_ini("config/记录.ini", "密码错误", login_num, '密码错误')
                 prints("密码错误，重上")
-                end_exsit(2)
+                end_exsit()
                 time.sleep(2)
                 continue
             elif login_ret == 5:
                 login_num = get_ini("config/记录.ini", "刷号记录", "当前账号", "")
                 set_ini("config/记录.ini", "冻结", login_num, '冻结')
                 prints("账号冻结，重上")
-                end_exsit(2)
+                end_exsit()
                 time.sleep(2)
                 continue
             elif login_ret == 101:
                 continue
             time.sleep(3)
-            is_60m = True
-            hwnda = dw.bcGT("TkTopLevel", "疯子打印机")
-            if hwnda > 0:
-                dw.cqMQFoSnghY(hwnda, 12)
-        hwnd = dw.bcGT("地下城与勇士", "地下城与勇士")
-        if hwnd > 0:
-            time.sleep(5)
-            Imok = True
+            is_60m = not is_60m
+        Imok = 赛丽亚房间(is_60m,zhiye,CRuser, CRpwd,x,y)
+        if not Imok:
+            continue
+        if account.dituid == 1:
             while True:
-                发送记录()
-                time.sleep(0.5)
-                FinStr = dw.RsJCdWDvHA(0, 0, x, y, "结束游戏", "ddc593-050505|ffffb8-000000", 1)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    prints('检查封号中断')
-                    time.sleep(5)
-                    fenghao_return = fenghaojianhcha()
-                    if fenghao_return == 'F5':
-                        prints("账号停封5天，换号")
-                        end_exsit(2)
-                        time.sleep(2)
-                        Imok = False
-                        break
-                    elif fenghao_return == 'F7':
-                        prints("账号停封7天，换号")
-                        end_exsit(2)
-                        time.sleep(2)
-                        Imok = False
-                        break
-                    elif fenghao_return == 'F0':
-                        prints('只是中断没有封号，重上')
-                        end_exsit(2)
-                        time.sleep(2)
-                        Imok = False
-                        break
-                    elif fenghao_return == 'F100':
-                        prints("永久封号，换号")
-                        end_exsit(2)
-                        time.sleep(2)
-                        Imok = False
-                        break
-                    elif fenghao_return == 'F101':
-                        prints("此ID已在游戏中，重上")
-                        end_exsit(2)
-                        time.sleep(2)
-                        Imok = False
-                        break
-                    # 选择角色
-                    juesechuli_ret = juesechuli(1)
-                    if juesechuli_ret == 0:
-                        prints("角色刷完，换号")
-                        end_exsit(2)
-                        time.sleep(2)
-                        Imok = False
-                        break
-                    elif juesechuli_ret == 1:
-                        prints("角色更换完成")
-                    elif juesechuli_ret == 2:
-                        prints("网络连接中断，重上")
-                        end_exsit(2)
-                        time.sleep(2)
-                        Imok = False
-                        break
-                    elif juesechuli_ret == 3:
-                        prints("角色处理超时，重上")
-                        end_exsit(2)
-                        time.sleep(2)
-                        Imok = False
-                        break
-                    time.sleep(5)
-                    # 刷新列表
-                    shuaxinliebiao()
-                FinStr = dw.RsJCdWDvHA(379, 441, 437, 468, "关闭", "ddc593-000000", 1)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    if jinqizhicai() == 1:
-                        Imok = False
-                        break
-                    time.sleep(3)
-                    intx = int(pos[1])
-                    inty = int(pos[2])
-                    xamo.UIKBudj(intx + 5, inty + 3)
-                    time.sleep(1)
-                    xamo.PPWEbxbar(1)
-                    time.sleep(1)
-                    qingkongyouxichuangkou()
-                FinStr = dw.uEKuRfCL(365, 356, 418, 384, "签到.bmp", "000000", "0.9", 0)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    if jinqizhicai() == 1:
-                        Imok = False
-                        break
-                    time.sleep(1)
-                    qingkongyouxichuangkou()
-                FinStr = dw.uEKuRfCL(114, 59, 739, 306, "叉.bmp", "000000", "0.9", 0)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    if jinqizhicai() == 1:
-                        Imok = False
-                        break
-                    time.sleep(1)
-                    qingkongyouxichuangkou()
-                FinStr = dw.RsJCdWDvHA(307, 106, 585, 304, "赛丽亚", "f7d65a-000000", 1)
-                pos = FinStr.split('|')
-                if int(pos[1]) > 0:
-                    if jinqizhicai() == 1:
-                        Imok = False
-                        break
-                    if is_60m:
-                        # 职业1 = 召唤：2 = 风法
-                        #zhiye = 1
-                        # 关闭直播视频进程
-                        run('taskkill /F /IM CrossProxy.exe', shell=True)
-                        prints("等待60秒...")
-                        time.sleep(10)
-                        xamo.UIKBudj(1119, 43)
-                        time.sleep(0.5)
-                        xamo.PPWEbxbar(1)
-                        time.sleep(1)
-                        xamo.UIKBudj(1119, 108)
-                        time.sleep(0.5)
-                        xamo.PPWEbxbar(2)
-                        time.sleep(1)
-                        if jinqizhicai() == 1:
-                            Imok = False
-                            break
-                        time.sleep(30)
-                        # 只兑换点券
-                        if zhuanqian == '真':
-                            # jieshouyoujian()
-                            # 清理游戏窗口()
-                            # if 检查礼盒() == 0:
-                            #     清理游戏窗口()
-                            #     购买礼盒()
-                            #     清理游戏窗口()
-                            #     jieshouyoujian()
-                            #     清理游戏窗口()
-                            #     打开礼盒()
-                            # 清理游戏窗口()
-                            # xm_ret = 上架礼盒()
-                            # if xm_ret == 3:
-                            #     清理游戏窗口()
-                            #     上架礼盒()
-                            # 清理游戏窗口()
-                            # while True:
-                            #     FinStr = dw.uEKuRfCL(263, 462, 533, 551, "邮件.bmp|邮件1.bmp", "202020", "0.9", 0)
-                            #     pos = FinStr.split('|')
-                            #     if int(pos[1]) > 0:
-                            #         jieshouyoujian()
-                            #         清理游戏窗口()
-                            #         break
-                            #     else:
-                            #         prints("等待接收金币")
-                            #         time.sleep(2)
-                            chushoudianquan()
-                            清理游戏窗口()
-                            jieshouyoujian()
-                            清理游戏窗口()
-                            fyj_return = fayoujian(CRuser, CRpwd)
-                            if fyj_return == 1:
-                                # 正常返回
-                                pass
-                            elif fyj_return == 2:
-                                prints('网络连接中断,重上')
-                                end_exsit(2)
-                                time.sleep(2)
-                                Imok = False
-                                break
-                            elif fyj_return == 3:
-                                prints('发送邮件超时,重上')
-                                end_exsit(2)
-                                time.sleep(2)
-                                Imok = False
-                                break
-                            prints("礼盒处理完成，换号")
-                            jiluwanchengshijian_zhuanqian()
-                            end_exsit(2)
-                            time.sleep(2)
-                            Imok = False
-                            break
-                        检查累积在线奖励()
-                        #设置
-                        shezhi = get_ini('config/设置.ini', '设置', account.hao + '_' + account.daqu,"假")
-                        if shezhi != '真':
-                            sz_ret = 设置()
-                            if sz_ret == 1:
-                                set_ini('config/设置.ini','设置',account.hao + '_' + account.daqu,'真')
-                                prints('快捷键设置成功')
-                            else:
-                                prints('快捷键设置失败')
-                        #yongbingchuzhan()
-                    if goumaimianxiu == '真':
-                        购买免修()
-                        清理游戏窗口()
-                    if duihuandianquan == "真":
-                        csdq_ret = chushoudianquan()
-                        清理游戏窗口()
-                        if csdq_ret > 0:
-                            jieshouyoujian()
-                            清理游戏窗口()
-                    # 学习技能
-                    # 格兰迪才学习技能
-                    if account.dituid == 1:
-                        学习技能(zhiye)
-                    #检查门票
-                    if account.dituid == 2:
-                        ret_mp = 门票数量检查购买()
-                        if ret_mp == 1:
-                            jieshouyoujian()
-                            清理游戏窗口()
-                            yd_ret = 移动(3)
-                            if yd_ret == 1:
-                                prints('移动位置超时')
-                                end_exsit(2)
-                                time.sleep(2)
-                                Imok = False
-                                break
-                            购买黄龙入选资格()
-                            清理游戏窗口()
-                            yd_ret = 移动(4)
-                            if yd_ret == 1:
-                                prints('移动位置超时')
-                                end_exsit(2)
-                                time.sleep(2)
-                                Imok = False
-                                break
-                        else:
-                            # 移动到副本门口
-                            yd_ret = 移动(2)
-                            if yd_ret == 1:
-                                prints('移动位置超时')
-                                end_exsit(2)
-                                time.sleep(2)
-                                Imok = False
-                    if account.dituid == 1:
-                        # 移动到副本门口
-                        yd_ret = 移动(1)
-                        if yd_ret == 1:
-                            prints('移动位置超时')
-                            end_exsit(2)
-                            time.sleep(2)
-                            Imok = False
-                    break
-            if not Imok:
-                continue
-            if account.dituid == 2:
-                #黄龙
-                Imok = True
-                while True:
-                    while True:
-                        time.sleep(0.05)
-                        FinStr = dw.uEKuRfCL(136, 79, 588, 276, "黄龙图内.bmp", "000000", "0.9", 0)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            break
-                        FinStr = dw.uEKuRfCL(339, 574, 392, 596, "空格.bmp", "000000", "0.9", 0)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            xamo.KJDfekiHDh(32, 4)
-                            time.sleep(0.2)
-                        FinStr = dw.RsJCdWDvHA(379, 441, 437, 468, "关闭", "ddc593-000000", 1)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            qingkongyouxichuangkou()
-                        FinStr = dw.RsJCdWDvHA(663, 27, 754, 53, "素喃", "e6c89b-000000", 1)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            prints('副本门口处理')
-                            检查累积在线奖励()
-                            # 疲劳刷完了
-                            color = dw.LYqISzEsHWMD(339, 553)
-                            if color == "0b0b0b" or color == "333333" or color == pl_color:
-                                time.sleep(1)
-                                prints('打印任务完成')
-                                出售分解(1)
-                                jieshouyoujian()
-                                # 发送邮件
-                                fyj_return = fayoujian(CRuser, CRpwd)
-                                if fyj_return == 1:
-                                    # 正常返回
-                                    pass
-                                elif fyj_return == 2:
-                                    prints('网络连接中断,重上')
-                                    end_exsit(2)
-                                    time.sleep(2)
-                                    Imok = False
-                                    break
-                                elif fyj_return == 3:
-                                    prints('发送邮件超时,重上')
-                                    end_exsit(2)
-                                    time.sleep(2)
-                                    Imok = False
-                                    break
-                                # 记录完成时间
-                                jiluwanchengshijian()
-                                # 换角色
-                                prints("PL刷完，换角色")
-                                juesechuli_ret = juesechuli(2)
-                                if juesechuli_ret == 0:
-                                    prints("角色刷完，换号")
-                                    end_exsit(2)
-                                    time.sleep(2)
-                                    Imok = False
-                                    break
-                                if juesechuli_ret == 1:
-                                    # 正常返回
-                                    pass
-                                elif juesechuli_ret == 2:
-                                    prints("网络连接中断，重上")
-                                    end_exsit(2)
-                                    time.sleep(2)
-                                    Imok = False
-                                    break
-                                elif juesechuli_ret == 3:
-                                    prints("角色处理超时，重上")
-                                    end_exsit(2)
-                                    time.sleep(2)
-                                    Imok = False
-                                    break
-                                # 刷新列表
-                                tk.trickit()
-                                time.sleep(5)
-                                qingkongyouxichuangkou()
-                                # 换完角色跳出从头开始
-                                Imok = False
-                                break
-                            FinStr = dw.uEKuRfCL(272, 483, 501, 544, "虚弱.bmp", "000000", "0.9", 0)
-                            pos = FinStr.split('|')
-                            if int(pos[1]) > 0:
-                                intx = int(pos[1])
-                                inty = int(pos[2])
-                                xamo.UIKBudj(intx + 3, inty + 3)
-                                time.sleep(0.2)
-                                xamo.PPWEbxbar(1)
-                                time.sleep(1)
-                                xamo.UIKBudj(426, 403)
-                                time.sleep(0.2)
-                                xamo.PPWEbxbar(1)
-                                time.sleep(10)
-                                清理游戏窗口()
-                                continue
-                            出售分解(1)
-                            向左()
-                            time.sleep(0.5)
-                            向右()
-                            while True:
-                                time.sleep(0.2)
-                                FinStr = dw.RsJCdWDvHA(705, 535, 792, 572, "返回城镇", "ddc593-000000", 1)
-                                pos = FinStr.split('|')
-                                if int(pos[1]) > 0:
-                                    time.sleep(3)
-                                    弹起()
-                                    #选择黄龙
-                                    xamo.UIKBudj(573, 404)
-                                    time.sleep(0.2)
-                                    xamo.PPWEbxbar(5)
-                                    time.sleep(2)
-                                FinStr = dw.uEKuRfCL(136, 79, 588, 276, "黄龙图内.bmp", "000000", "0.9", 0)
-                                pos = FinStr.split('|')
-                                if int(pos[1]) > 0:
-                                    break
-                                FinStr = dw.uEKuRfCL(339, 574, 392, 596, "空格.bmp", "000000", "0.9", 0)
-                                pos = FinStr.split('|')
-                                if int(pos[1]) > 0:
-                                    xamo.KJDfekiHDh(32, 4)
-                                    time.sleep(0.2)
-                            break
-                    if not Imok:
-                        break
-                    while_time = datetime.datetime.now()
-                    while True:
-                        time.sleep(0.2)
-                        FinStr = dw.RsJCdWDvHA(430, 366, 588, 586, "重量", "e6c89b-000000", 1)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            xamo.KJDfekiHDh(73, 1)
-                        FinStr = dw.AIdCpitUAXsF(0, 78, 799, 552, "ff0094-101010|ff00ff-101010", 1.0, 0)
-                        pos = FinStr.split('|')
-                        if int(pos[0]) > 0:
-                            jgw_x = int(pos[0])
-                            jgw_y = int(pos[1])
-                            FinStr = dw.uEKuRfCL(0, 78, 799, 552, "my.bmp", "000000", "1", 0)
-                            pos = FinStr.split('|')
-                            if int(pos[1]) > 0:
-                                jmy_x = int(pos[1])
-                                jmy_y = int(pos[2])
-                                if jgw_x + 15 > jmy_x + 5:
-                                    xamo.KJDfekiHDh(39, 1)
-                                elif jgw_x + 15 < jmy_x + 5:
-                                    xamo.KJDfekiHDh(37, 1)
-                            x = 532
-                            y = 563
-                            JN = False
-                            for i in range(6):
-                                FinStr = dw.uEKuRfCL(239, 281, 341, 384, "你胜利了.bmp", "000000", "0.9", 0)
-                                pos = FinStr.split('|')
-                                if int(pos[1]) > 0:
-                                    弹起()
-                                    while_time = datetime.datetime.now()
-                                    xamo.KJDfekiHDh(86, 1)
-                                    time.sleep(1)
-                                    xamo.KJDfekiHDh(88, 6)
-                                FinStr = dw.AIdCpitUAXsF(x, y, x + 22,y + 20, "ffffff-000000", 1.0, 0)
-                                pos = FinStr.split('|')
-                                if int(pos[0]) > 0:
-                                    pass
-                                else:
-                                    if i == 0:
-                                        xamo.KJDfekiHDh(65, 1)
-                                        JN = True
-                                    elif i == 1:
-                                        xamo.KJDfekiHDh(83, 1)
-                                        JN = True
-                                    elif i == 2:
-                                        xamo.KJDfekiHDh(68, 1)
-                                        JN = True
-                                    elif i == 3:
-                                        xamo.KJDfekiHDh(70, 1)
-                                        JN = True
-                                    elif i == 4:
-                                        xamo.KJDfekiHDh(71, 1)
-                                        JN = True
-                                    elif i == 5:
-                                        xamo.KJDfekiHDh(72, 1)
-                                        JN = True
-                                x += 30
-                            if not JN:
-                                xamo.KJDfekiHDh(88, 1)
-                        FinStr = dw.uEKuRfCL(239, 281, 341, 384, "你胜利了.bmp", "000000", "0.9", 0)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            弹起()
-                            while_time = datetime.datetime.now()
-                            xamo.KJDfekiHDh(86, 1)
-                            time.sleep(1)
-                            xamo.KJDfekiHDh(88, 6)
-                        FinStr = dw.RsJCdWDvHA(310,254, 427, 299, "指令", "ffffff-000000", 1)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            xamo.UIKBudj(399, 331)
-                            time.sleep(0.2)
-                            xamo.PPWEbxbar(1)
-                        FinStr = dw.uEKuRfCL(0, 78, 799, 552, "捡1.bmp|捡2.bmp|捡3.bmp|捡4.bmp", "050505", "0.95", 0)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            弹起()
-                            xamo.KJDfekiHDh(86, 1)
-                            time.sleep(1)
-                            xamo.KJDfekiHDh(88, 6)
-                        FinStr = dw.RsJCdWDvHA(702, 97, 751, 138, "通关", "e6c89b-000000", 1)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            弹起()
-                            xamo.KJDfekiHDh(86, 1)
-                            time.sleep(1)
-                            xamo.KJDfekiHDh(88, 6)
-                            FinStr = dw.RsJCdWDvHA(310, 254, 427, 299, "指令", "ffffff-000000", 1)
-                            pos = FinStr.split('|')
-                            if int(pos[1]) > 0:
-                                xamo.UIKBudj(399, 331)
-                                time.sleep(0.2)
-                                xamo.PPWEbxbar(1)
-                            color = dw.LYqISzEsHWMD(339, 553)
-                            if color == "0b0b0b" or color == "333333" or color == pl_color:
-                                print('返回城镇')
-                                fanhuichengzhen()
-                                time.sleep(3)
-                                break
-                            else:
-                                FinStr = dw.RsJCdWDvHA(680, 74, 723, 99, "F10", "808080-000000", 1)
-                                pos = FinStr.split('|')
-                                if int(pos[1]) > 0:
-                                    prints("没有门票，重上")
-                                    end_exsit(2)
-                                    time.sleep(2)
-                                    Imok = False
-                                    break
-                                fz_ret = 检查负重()
-                                if fz_ret == 1:
-                                    fanhuichengzhen()
-                                    time.sleep(3)
-                                    break
-                                else:
-                                    xamo.KJDfekiHDh(121, 4)
-                                    time.sleep(5)
-                                    break
-                        while_time_now = datetime.datetime.now()
-                        time_temp = while_time_now.minute - while_time.minute
-                        if time_temp > 5:
-                            prints("图内超时，重上")
-                            end_exsit(2)
-                            time.sleep(2)
-                            Imok = False
-                            break
-                    if not Imok:
-                        break
-            elif account.dituid == 1:
                 # 格兰迪
-                maoxiandengji = int(get_ini('config/cfg.ini', '游戏配置', '冒险等级',"4"))
-                Imok = True
-                while True:
-                    menkou_time = datetime.datetime.now()
-                    while True:
-                        time.sleep(0.05)
-                        menkou_time_now = datetime.datetime.now()
-                        time_temp = menkou_time_now.minute - menkou_time.minute
-                        if time_temp > 6:
-                            prints("图外超时，重上")
-                            end_exsit(2)
-                            time.sleep(2)
-                            Imok = False
-                            break
-                        FinStr = dw.RsJCdWDvHA(379, 441, 437, 468, "关闭", "ddc593-000000", 1)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            qingkongyouxichuangkou()
-                        if zhongduan_cha() == 1:
-                            Imok = False
-                            break
-                        # 疲劳刷完了
-                        color = dw.LYqISzEsHWMD(339, 553)
-                        if color == "0b0b0b" or color == "333333" or color == pl_color:
-                            time.sleep(1)
-                            FinStr = dw.RsJCdWDvHA(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
-                            pos = FinStr.split('|')
-                            if int(pos[1]) > 0:
-                                break
-                            prints('打印任务完成')
-                            出售分解(1)
-                            jieshouyoujian()
-                            # 发送邮件
-                            fyj_return = fayoujian(CRuser, CRpwd)
-                            if fyj_return == 1:
-                                # 正常返回
-                                pass
-                            elif fyj_return == 2:
-                                prints('网络连接中断,重上')
-                                end_exsit(2)
-                                time.sleep(2)
-                                Imok = False
-                                break
-                            elif fyj_return == 3:
-                                prints('发送邮件超时,重上')
-                                end_exsit(2)
-                                time.sleep(2)
-                                Imok = False
-                                break
-                            # 记录完成时间
-                            jiluwanchengshijian()
-                            # 刷新列表
-                            tk.trickit()
-                            # 换角色
-                            prints("PL刷完，换角色")
-                            juesechuli_ret = juesechuli(2)
-                            if juesechuli_ret == 0:
-                                prints("角色刷完，换号")
-                                end_exsit(2)
-                                time.sleep(2)
-                                Imok = False
-                                break
-                            if juesechuli_ret == 1:
-                                # 正常返回
-                                pass
-                            elif juesechuli_ret == 2:
-                                prints("网络连接中断，重上")
-                                end_exsit(2)
-                                time.sleep(2)
-                                Imok = False
-                                break
-                            elif juesechuli_ret == 3:
-                                prints("角色处理超时，重上")
-                                end_exsit(2)
-                                time.sleep(2)
-                                Imok = False
-                                break
-                            # 刷新列表
-                            tk.trickit()
-                            time.sleep(5)
-                            qingkongyouxichuangkou()
-                            # 换完角色跳出从头开始
-                            Imok = False
-                            break
-                        FinStr = dw.RsJCdWDvHA(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            break
-                        FinStr = dw.RsJCdWDvHA(667, 27, 745, 51, "斯曼工业基地", "e6c89b-000000", 1)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            prints('副本门口处理')
-                            检查累积在线奖励()
-                            FinStr = dw.uEKuRfCL(272, 483, 501, 544, "虚弱.bmp", "000000", "0.9", 0)
-                            pos = FinStr.split('|')
-                            if int(pos[1]) > 0:
-                                intx = int(pos[1])
-                                inty = int(pos[2])
-                                xamo.UIKBudj(intx + 3, inty + 3)
-                                time.sleep(0.2)
-                                xamo.PPWEbxbar(1)
-                                time.sleep(1)
-                                xamo.UIKBudj(426, 403)
-                                time.sleep(0.2)
-                                xamo.PPWEbxbar(1)
-                                time.sleep(10)
-                                清理游戏窗口()
-                                menkou_time = datetime.datetime.now()
-                                continue
-                            出售分解(1)
-                            向左()
-                            time.sleep(0.5)
-                            向右()
-                            xuantu_time = datetime.datetime.now()
-                            while True:
-                                time.sleep(0.05)
-                                xuantu_time_now = datetime.datetime.now()
-                                time_temp = xuantu_time_now.minute - xuantu_time.minute
-                                if time_temp > 2:
-                                    prints("选图超时，重上")
-                                    end_exsit(2)
-                                    time.sleep(2)
-                                    Imok = False
-                                    break
-                                if zhongduan_cha() == 1:
-                                    Imok = False
-                                    break
-                                time.sleep(0.2)
-                                FinStr = dw.RsJCdWDvHA(509, 533, 583, 570, "练习模式", "ddc593-000000", 1)
-                                pos = FinStr.split('|')
-                                if int(pos[1]) > 0:
-                                    time.sleep(1)
-                                    弹起()
-                                    FinStr = dw.uEKuRfCL(412, 347, 555, 409, "副本界面_格兰迪.bmp|副本界面_格兰迪1.bmp", "000000", "0.9", 0)
-                                    pos = FinStr.split('|')
-                                    if int(pos[1]) > 0:
-                                        for i in range(5):
-                                            xamo.KJDfekiHDh(37, 1)
-                                            time.sleep(0.2)
-                                        for i in range(maoxiandengji):
-                                            xamo.KJDfekiHDh(39, 1)
-                                            time.sleep(0.2)
-                                        xamo.KJDfekiHDh(32, 3)
-                                        time.sleep(0.2)
-                                        xamo.KJDfekiHDh(32, 3)
-                                        time.sleep(3)
-                                    else:
-                                        xamo.KJDfekiHDh(38, 1)
-                                        time.sleep(1)
-                                FinStr = dw.RsJCdWDvHA(593, 0, 691, 28, "格兰迪发电站", "ccc1a7-000000", 1)
-                                pos = FinStr.split('|')
-                                if int(pos[1]) > 0:
-                                    break
-                            break
-                    if not Imok:
-                        break
-                    prints('捡取 = ' + str(jianqu))
-                    xingwei = True
-                    guanqia = 0
-                    duobidihuo = False
-                    Imok = True
-                    time_is = True
-                    while_time = datetime.datetime.now()
-                    # 游戏内循环执行
-                    prints('进入副本')
-                    while True:
-                        time.sleep(0.05)
-                        if zhongduan_cha() == 1:
-                            Imok = False
-                            break
-                        if guanqia == 0:
-                            guanqia = 检查关卡()
-                        if xingwei:
-                            # 关卡7再次检查确认
-                            # 如果还能在小地图找到人物，证明走错了关卡，就按关卡检查的返回
-                            if guanqia == 7:
-                                guanqia_temp = 检查关卡()
-                                if guanqia_temp > 0:
-                                    guanqia = guanqia_temp
-                            if guanqia > 0:
-                                duobidihuo = 关卡构造(zhiye,guanqia)
-                                xingwei = False
-                        FinStr = dw.uEKuRfCL(0, 78, 799, 552, "可破坏.bmp", "000000", "0.9", 0)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            打石头()
-                        if str(jianqu) == '真':
-                            FinStr = dw.uEKuRfCL(0, 78, 799, 552, "wp.bmp", "000000", "0.9", 0)
-                            pos = FinStr.split('|')
-                            if int(pos[1]) > 0:
-                                弹起()
-                                捡取()
-                                FinStr = dw.uEKuRfCL(0, 78, 799, 552, "可破坏.bmp", "000000", "0.9", 0)
-                                pos = FinStr.split('|')
-                                if int(pos[1]) > 0:
-                                    打石头()
-                        FinStr = dw.uEKuRfCL(718, 25, 795, 105, "问号绿.bmp|问号黄.bmp", "000000", "0.9", 0)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            找门(guanqia, 0, jianqu)
-                            time.sleep(1)
-                            xingwei = True
-                            guanqia = 0
-                            continue
-                        else:
-                            # 走到错误的关卡,Boss前一关按照走错处理
-                            FinStr = dw.uEKuRfCL(718, 25, 795, 105, "错关.bmp|错关1.bmp", "000000", "0.9", 0)
-                            pos = FinStr.split('|')
-                            if int(pos[1]) > 0:
-                                找门(guanqia, 1, jianqu)
-                                time.sleep(1)
-                                xingwei = True
-                                if guanqia == 6:
-                                    guanqia += 1
-                                else:
-                                    guanqia = 0
-                                continue
-                            else:
-                                if zhiye == 2:
-                                    if guanqia == 5:
-                                        向左()
-                                        time.sleep(0.5)
-                                        弹起()
-                                    打怪_风法(guanqia)
-                        FinStr = dw.uEKuRfCL(612, 132, 735, 164, "通关.bmp", "000000", "0.9", 0)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            duobidihuo = False
-                            弹起()
-                            boss关捡取()
-                            弹起()
-                            清理游戏窗口()
-                            color = dw.LYqISzEsHWMD(339, 553)
-                            if color == "0b0b0b" or color == "333333" or color == pl_color:
-                                print('返回城镇')
-                                fanhuichengzhen()
-                                time.sleep(3)
-                                break
-                            else:
-                                fz_ret = 检查负重()
-                                if fz_ret == 1:
-                                    fanhuichengzhen()
-                                    time.sleep(3)
-                                    break
-                                else:
-                                    xamo.KJDfekiHDh(121, 1)
-                                    time.sleep(1)
-                                    xamo.KJDfekiHDh(121, 1)
-                                    time.sleep(1)
-                                    xamo.KJDfekiHDh(121, 1)
-                                    time.sleep(5)
-                                    break
-                        FinStr = dw.RsJCdWDvHA(667, 27, 745, 51, "斯曼工业基地", "e6c89b-000000", 1)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            弹起()
-                            break
-                        if zhiye == 1:
-                            # 躲避
-                            FinStr = dw.uEKuRfCL(0, 78, 799, 552, "my.bmp", "000000", "0.9", 0)
-                            pos = FinStr.split('|')
-                            if int(pos[1]) > 0:
-                                myX = int(pos[1])
-                                myY = int(pos[2])
-                                FinStr = dw.AIdCpitUAXsF(myX - 100, myY + 130, myX + 120, myY + 210,"ff0094-101010|ff00ff-101010", 1.0, 0)
-                                pos = FinStr.split('|')
-                                if int(pos[0]) > 0:
-                                    rand = random.randint(1, 2)
-                                    if rand == 1:
-                                        向上()
-                                        time.sleep(1)
-                                        弹起()
-                                    elif rand == 2:
-                                        向下()
-                                        time.sleep(1)
-                                        弹起()
-                            if duobidihuo:
-                                躲避地火(jianqu)
-                                技能(2)
-                                color = dw.LYqISzEsHWMD(52, 566)
-                                if color == '000000':
-                                    xamo.KJDfekiHDh(49, 1)
-                        # 图内超时判断
-                        FinStr = dw.RsJCdWDvHA(333, 571, 473, 597, "只能城镇交易", "ffff00-000000", 1)
-                        pos = FinStr.split('|')
-                        if int(pos[1]) > 0:
-                            time_is = True
-                            while_time = datetime.datetime.now()
-                        if time_is:
-                            while_time_now = datetime.datetime.now()
-                            time_temp = while_time_now.minute - while_time.minute
-                            if time_temp > 6:
-                                prints("图内超时，重上")
-                                end_exsit(2)
-                                time.sleep(2)
-                                Imok = False
-                                break
-                    if not Imok:
-                        break
-            time.sleep(1)
+                Imok = 副本门口(pl_color,CRuser, CRpwd)
+                if not Imok:
+                    break
+                Imok = 格蓝迪图内(zhiye,jianqu,pl_color)
+                if not Imok:
+                    break
+        time.sleep(1)
 if __name__ == '__main__':
     multiprocessing.freeze_support()
-    addfile2autorun(os.getcwd() + '\start.bat')
     t = threading.Thread(target=while_, name='MainThread')
     #t.setDaemon(True)
     t.start()
@@ -5181,7 +4854,7 @@ if __name__ == '__main__':
         file.close()
     with open('ver', 'r') as f:
         ver = f.read()
-    pc_n = get_pc_name()
+    pc_n = pc_name
     CD = get_ini('注册码.ini', '注册码', pc_n, "")
     ip = get_ini('config/主机设置.ini', '设置', 'ip', "192.168.0.66")
     j = 40
@@ -5195,17 +4868,20 @@ if __name__ == '__main__':
             if ret_td != '':
                 if ret_td == '101':
                     #注册码在别的机器登录
-                    dw.AQkYZXxNfqMz('清理.bat', 0)
+                    print('注册码在别的机器登录')
+                    end_exsit()
                     异常文本('注册码在别的机器登录')
                     y = 0
                     os._exit(1)
                 elif ret_td == '0':
                     #查询异常
+                    print('查询异常')
                     异常文本('查询异常' + str(y))
                     y += 1
                 elif ret_td == '102':
                     #到期
-                    dw.AQkYZXxNfqMz('清理.bat', 0)
+                    end_exsit()
+                    print('注册码到期')
                     异常文本('注册码到期')
                     y = 0
                     os._exit(1)
@@ -5216,24 +4892,25 @@ if __name__ == '__main__':
                 y += 1
             if y > 10:
                 #跳动异常退出
-                dw.AQkYZXxNfqMz('清理.bat', 0)
+                end_exsit()
+                print('网络异常')
                 异常文本('网络异常')
                 os._exit(1)
             #检查更新
-            try:
-                strs = str(connect.getver(''))
-                if strs != '0' and strs != '':
-                    if isinstance(strs, str):
-                        if ver != strs:
-                            with open('ver', 'w') as f:
-                                f.write(strs)
-                            弹起()
-                            prints('发现新版本即将更新')
-                            time.sleep(3)
-                            dw.AQkYZXxNfqMz('update.exe', 0)
-                            os._exit(1)
-            except:
-                print('检查版本失败')
+            # try:
+            #     strs = str(connect.getver(''))
+            #     if strs != '0' and strs != '':
+            #         if isinstance(strs, str):
+            #             if ver != strs:
+            #                 with open('ver', 'w') as f:
+            #                     f.write(strs)
+            #                 弹起()
+            #                 prints('发现新版本即将更新')
+            #                 time.sleep(3)
+            #                 dw.RunApp('update.exe', 0)
+            #                 os._exit(1)
+            # except:
+            #     print('检查版本失败')
             j = 0
         if public.k == 2:
             弹起()
@@ -5250,7 +4927,7 @@ if __name__ == '__main__':
                 public.ShiLian = False
             except:
                 print("主机不在线")
-                for i in range(random.randint(1, 60)):
+                for i in range(random.randint(1, 30)):
                     if public.k == 2:
                         弹起()
                         os._exit(1)

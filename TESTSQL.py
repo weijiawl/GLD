@@ -69,6 +69,11 @@ class MYSQL:
         try:
             ret_code = self.查询机器码(form, tk)
             print('查询机器码返回 = ' + str(ret_code))
+            if ret_code == 0:
+                self.cursor.close()
+                self.connect.close()
+                self.login_sql()
+                ret_code = self.查询机器码(form, tk)
             if ret_code == code:
                 sql = "SELECT date_z FROM " + form + " WHERE tk = '%s' "
                 data = (tk)
@@ -124,6 +129,11 @@ class MYSQL:
         try:
             self.chekdate()
             ret_code = self.查询机器码(form, tk)
+            if ret_code == 0:
+                self.cursor.close()
+                self.connect.close()
+                self.login_sql()
+                ret_code = self.查询机器码(form, tk)
             if ret_code == None:
                 date_K = datetime.datetime.now()
                 date_temp = datetime.timedelta(days=30)
