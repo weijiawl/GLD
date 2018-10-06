@@ -9,7 +9,6 @@ import os
 import win_tk
 import psutil
 import datetime
-import time
 def set_ini(name, section, option, strs):
     try:
         cf = configparser.ConfigParser()
@@ -71,7 +70,6 @@ def trickit():
             if num != "":
                 num_arr = num.split('=')
                 for i in range(int(num_arr[3])):
-                    dangqianjuese = ""
                     zhuangtai = ""
                     shijian = ""
                     temp_ret = get_ini('config/记录.ini', '封号', num_arr[0], "")
@@ -96,7 +94,8 @@ def trickit():
                                         temp_ret = get_ini('config/记录.ini', '刷号记录', '当前角色',"")
                                         if temp_ret == str(i + 1):
                                             zhuangtai = '打印中'
-                    id = win_tk.tree.insert('', inde, values=[str(inde + 1), num_arr[0], num_arr[2], str(i + 1), dangqianjuese,zhuangtai, shijian])
+                    jb = get_ini('config/账号数据.ini',num_arr[0] + '_' + num_arr[2] + '_' + str(i + 1), '金币', "0")
+                    id = win_tk.tree.insert('', inde, values=[str(inde + 1), num_arr[0], num_arr[2], str(i + 1), jb + 'W',zhuangtai, shijian])
                     if zhuangtai == '封号':
                         win_tk.tree.item(id, tags=('hongse'))
                     elif zhuangtai == '制裁':
@@ -144,10 +143,10 @@ def text(temp):
     win_tk.lb.see(END)
 def win():
     root = tkinter.Tk()
-    root.geometry('800x310+0+601')
+    root.geometry('800x310')
     root.resizable(False, False)
-    #'疯子打印机0819.1.'
-    root.title('疯子打印机V0823.A')
+    pc_name = get_ini('config/cfg.ini', '软件配置', 'pc_name', "")
+    root.title(pc_name + '    疯子打印机V1003.a')
     frame = Frame(root)
     frame.place(x=0, y=10, width=610, height=300)
     # 滚动条
@@ -161,25 +160,26 @@ def win():
     framt = Frame(root)
     scrollBat = tkinter.Scrollbar(framt)
     scrollBat.pack(side=tkinter.RIGHT, fill=tkinter.Y)
-    framt.place(x=610, y=70, width=190, height=230)
-    win_tk.lb = Text(framt, height=16, width=24, yscrollcommand=scrollBat.set)
+    framt.place(x=610, y=50, width=190, height=260)
+    win_tk.lb = Text(framt,width=19, height=16 , yscrollcommand=scrollBat.set)
     win_tk.lb.pack(fill=tkinter.X, side=tkinter.BOTTOM)
-    win_tk.lb2 = Label(framt, foreground='red', text='封号:   制裁:   完成角色: ', )
-    win_tk.lb2.pack()
+    win_tk.lb4 = Label(framt, foreground='red', fg = "red",bg = "dark green",font = "Helvetica 16 bold italic",text=pc_name, ).pack()
+    win_tk.lb2 = Label(framt, foreground='red', text='封号:   制裁:   完成角色: ', ).pack()
+
     # 设置每列宽度和对齐方式
     win_tk.tree.column('c1', width=60, anchor='center')
     win_tk.tree.column('c2', width=100, anchor='center')
     win_tk.tree.column('c3', width=80, anchor='center')
     win_tk.tree.column('c4', width=60, anchor='center')
-    win_tk.tree.column('c5', width=60, anchor='center')
-    win_tk.tree.column('c6', width=90, anchor='center')
-    win_tk.tree.column('c7', width=150, anchor='center')
+    win_tk.tree.column('c5', width=90, anchor='center')
+    win_tk.tree.column('c6', width=80, anchor='center')
+    win_tk.tree.column('c7', width=130, anchor='center')
     # 设置每列表头标题文本
     win_tk.tree.heading('c1', text='编号')
     win_tk.tree.heading('c2', text='账号')
     win_tk.tree.heading('c3', text='大区')
     win_tk.tree.heading('c4', text='角色')
-    win_tk.tree.heading('c5', text=' ')
+    win_tk.tree.heading('c5', text='金币')
     win_tk.tree.heading('c6', text='状态')
     win_tk.tree.heading('c7', text='完成时间')
     win_tk.tree.pack(side=tkinter.LEFT, fill=tkinter.Y)
@@ -189,6 +189,7 @@ def win():
     #Button(frams, text='打印机启动', command=t_start).pack(side=TOP, anchor=S, fill=NONE, expand=NO)
     Button(frams, text='打印机结束', command=end_exit).pack(side=TOP, anchor=S, fill=NONE, expand=NO)
     # Button(frams, text='Bottom').pack(side=TOP, anchor=S, fill=NONE , expand=NO)
-
     root.protocol("WM_DELETE_WINDOW",end_exit)
     root.mainloop()
+if __name__ == '__main__':
+    win()

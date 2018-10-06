@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/MyCode.iml" filepath="$PROJECT_DIR$/.idea/MyCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../PyLeve/.idea/PyLeve.iml" filepath="$PROJECT_DIR$/../PyLeve/.idea/PyLeve.iml" />
     </modules>
   </component>
 </project>
