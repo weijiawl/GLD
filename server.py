@@ -42,6 +42,6 @@ class MyServer(socketserver.BaseRequestHandler):
         conn.close()
 if __name__ == '__main__':
     print('服务器启动')
-    QL = TESTSQL.MYSQL(2206,'root','Zddaa1122','mydb')
-    sever = socketserver.ThreadingTCPServer(("172.31.38.183", 8680),MyServer)
+    QL = TESTSQL.MYSQL(3306,'root','Zddaa0011','mydb')
+    sever = socketserver.ThreadingTCPServer(("172.24.76.54", 8680),MyServer)
     sever.serve_forever()

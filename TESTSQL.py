@@ -8,11 +8,11 @@ class MYSQL:
         self.db_ = db
         self.login_sql()
     def __del__(self):
-        self.cursor.close()
+        #self.cursor.close()
         self.connect.close()
     def login_sql(self):
         self.connect = pymysql.Connect(
-            host = 'localhost',
+            host = '127.0.0.1',
             port= self.port_,
             user= self.user_,
             passwd= self.passwd_,
@@ -161,8 +161,8 @@ class MYSQL:
                         print('ret = 1')
                         return 1
                 else:
-                    print('ret = 0')
+                    print('ret_date ret = 0')
                     return 0
         except:
-            print('ret = 0')
+            print('except ret = 0')
             return 0

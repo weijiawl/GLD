@@ -38,21 +38,22 @@ def gengxintongji():
         ret = config.options('封号')
         F_hao = len(ret)
     except:
-        F_hao = 0
+        pass
     try:
         config = configparser.ConfigParser()
         config.read("config/记录.ini")
         ret = config.options('制裁')
         Z_hao = len(ret)
     except:
-        Z_hao = 0
+        pass
     try:
         config = configparser.ConfigParser()
         config.read("config/记录.ini")
         ret = config.options('完成时间')
         W_hao = len(ret)
     except:
-        W_hao = 0
+        pass
+
     win_tk.lb2["text"] = '封号:' + str(F_hao) + '制裁:' + str(Z_hao) + '完成角色:' + str(W_hao)
 def trickit():
     print('刷新列表')
@@ -95,7 +96,14 @@ def trickit():
                                         if temp_ret == str(i + 1):
                                             zhuangtai = '打印中'
                     jb = get_ini('config/账号数据.ini',num_arr[0] + '_' + num_arr[2] + '_' + str(i + 1), '金币', "0")
-                    id = win_tk.tree.insert('', inde, values=[str(inde + 1), num_arr[0], num_arr[2], str(i + 1), jb + 'W',zhuangtai, shijian])
+                    zy = get_ini('config/账号数据.ini',num_arr[0] + '_' + num_arr[2] + '_' + str(i + 1), '职业', "未知")
+                    if zy == '1':
+                        zy = '召唤'
+                    elif zy == '2':
+                        zy ='风法'
+                    dj = get_ini('config/账号数据.ini', num_arr[0] + '_' + num_arr[2] + '_' + str(i + 1), '等级', "0")
+                    hz = get_ini('config/账号数据.ini', num_arr[0], '黑钻', "未知")
+                    id = win_tk.tree.insert('', inde, values=[str(inde + 1), num_arr[0], num_arr[2], str(i + 1), zy, dj, hz, jb + 'W',zhuangtai, shijian])
                     if zhuangtai == '封号':
                         win_tk.tree.item(id, tags=('hongse'))
                     elif zhuangtai == '制裁':
@@ -138,7 +146,7 @@ def end_jincheng():
 def end_exit():
     public.k = 2
 def text(temp):
-    d2 = datetime.datetime.now().strftime('%d %H:%M:%S')
+    d2 = datetime.datetime.now().strftime('%H:%M:%S')
     win_tk.lb.insert(END, d2 + ' ' + temp + '\n')
     win_tk.lb.see(END)
 def win():
@@ -146,14 +154,14 @@ def win():
     root.geometry('800x310')
     root.resizable(False, False)
     pc_name = get_ini('config/cfg.ini', '软件配置', 'pc_name', "")
-    root.title(pc_name + '    疯子打印机V1003.a')
+    root.title(pc_name + '    疯子打印机V1116.A')
     frame = Frame(root)
     frame.place(x=0, y=10, width=610, height=300)
     # 滚动条
     scrollBar = tkinter.Scrollbar(frame)
     scrollBar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
     # Treeview组件，6列，显示表头，带垂直滚动条
-    win_tk.tree = Treeview(frame, columns=('c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'), show="headings",
+    win_tk.tree = Treeview(frame, columns=('c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10'), show="headings",
                     yscrollcommand=scrollBar.set)
     frams = Frame(root)
     frams.place(x=610, y=10, width=80, height=300)
@@ -167,21 +175,28 @@ def win():
     win_tk.lb2 = Label(framt, foreground='red', text='封号:   制裁:   完成角色: ', ).pack()
 
     # 设置每列宽度和对齐方式
-    win_tk.tree.column('c1', width=60, anchor='center')
-    win_tk.tree.column('c2', width=100, anchor='center')
-    win_tk.tree.column('c3', width=80, anchor='center')
-    win_tk.tree.column('c4', width=60, anchor='center')
-    win_tk.tree.column('c5', width=90, anchor='center')
-    win_tk.tree.column('c6', width=80, anchor='center')
-    win_tk.tree.column('c7', width=130, anchor='center')
+    win_tk.tree.column('c1', width=50, anchor='center')
+    win_tk.tree.column('c2', width=80, anchor='center')
+    win_tk.tree.column('c3', width=70, anchor='center')
+    win_tk.tree.column('c4', width=40, anchor='center')
+    win_tk.tree.column('c5', width=40, anchor='center')
+    win_tk.tree.column('c6', width=40, anchor='center')
+    win_tk.tree.column('c7', width=40, anchor='center')
+    win_tk.tree.column('c8', width=60, anchor='center')
+    win_tk.tree.column('c9', width=40, anchor='center')
+    win_tk.tree.column('c10', width=130, anchor='center')
     # 设置每列表头标题文本
+
     win_tk.tree.heading('c1', text='编号')
     win_tk.tree.heading('c2', text='账号')
     win_tk.tree.heading('c3', text='大区')
     win_tk.tree.heading('c4', text='角色')
-    win_tk.tree.heading('c5', text='金币')
-    win_tk.tree.heading('c6', text='状态')
-    win_tk.tree.heading('c7', text='完成时间')
+    win_tk.tree.heading('c5', text='职业')
+    win_tk.tree.heading('c6', text='等级')
+    win_tk.tree.heading('c7', text='黑钻')
+    win_tk.tree.heading('c8', text='金币')
+    win_tk.tree.heading('c9', text='状态')
+    win_tk.tree.heading('c10', text='完成时间')
     win_tk.tree.pack(side=tkinter.LEFT, fill=tkinter.Y)
     # Treeview组件与垂直滚动条结合
     scrollBar.config(command=win_tk.tree.yview)

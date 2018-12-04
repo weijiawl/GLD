@@ -6,20 +6,22 @@ class HZ:
     def __init__(self,x,y,nbr,VID=0x0,PID=0x0):
         self.objdll = ctypes.windll.LoadLibrary('dk.dll')
         if VID > 0x0:
-            temp = self.objdll.M_Open_VidPid(VID,PID + nbr)
+            self.hdl = self.objdll.M_Open_VidPid(VID,PID + nbr)
             b = bytes([108,100,119,108,50,48,49,56,47,42,46])
-            self.ret = self.objdll.M_VerifyUserData(temp, 11, b)
-            print(self.ret)
+            self.ret = self.objdll.M_VerifyUserData(self.hdl, 11, b)
             if self.ret == 0:
-                self.hdl = temp
                 self.objdll.M_ResolutionUsed(self.hdl, x, y)
-                tk.text('发现双头盒子 ID = self.hdl')
+                #print('发现双头盒子 ID = ' + str(self.hdl))
+                tk.text('发现双头盒子 ID = ' + str(self.hdl))
             else:
+                #print('发现非法盒子')
                 tk.text('发现非法盒子')
+            #self.objdll.M_ResolutionUsed(self.hdl, x, y)
+            #tk.text('发现双头盒子 ID = ' + str(self.hdl))
         else:
             self.hdl = self.objdll.M_Open(nbr)
             self.objdll.M_ResolutionUsed(self.hdl, x, y)
-            tk.text('发现单头盒子 ID = self.hdl')
+            #tk.text('发现单头盒子 ID = self.hdl')
     #-----------------------------------键盘----------------------------------
     # 单击
     def KJDfekiHDh(self, KeyInt, Nbr):
@@ -67,4 +69,4 @@ class HZ:
     def MNXjhfejkhV(self):
         return self.objdll.M_RightUp(self.hdl)
 if __name__ == '__main__':
-    te = HZ(1366, 768, 0, 0xC317, 0xF002)
+    te = HZ(1366, 768, 0, 0xC216, 0x102)

